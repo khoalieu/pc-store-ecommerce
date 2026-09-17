@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Static HTML5 and CSS3. A very small amount of dependency-free vanilla JavaScript is allowed only for preview interactions such as sidebar and drawer toggles, tabs, dropdowns, accordions, and modals. No application state, authentication, backend, API, database, payment, shipping, or production business logic is implemented in this phase.
+Static HTML5 and CSS3. A very small amount of dependency-free vanilla JavaScript is allowed only for preview interactions such as sidebar and drawer toggles, tabs, dropdowns, accordions, and modals. The current validation target is desktop web; mobile-specific interface work is deferred. No application state, authentication, backend, API, database, payment, shipping, or production business logic is implemented in this phase.
 
 ## Users
 
@@ -72,8 +72,8 @@ PCMatch combines three kinds of matching in one traceable experience: component-
 
 ## Accessibility & Inclusion
 
-- Responsive layouts must work on desktop, tablet, and mobile without simply shrinking the desktop composition.
+- The current static validation package targets desktop web; future production implementation must define tablet and mobile behavior as a separate scoped pass.
 - Use semantic structure, visible keyboard focus, labelled controls, sufficiently large touch targets, text alternatives, and errors stated in words.
 - Status and compatibility meanings must never rely on color alone; pair color with text and a recognizable symbol.
 - Main reading text is at least 16px, with sufficient contrast and predictable navigation across each portal.
-- Dense tables must become readable cards or deliberate horizontal regions on small screens without dropping critical data or actions.
+- Dense tables preserve column relationships and semantic headers on desktop; future small-screen behavior must not drop critical data or actions.

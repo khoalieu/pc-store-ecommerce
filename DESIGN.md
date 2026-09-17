@@ -1,61 +1,51 @@
 ---
-name: PCMatch Configurator Telemetry
-description: Hệ giao diện kỹ thuật sáng, biến cấu hình PC, tương thích, ngân sách và trách nhiệm shop thành một bảng đo dễ truy vết.
+name: PCMatch Precision Commerce
+description: Hệ giao diện thương mại kỹ thuật trưởng thành, giúp người mua, shop và quản trị viên đọc nhanh cấu hình, trách nhiệm và trạng thái vận hành.
 colors:
-  cobalt-signal: "#135FD2"
-  cobalt-deep: "#0B3A86"
-  cobalt-soft: "#EEF4FF"
-  teal-verified: "#05877E"
-  teal-deep: "#075F59"
-  teal-soft: "#EFFAF9"
-  amber-conditional: "#C87500"
-  amber-deep: "#7A4600"
-  amber-soft: "#FFF7E8"
-  red-critical: "#C63B4B"
-  red-deep: "#8F2533"
-  red-soft: "#FFF0F2"
-  ink-graphite: "#15202B"
-  slate-reading: "#566370"
-  canvas-cool: "#F2F5F6"
-  surface-white: "#FFFFFF"
-  border-instrument: "#CCD6DC"
-  surface-muted: "#E7EDF0"
-  surface-muted-strong: "#D5DFE4"
+  cobalt-primary: "#2563EB"
+  cobalt-deep: "#1D4ED8"
+  cobalt-soft: "#EFF6FF"
+  teal-verified: "#0F9F91"
+  teal-deep: "#08756C"
+  teal-soft: "#ECFDF9"
+  amber-warning: "#D97706"
+  amber-deep: "#92400E"
+  amber-soft: "#FFF7ED"
+  red-critical: "#C9344A"
+  red-deep: "#A61F35"
+  red-soft: "#FFF1F3"
+  ink: "#172033"
+  slate: "#5C6778"
+  canvas: "#F5F7FA"
+  surface: "#FFFFFF"
+  border: "#DFE5EC"
+  muted: "#EDF1F5"
 typography:
   display:
-    fontFamily: "Saira Semi Condensed, Arial Narrow, sans-serif"
-    fontSize: "clamp(3rem, 6vw, 6rem)"
+    fontFamily: "Be Vietnam Pro, Arial, sans-serif"
+    fontSize: "clamp(2.75rem, 4vw, 4rem)"
     fontWeight: 700
-    lineHeight: 0.9
-    letterSpacing: "-0.04em"
-  headline:
-    fontFamily: "Saira Semi Condensed, Arial Narrow, sans-serif"
-    fontSize: "clamp(2.25rem, 4.2vw, 4rem)"
+    lineHeight: 1.04
+    letterSpacing: "-0.035em"
+  pageTitle:
+    fontFamily: "Be Vietnam Pro, Arial, sans-serif"
+    fontSize: "clamp(1.9rem, 2.4vw, 2.55rem)"
     fontWeight: 700
-    lineHeight: 1
-    letterSpacing: "-0.025em"
-  title:
-    fontFamily: "Saira Semi Condensed, Arial Narrow, sans-serif"
-    fontSize: "1.375rem"
-    fontWeight: 650
     lineHeight: 1.15
-    letterSpacing: "normal"
+    letterSpacing: "-0.025em"
   body:
     fontFamily: "Be Vietnam Pro, Arial, sans-serif"
-    fontSize: "1rem"
+    fontSize: "0.9375rem"
     fontWeight: 400
-    lineHeight: 1.6
-    letterSpacing: "normal"
+    lineHeight: 1.55
   label:
     fontFamily: "Be Vietnam Pro, Arial, sans-serif"
-    fontSize: "0.6875rem"
-    fontWeight: 700
-    lineHeight: 1.2
-    letterSpacing: "0.075em"
+    fontSize: "0.75rem"
+    fontWeight: 650
+    lineHeight: 1.3
 rounded:
-  sharp: "0"
-  control: "2px"
-  panel: "4px"
+  control: "9px"
+  panel: "14px"
   status: "999px"
 spacing:
   space-1: "4px"
@@ -71,212 +61,130 @@ spacing:
   space-18: "72px"
 components:
   button-primary:
-    backgroundColor: "{colors.cobalt-signal}"
-    textColor: "{colors.surface-white}"
-    typography: "{typography.label}"
+    backgroundColor: "{colors.cobalt-primary}"
+    textColor: "{colors.surface}"
     rounded: "{rounded.control}"
-    padding: "0 20px"
-    height: "48px"
-  button-secondary:
-    backgroundColor: "{colors.surface-white}"
-    textColor: "{colors.ink-graphite}"
-    typography: "{typography.label}"
-    rounded: "{rounded.control}"
-    padding: "0 20px"
-    height: "48px"
-  button-quiet:
-    backgroundColor: "transparent"
-    textColor: "{colors.cobalt-deep}"
-    typography: "{typography.label}"
-    rounded: "{rounded.control}"
-    padding: "0 12px"
-    height: "40px"
+    padding: "0 17px"
+    height: "42px"
   panel:
-    backgroundColor: "{colors.surface-white}"
-    textColor: "{colors.ink-graphite}"
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
     rounded: "{rounded.panel}"
     padding: "24px"
   input:
-    backgroundColor: "{colors.surface-white}"
-    textColor: "{colors.ink-graphite}"
-    typography: "{typography.body}"
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
     rounded: "{rounded.control}"
-    padding: "11px 13px"
-    height: "48px"
+    padding: "10px 13px"
+    height: "44px"
 ---
 
-# Design System: PCMatch Configurator Telemetry
+# Design System: PCMatch Precision Commerce
 
-## Overview
+## Hướng thị giác
 
-**Creative North Star: "Bàn đo cấu hình đang hoạt động"**
+**Creative North Star: “Precision Commerce Workspace.”**
 
-PCMatch trông như một configurator kỹ thuật đáng tin cậy đang chạy, không như một trang bán lẻ phủ lớp gaming. Mỗi bề mặt làm rõ quan hệ giữa lựa chọn linh kiện, kết quả tương thích, ngân sách và bên chịu trách nhiệm. Thẩm mỹ đến từ nhịp đo, cấu trúc, số liệu và trạng thái chính xác; không đến từ ánh sáng RGB, kính mờ hay gradient trang trí.
+PCMatch phải giống một sản phẩm thương mại đang vận hành thật: rõ ràng như công cụ cấu hình, đáng tin như hệ thống đơn hàng và đủ ấm để người mua phổ thông không cảm thấy đang dùng phần mềm kỹ thuật nội bộ. Giao diện ưu tiên khả năng quét, nhận biết trạng thái và ra quyết định. Cá tính thương hiệu đến từ độ chính xác, ảnh linh kiện thật, màu trạng thái nhất quán và nhịp không gian sạch; không đến từ nền lưới, đường đo trang trí hoặc phong cách gaming RGB.
 
-Hệ thống dùng nền sáng để Buyer, Shop và Admin đọc được thông tin dày trong điều kiện làm việc thông thường. Buyer có khoảng thở và chỉ số lớn hơn; Shop và Admin tăng mật độ, mở mỗi workflow bằng một command band màu ink và dùng panel telemetry đảo màu để tạo điểm tập trung. Phần còn lại giữ panel trắng, rail ngang, nhãn chữ hoa nhỏ, số đo cô đọng và status có ý nghĩa.
+Ba khu vực chia sẻ cùng hệ thống:
 
-**Key Characteristics:**
+- **Buyer:** rộng rãi hơn, ảnh sản phẩm và quyết định mua hàng là trọng tâm.
+- **Shop:** mật độ vừa, ưu tiên công việc cần xử lý và trách nhiệm của đúng shop.
+- **Admin:** mật độ cao hơn, ưu tiên ngoại lệ, dữ liệu nguồn và audit.
 
-- Bảng đo sáng, sắc nét, phẳng và có cấu trúc 12 cột.
-- Lưới đo 32px rất nhẹ phủ canvas; command band màu ink tạo đỉnh hierarchy cho màn hình vận hành.
-- Chỉ số lớn luôn đi cùng nhãn, đơn vị và câu giải thích ngắn.
-- Cobalt dành cho hành động và trạng thái đang chọn; teal dành cho bằng chứng đã xác nhận.
-- Amber và đỏ chỉ xuất hiện khi có điều kiện, lỗi hoặc hành động cần chú ý.
-- Signal rail ngang liên kết các vùng có quan hệ mà không thay thế tiêu đề hoặc nhãn.
+## Nguyên tắc cốt lõi
 
-## Colors
+1. **Quan hệ trước trang trí.** Dùng alignment, khoảng cách, divider và thứ bậc chữ trước khi thêm container hoặc màu.
+2. **Một màu, một nghĩa.** Cobalt là hành động/đang chọn; teal là đã xác minh; amber là cần chú ý; red là lỗi hoặc phá hủy.
+3. **Sự thật kỹ thuật tách khỏi điều kiện thương mại.** Model, offer, shop, giá, tồn, giao hàng và bảo hành luôn là lớp thông tin độc lập.
+4. **Trách nhiệm luôn nhìn thấy.** Đơn cha, đơn con, shipment, payment và case không bị gộp thành một badge chung.
+5. **Không dùng độ nhỏ để tạo vẻ chuyên nghiệp.** Nhãn chức năng tối thiểu 12px; nội dung bảng tối thiểu 13px; body mặc định 15px.
 
-Bảng màu mang tính công cụ: nền trung tính chiếm phần lớn diện tích; màu chỉ nổi lên khi thể hiện hành động, trạng thái hoặc bằng chứng.
+## Màu sắc
 
-### Primary
+Canvas lạnh `#F5F7FA` và panel trắng chiếm phần lớn diện tích. Ink `#172033` dùng cho chữ chính; slate `#5C6778` dành cho mô tả vẫn phải đạt tương phản đọc. Border `#DFE5EC` tạo cấu trúc mà không làm trang nặng.
 
-- **Cobalt Signal:** hành động chính, focus ring, liên kết active, meter và signal rail đang được người dùng chọn.
-- **Cobalt Deep:** trạng thái hover/active và chữ trên nền cobalt nhạt.
-- **Cobalt Soft:** nền chọn nhẹ cho row, navigation, thông báo thông tin và bề mặt hover.
+- Primary `#2563EB`: CTA, focus, link active, lựa chọn hiện tại.
+- Verified `#0F9F91`: tương thích/đối soát/hoàn thành đã xác nhận.
+- Warning `#D97706`: có điều kiện, gần SLA, cần kiểm tra.
+- Critical `#DC4255`: không tương thích, thất bại, hành động nguy hiểm.
 
-### Secondary
-
-- **Teal Verified:** tương thích đã kiểm tra, dữ liệu đã đối chiếu và bước đã hoàn tất; không dùng như màu CTA cạnh tranh với cobalt.
-- **Teal Deep / Soft:** cặp chữ–nền cho trạng thái verified có độ tương phản nhẹ hơn hành động chính.
-
-### Tertiary
-
-- **Amber Conditional:** dữ liệu có điều kiện, vượt ngưỡng, sắp hết hạn hoặc cần xác nhận.
-- **Amber Deep / Soft:** cặp chữ–nền cho cảnh báo và trạng thái conditional.
-- **Red Critical:** không tương thích, thất bại và hành động phá hủy.
-- **Red Deep / Soft:** cặp chữ–nền cho lỗi và cảnh báo nghiêm trọng.
-
-### Neutral
-
-- **Ink Graphite:** chữ chính, số đo và đường viền có trọng lượng cao.
-- **Slate Reading:** mô tả, metadata và nhãn phụ vẫn phải đạt tương phản đọc được.
-- **Cool Canvas:** nền trang và nền đầu bảng, tách panel mà không cần shadow dày.
-- **Surface White:** panel, field và vùng tương tác chính.
-- **Instrument Border:** đường đo, separator và khung control 1px.
-- **Muted Surface / Muted Strong:** vùng disabled, skeleton, track và row chưa active.
-
-**The Signal Ownership Rule.** Cobalt chỉ nói “có thể thao tác/đang thao tác”; teal chỉ nói “đã xác nhận”. Không đảo hai nghĩa này.
-
-**The Status Redundancy Rule.** Mọi màu trạng thái phải đi cùng nhãn chữ và một dấu hiệu hình học, icon hoặc cấu trúc vị trí.
+Mọi màu trạng thái phải đi cùng nhãn chữ. Không dùng màu để thay thế nội dung.
 
 ## Typography
 
-**Display Font:** Saira Semi Condensed (với Arial Narrow dự phòng)
+Be Vietnam Pro là typeface chính cho toàn bộ sản phẩm để tiếng Việt rõ và tạo cảm giác thống nhất giữa commerce và operations. Saira Semi Condensed chỉ còn là asset dự phòng của prototype cũ; không dùng trong lớp production.
 
-**Body Font:** Be Vietnam Pro (với Arial dự phòng)
+- Display: 44–64px, dùng giới hạn cho hero Buyer.
+- Page title: 30–41px.
+- Section title: 26–32px.
+- Card title: 16–17px.
+- Body: 15px, line-height 1.55, measure 65–70ch.
+- Label/status: 12px, weight 650; không viết hoa/tracking rộng trừ header bảng hoặc mã phân loại ngắn.
+- Giá, tỷ lệ và mã nghiệp vụ dùng tabular numerals khi có thể.
 
-**Metric Font:** Saira Semi Condensed, dùng chữ số tabular khi có thể
+## Bố cục desktop
 
-**Character:** Saira tạo dáng kỹ thuật hẹp cho heading và số đo mà không giả lập terminal; Be Vietnam Pro giữ tiếng Việt rõ ở mật độ cao. Cặp chữ phân biệt “đo/điều khiển” với “giải thích/đọc”.
+Prototype hiện tại tập trung desktop web. Container tối đa 1360px, lề ngoài 28px và gutter 16–22px. Topbar cao 74px; service bar cao 34px. Buyer dùng các bố cục 5/4/3, 8/4 hoặc nội dung linh hoạt + summary 370–390px. Shop/Admin dùng sidebar 256px và vùng nội dung có padding 34–38px.
 
-### Hierarchy
+Không dùng command band tối cỡ lớn cho mọi dashboard. Page header vận hành nằm trực tiếp trên canvas để nhường hierarchy cho dữ liệu và task. Bề mặt ink chỉ dùng có chủ đích ở Buyer hero, auth context, service bar và footer.
 
-- **Display** (700, `clamp(3rem, 6vw, 6rem)`, 0.9): tuyên bố mở đầu; trên mobile co theo viewport nhưng không nhỏ hơn 2.8rem.
-- **Headline** (700, `clamp(2.25rem, 4.2vw, 4rem)`, 1): tiêu đề trang và nhóm workflow.
-- **Title** (650, 1.375rem, 1.15): tên panel, card và đối tượng nghiệp vụ.
-- **Body** (400, 1rem, 1.6): nội dung chính; đoạn dài giới hạn khoảng 70–72ch.
-- **Label** (700, 0.6875rem, tracking 0.075em): tên chỉ số, trạng thái và metadata; thường viết hoa, không dùng cho câu dài.
+## Bề mặt và độ sâu
 
-**The Metric Pair Rule.** Một số đo lớn luôn có nhãn, đơn vị hoặc denominator, và ngữ cảnh thời điểm/phạm vi bên cạnh.
+- Panel: góc 14px, border 1px, nền trắng; không vừa border vừa shadow lớn.
+- Product card: border ở trạng thái nghỉ; hover nâng 3px và thêm shadow mềm để cho biết có thể mở.
+- Sticky summary và hero: có shadow mềm vì thật sự nổi khỏi luồng.
+- Button/input: góc 9px; status/count dùng pill.
+- Modal: góc 15px, shadow overlay rõ; backdrop tối bán trong suốt.
 
-## Layout
+Không dùng corner calibration, thick top stripe, colored side border, measurement grid, glass decoration hoặc gradient text.
 
-Desktop dùng container tối đa 1480px, lề ngoài 16px và lưới 12 cột với gutter 16px. First viewport Buyer dùng bố cục 4/5/3; các task chính dùng 8/4 hoặc một vùng nội dung linh hoạt cạnh summary 350–380px. Shop và Admin dùng sidebar 248px cộng vùng nội dung linh hoạt; page head trực tiếp của shell trở thành command band tối cao tối thiểu 210px. Dashboard metric dùng nhịp 3/2/2/5 cột để tránh bốn card đồng hạng. Nhịp khoảng cách được triển khai theo thang 4/8/12/16/20/24/32/40/48/64/72px.
-
-Dưới 1200px, intro Buyer chiếm toàn hàng và manifest/telemetry chuyển thành 8/4; lưới card giảm cột, metric dashboard về 2 cột. Navigation header thu gọn ở 1100px. Dưới 900px, các shell Shop/Admin về một cột và sidebar trở thành drawer; sticky summary trở lại luồng trang. Dưới 768px, Buyer về một cột, telemetry và metric dashboard giữ lưới hai cột khi đủ chỗ, action xếp dọc hoặc thành lưới hai nút, lề ngoài còn 12px và bottom navigation năm mục xuất hiện. Bảng dữ liệu và bảng so sánh trở thành vùng cuộn ngang có chủ đích, không bỏ cột nghiệp vụ.
-
-Topbar cao 72px ở desktop và 62px ở mobile. Panel chính dùng padding 20–24px; mobile giảm panel padded về 16px. Nội dung cuối trang Buyer chừa 88px để bottom navigation không che focus target.
-
-**The Relationship Before Decoration Rule.** Dùng alignment, rail, divider và khoảng cách để thể hiện quan hệ trước khi thêm màu, icon hoặc container mới.
-
-## Elevation & Depth
-
-Hệ thống phẳng theo mặc định. Tầng được tạo bởi canvas lạnh, panel trắng, đường viền 1px và thanh tín hiệu ở cạnh trên. Shadow chỉ xuất hiện khi một bề mặt thực sự nổi khỏi luồng: dropdown/menu dùng `0 8px 24px rgba(21, 32, 43, 0.12)`; modal và drawer dùng `0 20px 60px rgba(21, 32, 43, 0.18)`. Hover không làm card bay lên.
-
-**The Flat-at-Rest Rule.** Card và panel đứng yên không dùng shadow; trạng thái tương tác thể hiện bằng border, màu nền hoặc signal rail.
-
-## Shapes
-
-Hình học gần vuông và có thứ bậc rõ: panel dùng góc 4px; button, input, build slot và skeleton line dùng góc 2px; bảng, rail và icon button có thể vuông hoàn toàn. Status dùng pill 999px vì hình dáng giúp phân biệt metadata với control. Logo mark, dot trạng thái và vạch ngang 2–3px là các dấu hiệu lặp lại; không dùng blob hoặc clip-path trang trí.
-
-**The Shape Hierarchy Rule.** Pill chỉ dành cho trạng thái hoặc số đếm nhỏ; hành động và container luôn giữ cạnh kỹ thuật 0–4px.
-
-## Product Imagery
-
-Ảnh linh kiện dùng packshot thật trên nền trung tính, ưu tiên asset từ hãng và tài liệu kỹ thuật chính thức. Card catalog đặt sản phẩm trong một `product plate` có khung đo, tên dòng sản phẩm và metadata socket/công suất; ảnh luôn dùng `object-fit: contain`, giữ đúng tỷ lệ và không cắt mất chi tiết nhận diện. Trang model tăng kích thước packshot nhưng vẫn dành vùng riêng cho mã model và thông số cốt lõi. Build slot và dòng đơn hàng dùng thumbnail 52–58px để giúp quét nhanh, không thay thế tên model, shop hoặc giá.
-
-Ảnh nền trắng có thể dùng `mix-blend-mode: multiply` trên bề mặt sáng để hòa vào canvas; ảnh có alpha giữ nền trong suốt. SSD và asset vốn có nền đen dùng biến thể thumbnail tối riêng, không ép blend gây mất chi tiết. Mọi asset tải về phải được lưu cục bộ, có kích thước nội tại để tránh layout shift và ghi nguồn tại `prototype/assets/images/products/SOURCES.md`.
-
-**The Product Truth Rule.** Ảnh phải khớp đúng model hoặc đúng family đã ghi rõ; không dùng hình linh kiện khác chỉ vì bố cục đẹp hơn. Ảnh seed phục vụ kiểm tra UI phải được thay bằng media có quyền sử dụng thương mại trước khi phát hành công khai.
-
-## Components
-
-### Buttons
-
-- **Primary:** nền cobalt, chữ trắng, cao tối thiểu 48px, padding ngang 20px; label 0.6875rem viết hoa và có động từ rõ.
-- **Secondary:** nền trắng, viền instrument, chữ graphite; cùng chiều cao và nhịp với primary.
-- **Quiet:** nền trong suốt, cao 40px, chữ cobalt deep; dùng cho hành động phụ trong alert hoặc cụm action.
-- **Hover / Focus / Active:** primary chuyển cobalt deep; secondary chuyển nền cobalt soft và viền cobalt; focus ring cobalt 3px có offset; active nén xuống 1px. Chuyển trạng thái dùng signal easing 160ms.
-- **Danger / Disabled:** danger dùng red critical; disabled dùng muted strong/muted, chữ slate và không dịch chuyển.
-
-### Chips
-
-- **Status:** pill trắng có viền, chấm tròn và label chữ; các biến thể info, verified, conditional và critical dùng cặp nền soft + chữ deep tương ứng.
-- **Count:** pill nhỏ trên sidebar, nền muted và số căn giữa.
-
-### Cards / Containers
-
-- **Panel:** nền trắng trên canvas lạnh, viền instrument 1px, góc 4px; padding chuẩn 24px và giảm còn 16px trên mobile.
-- **Command band:** bề mặt ink chỉ dành cho page head trực tiếp của Shop/Admin; có rail cobalt–teal ở đáy, vạch đo dọc nhẹ và action vẫn đọc rõ trên nền tối.
-- **Inverted telemetry:** một panel ink trong rail bên phải làm điểm tập trung cho KPI vận hành; telemetry con dùng nền trắng 5.5%, viền trắng 16% và vẫn giữ màu signal có nghĩa.
-- **Corner calibration:** panel có dấu góc 13px bằng hairline cobalt để nhắc lại ngôn ngữ đo mà không thêm shadow hay icon trang trí.
-- **Active panel:** border cobalt 1px và signal rail ngang 3px ở cạnh trên; không dùng glow hoặc viền dọc dày.
-- **Product / offer card:** giữ model chuẩn, shop, giá, tồn, bảo hành và cập nhật gần nhất thành các lớp đọc riêng.
-- **Data table:** header dùng ink và label trắng 72%; row tách bằng muted divider, hover chuyển cobalt soft rất nhẹ.
-
-### Inputs / Fields
-
-- **Field:** cao tối thiểu 48px, nền trắng, viền instrument, góc 2px và label ở ngoài field. Search trong topbar cao 48px, nền trắng 88% và có rail cobalt inset khi focus.
-- **Focus:** border cobalt cùng ring cobalt 3px bán trong suốt.
-- **Error / Disabled:** error dùng chữ red deep và thông điệp bằng lời; disabled dùng muted surface nhưng nội dung vẫn đọc được.
+## Thành phần dùng lại
 
 ### Navigation
 
-- **Buyer header:** logo + search lớn + link chữ; active item dùng underline cobalt 3px. Ở mobile, search xuống hàng riêng và menu chuyển thành nút 44px.
-- **Shop / Admin sidebar:** brand block dùng ink; nhóm theo workflow; active row dùng nền cobalt, chữ trắng và underline teal 2px.
-- **Mobile Buyer:** bottom navigation cố định năm mục, cao tối thiểu 68px; mục active dùng cobalt soft/deep.
-- **Service bar:** dải ink 36px ở đầu mỗi surface thay cho banner prototype; nội dung chỉ nêu ngữ cảnh dữ liệu, workspace hoặc nguyên tắc sản phẩm có ích cho người dùng.
-- **Buyer footer:** bề mặt ink có rail cobalt–teal, gom điều hướng sản phẩm, tài khoản và nguyên tắc minh bạch dữ liệu; không lặp CTA chính của trang.
+Buyer header gồm logo, search lớn và link theo hành trình. Active link dùng chữ cobalt + underline 2px. Shop/Admin sidebar dùng nền xám rất nhạt, active row nền cobalt soft, không dùng vạch màu trang trí. Service bar chỉ chứa ngữ cảnh hữu ích.
 
-### Alerts
+### Buttons
 
-Alert dùng lưới signal dot + nội dung + action. Info, conditional và critical đều dùng nền soft, viền tonal và chữ deep; thông báo không dựa vào màu để truyền đạt mức độ hoặc hành động cần làm.
+Button cao tối thiểu 42px, label viết thường theo câu và có động từ rõ. Primary cobalt có shadow rất nhẹ; secondary nền trắng; quiet có nền cobalt soft khi hover; danger chỉ cho hành động phá hủy. Focus ring 3px luôn nhìn thấy.
 
-### Telemetry Strip
+### Form
 
-Một chỉ số gồm nhãn chỉ số, số/giá trị chính, đơn vị hoặc denominator, meter 5px và một câu diễn giải. Card cao tối thiểu 126px ở desktop, có signal rail 3px thể hiện tỷ lệ hoặc trạng thái; không dùng gauge tròn chỉ để trang trí. Command rail có một lần reveal 520ms theo exponential ease-out; thay đổi meter chạy 160ms và mọi chuyển động tôn trọng `prefers-reduced-motion`.
+Input/select cao 44px, label nằm ngoài control. Hover tăng contrast border; focus dùng border cobalt + ring bán trong suốt. Error phải nêu lỗi và cách sửa bằng chữ. Disabled không được trông như placeholder.
 
-### Build Slot
+### Status và alert
 
-Mỗi slot cao tối thiểu 68px; slot đã chọn có thể tăng lên 82px để chứa thumbnail thật 58×54px. Cấu trúc gồm mã thứ tự, ảnh nhận diện, nhóm linh kiện, model/offer hiện tại, shop, giá hoặc status. Slot active dùng nền cobalt soft, border cobalt và rail ngang 3px; slot trống không giả thumbnail mà nêu hành động chọn và ràng buộc còn thiếu.
+Status là pill nhỏ gồm dot + label; màu tonal, không phải button. Alert dùng dot + nội dung + action, góc 11px. Alert không lồng trong card nếu divider/spacing đã đủ.
 
-## Do's and Don'ts
+### Tables
 
-### Do:
+Header nền `#F8FAFC`, chữ 11px uppercase có tracking nhẹ. Cell 13px, padding 16px và hover xanh rất nhẹ. Mã, actor, payment, order, shipment phải giữ ở cột riêng.
 
-- **Do** giữ model chuẩn và offer shop thành hai lớp thông tin nhìn thấy được.
-- **Do** dùng một scenario dữ liệu xuyên suốt để mọi tổng tiền, shop, trạng thái và mã đối tượng khớp nhau.
-- **Do** để chỉ số, cảnh báo và hành động cùng xuất hiện tại điểm ra quyết định.
-- **Do** giữ bảng mobile trong vùng cuộn ngang có chủ đích khi việc chuyển thành card sẽ làm mất quan hệ cột.
-- **Do** để khoảng trắng, divider và rail ngang tạo hierarchy trước khi thêm card mới.
-- **Do** dùng tabular numerals cho giá, công suất, tỷ lệ và mã cần quét nhanh.
-- **Do** viết copy như sản phẩm đang vận hành: nhãn hành động trực tiếp, trạng thái có lối thoát, không để ngôn ngữ QA xuất hiện trên surface người dùng.
+### Product cards và imagery
 
-### Don't:
+Packshot dùng `object-fit: contain`, giữ đúng tỷ lệ, không cắt. Product plate nền `#F8FAFC` và không có khung đo trang trí. Card phải thấy model, thông số chính, trạng thái tương thích, giá và CTA trong một lượt quét. Nguồn ảnh lưu tại `prototype/assets/images/products/SOURCES.md`; asset seed phải được rà lại quyền thương mại trước khi phát hành.
 
-- **Don't** dùng gradient neon, glow RGB, glassmorphism hoặc nền tối chỉ vì sản phẩm liên quan PC.
-- **Don't** lồng card trong card khi divider hoặc spacing đã đủ.
-- **Don't** dùng icon tile chung chung thay cho nội dung linh kiện, dữ liệu hoặc trạng thái thật.
-- **Don't** gắn nhãn “tốt nhất” dựa riêng vào giá rẻ nhất.
-- **Don't** mô tả dữ liệu minh họa như cam kết thương mại, benchmark thật hoặc tích hợp đang hoạt động.
-- **Don't** để các nhãn “prototype”, “mô phỏng”, “demo” hoặc cảnh báo dành cho nhóm phát triển xuất hiện trong chrome sản phẩm chính thức.
+### Build slot
+
+Slot đã chọn gồm số thứ tự, thumbnail, nhóm linh kiện, model, shop và giá. Slot trống nêu hành động tiếp theo hoặc ràng buộc còn thiếu. Active dùng background/border tonal, không dùng thanh màu cạnh trên.
+
+### Operations cards
+
+Metric panel cùng chiều cao và chỉ chứa một chỉ số, phạm vi thời gian và diễn giải. Task list được ưu tiên hơn metric khi người dùng phải hành động. Dashboard không dùng bốn hero card để thay thế nội dung.
+
+## Interaction và motion
+
+Motion chính nằm ở hover card/CTA và thay đổi meter, 160–220ms, ease-out. Không áp cùng một entrance animation cho mọi section. `prefers-reduced-motion` tắt transition không thiết yếu. Tab, menu, modal và sidebar preview dùng vanilla JavaScript hiện có; không thêm logic nghiệp vụ.
+
+## Nội dung và trạng thái
+
+Copy là tiếng Việt sản phẩm, không dùng nhãn “prototype”, “demo”, “mô phỏng” trong chrome. Mọi luồng quan trọng cần có real content và đại diện cho loading, empty, error, permission, success, partial success, stale data, destructive confirmation. Thư viện trạng thái là tài liệu tham chiếu; màn hình nghiệp vụ dùng trạng thái phù hợp ngữ cảnh.
+
+## Không làm trong giai đoạn này
+
+- Không triển khai backend, API, database, authentication, payment, shipping hay business logic.
+- Không mở rộng thiết kế mobile; desktop là phạm vi xác nhận hiện tại.
+- Không bịa testimonial, partner, benchmark, SLA hoặc claim thương mại.
+- Không dùng UI gaming/RGB, glassmorphism, nền grid, icon emoji hoặc card lồng card để tạo vẻ “công nghệ”.
