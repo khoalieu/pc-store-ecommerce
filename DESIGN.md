@@ -201,6 +201,14 @@ Hình học gần vuông và có thứ bậc rõ: panel dùng góc 4px; button, 
 
 **The Shape Hierarchy Rule.** Pill chỉ dành cho trạng thái hoặc số đếm nhỏ; hành động và container luôn giữ cạnh kỹ thuật 0–4px.
 
+## Product Imagery
+
+Ảnh linh kiện dùng packshot thật trên nền trung tính, ưu tiên asset từ hãng và tài liệu kỹ thuật chính thức. Card catalog đặt sản phẩm trong một `product plate` có khung đo, tên dòng sản phẩm và metadata socket/công suất; ảnh luôn dùng `object-fit: contain`, giữ đúng tỷ lệ và không cắt mất chi tiết nhận diện. Trang model tăng kích thước packshot nhưng vẫn dành vùng riêng cho mã model và thông số cốt lõi. Build slot và dòng đơn hàng dùng thumbnail 52–58px để giúp quét nhanh, không thay thế tên model, shop hoặc giá.
+
+Ảnh nền trắng có thể dùng `mix-blend-mode: multiply` trên bề mặt sáng để hòa vào canvas; ảnh có alpha giữ nền trong suốt. SSD và asset vốn có nền đen dùng biến thể thumbnail tối riêng, không ép blend gây mất chi tiết. Mọi asset tải về phải được lưu cục bộ, có kích thước nội tại để tránh layout shift và ghi nguồn tại `prototype/assets/images/products/SOURCES.md`.
+
+**The Product Truth Rule.** Ảnh phải khớp đúng model hoặc đúng family đã ghi rõ; không dùng hình linh kiện khác chỉ vì bố cục đẹp hơn. Ảnh seed phục vụ kiểm tra UI phải được thay bằng media có quyền sử dụng thương mại trước khi phát hành công khai.
+
 ## Components
 
 ### Buttons
@@ -237,6 +245,8 @@ Hình học gần vuông và có thứ bậc rõ: panel dùng góc 4px; button, 
 - **Buyer header:** logo + search lớn + link chữ; active item dùng underline cobalt 3px. Ở mobile, search xuống hàng riêng và menu chuyển thành nút 44px.
 - **Shop / Admin sidebar:** brand block dùng ink; nhóm theo workflow; active row dùng nền cobalt, chữ trắng và underline teal 2px.
 - **Mobile Buyer:** bottom navigation cố định năm mục, cao tối thiểu 68px; mục active dùng cobalt soft/deep.
+- **Service bar:** dải ink 36px ở đầu mỗi surface thay cho banner prototype; nội dung chỉ nêu ngữ cảnh dữ liệu, workspace hoặc nguyên tắc sản phẩm có ích cho người dùng.
+- **Buyer footer:** bề mặt ink có rail cobalt–teal, gom điều hướng sản phẩm, tài khoản và nguyên tắc minh bạch dữ liệu; không lặp CTA chính của trang.
 
 ### Alerts
 
@@ -248,7 +258,7 @@ Một chỉ số gồm nhãn chỉ số, số/giá trị chính, đơn vị ho�
 
 ### Build Slot
 
-Mỗi slot cao tối thiểu 68px, gồm mã thứ tự, nhóm linh kiện, model/offer hiện tại, shop, giá hoặc status. Slot active dùng nền cobalt soft, border cobalt và rail ngang 3px; slot trống nêu hành động chọn và ràng buộc còn thiếu thay vì dùng minh họa mơ hồ.
+Mỗi slot cao tối thiểu 68px; slot đã chọn có thể tăng lên 82px để chứa thumbnail thật 58×54px. Cấu trúc gồm mã thứ tự, ảnh nhận diện, nhóm linh kiện, model/offer hiện tại, shop, giá hoặc status. Slot active dùng nền cobalt soft, border cobalt và rail ngang 3px; slot trống không giả thumbnail mà nêu hành động chọn và ràng buộc còn thiếu.
 
 ## Do's and Don'ts
 
@@ -260,6 +270,7 @@ Mỗi slot cao tối thiểu 68px, gồm mã thứ tự, nhóm linh kiện, mode
 - **Do** giữ bảng mobile trong vùng cuộn ngang có chủ đích khi việc chuyển thành card sẽ làm mất quan hệ cột.
 - **Do** để khoảng trắng, divider và rail ngang tạo hierarchy trước khi thêm card mới.
 - **Do** dùng tabular numerals cho giá, công suất, tỷ lệ và mã cần quét nhanh.
+- **Do** viết copy như sản phẩm đang vận hành: nhãn hành động trực tiếp, trạng thái có lối thoát, không để ngôn ngữ QA xuất hiện trên surface người dùng.
 
 ### Don't:
 
@@ -268,3 +279,4 @@ Mỗi slot cao tối thiểu 68px, gồm mã thứ tự, nhóm linh kiện, mode
 - **Don't** dùng icon tile chung chung thay cho nội dung linh kiện, dữ liệu hoặc trạng thái thật.
 - **Don't** gắn nhãn “tốt nhất” dựa riêng vào giá rẻ nhất.
 - **Don't** mô tả dữ liệu minh họa như cam kết thương mại, benchmark thật hoặc tích hợp đang hoạt động.
+- **Don't** để các nhãn “prototype”, “mô phỏng”, “demo” hoặc cảnh báo dành cho nhóm phát triển xuất hiện trong chrome sản phẩm chính thức.

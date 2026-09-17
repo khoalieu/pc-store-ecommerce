@@ -19,7 +19,7 @@ Static HTML5 and CSS3. A very small amount of dependency-free vanilla JavaScript
 
 ## Product Purpose
 
-PCMatch is a Vietnamese B2C marketplace for new PC components. It helps buyers move from technical uncertainty to a reviewable configuration, compare offers transparently, purchase across one or more shops, and retain clear ownership of shipping, warranty, returns, and disputes. This prototype exists to visualize the complete product UI, validate the information architecture and design system, and test whether the principal workflows and screen structure are understandable before production engineering begins.
+PCMatch is a Vietnamese B2C marketplace for new PC components. It helps buyers move from technical uncertainty to a reviewable configuration, compare offers transparently, purchase across one or more shops, and retain clear ownership of shipping, warranty, returns, and disputes. The current static UI package is the official visual baseline for Buyer, Shop, and Admin surfaces before production engineering begins.
 
 ## Positioning
 
@@ -43,8 +43,8 @@ PCMatch combines three kinds of matching in one traceable experience: component-
 - Compatibility has four explicit outcomes: incompatible, conditional, insufficient data, and passed checks. A passed check is not an absolute guarantee, and insufficient data may not be presented as success.
 - The cart does not reserve stock or guarantee price. Checkout must visibly recheck price, stock, fees, warranty, and compatibility without silently substituting products or partially placing an invalid order.
 - Standard models, shop offers, parent orders, sub-orders, payments, shipments, after-sales cases, refunds, and settlements are separate concepts and must remain visually distinct.
-- This phase is a static responsive prototype. All data, loading, error, permission, stale-data, and integration states are authored examples rather than live behavior.
-- Open production decisions remain documented in `docs/PCMatch_UI_REQUIREMENTS_SPEC.md`; the prototype must label assumptions as illustrative rather than turning them into policy or commercial claims.
+- This phase is a static web UI reference with no backend or production business logic. All data, loading, error, permission, stale-data, and integration states are authored examples rather than live behavior.
+- Open production decisions remain documented in `docs/PCMatch_UI_REQUIREMENTS_SPEC.md`; the UI must avoid turning unresolved assumptions into policy or commercial claims.
 
 ## Brand Commitments
 
@@ -53,13 +53,14 @@ PCMatch combines three kinds of matching in one traceable experience: component-
 - Tagline: “Khớp cấu hình. Đúng ngân sách. Chọn shop minh bạch.”
 - The two primary public entry points—“Tự build PC” and “Nhận cấu hình theo ngân sách”—have equal strategic weight.
 - Voice is technically precise, transparent, helpful, and calm. It explains uncertainty and responsibility instead of hiding them behind promotional language.
-- No approved logo, photography library, illustration system, trademark clearance, or production brand asset exists in the repository yet.
+- No approved logo, illustration system, trademark clearance, or complete production brand library exists in the repository yet. A small, source-documented set of product packshots is included only as catalog seed media for static UI validation; commercial usage rights must be confirmed or the assets replaced before public release.
 
 ## Evidence on Hand
 
 - `docs/PCMatch_UI_REQUIREMENTS_SPEC.md` is the confirmed product and UI requirements authority for this phase. It consolidates the project's earlier analysis package, use cases, actor definitions, and scope decisions.
 - The specification contains the role model, 107-screen inventory, state vocabulary, business rules that must be visible in UI, traceability matrix, representative data scenario, responsive expectations, and prototype acceptance criteria.
 - No real customer testimonials, partner logos, verified commercial benchmarks, production prices, carrier/payment contracts, or live operational data are available. Future work must not fabricate them.
+- Seed product imagery and its provenance are recorded in `prototype/assets/images/products/SOURCES.md`; the images demonstrate catalog density and recognition but are not evidence of supplier relationships or merchandising approval.
 
 ## Product Principles
 

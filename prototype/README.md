@@ -1,6 +1,6 @@
-# PCMatch static UI prototype
+# PCMatch official static UI
 
-## Open the prototype
+## Open the interface
 
 From the repository root:
 
@@ -10,11 +10,11 @@ python3 -m http.server 4173 -d prototype
 
 Then open `http://127.0.0.1:4173/`.
 
-No build step, backend, API, authentication, database, payment, or carrier integration is required. JavaScript is limited to preview interactions: responsive menus/sidebar, tabs, dialogs, dropdowns, and synchronized slot focus.
+No build step, backend, API, authentication, database, payment, or carrier integration is required. JavaScript is limited to UI-only interactions: menus/sidebar, tabs, dialogs, dropdowns, and synchronized slot focus.
 
-## Representative responsive screens
+## Implemented product surfaces
 
-| Requirement family | Prototype file |
+| Requirement family | Static UI file |
 |---|---|
 | Sitemap and all B01–B45, S01–S31, A01–A31 IDs | `index.html` |
 | B01 Home | `buyer/home.html` |
@@ -31,4 +31,4 @@ No build step, backend, API, authentication, database, payment, or carrier integ
 | B08–B13 Account and authentication family | `auth/login.html` |
 | Shared loading/empty/error/permission/confirmation states | `states/index.html` |
 
-All values are illustrative and remain consistent with the Nguyễn Minh / BuildPro Sài Gòn / TechZone Hà Nội scenario in the requirements specification.
+Displayed values are interface fixtures rather than live data. They remain consistent with the Nguyễn Minh / BuildPro Sài Gòn / TechZone Hà Nội scenario in the requirements specification.
