@@ -334,15 +334,15 @@ p { max-width: 70ch; }
   min-height: 42px;
   padding: 10px 12px;
   border-radius: 9px;
-  color: #576377;
+  color: #334155;
   font-size: 13px;
   font-weight: 550;
 }
-.sidebar a:hover { background: #f0f4f9; color: var(--color-ink); }
-.sidebar a[aria-current="page"] { background: #e9f1ff; color: var(--color-cobalt-deep); font-weight: 650; }
+.sidebar a:hover { background: #f1f5f9; color: #0f172a; }
+.sidebar a[aria-current="page"] { background: #edf5ff; color: #1d68e3; font-weight: 650; }
 .sidebar a[aria-current="page"]::after { display: none; }
 .sidebar__count { min-width: 25px; padding: 3px 7px; font-size: 11px; }
-.sidebar a[aria-current="page"] .sidebar__count { background: white; color: var(--color-cobalt-deep); }
+.sidebar a[aria-current="page"] .sidebar__count { background: white; color: #1d68e3; }
 .shell__content { padding: 34px 38px 72px; background: var(--color-canvas); }
 
 .shell__content > .page-head {
@@ -613,4 +613,26 @@ p { max-width: 70ch; }
 
 @media (prefers-reduced-motion: reduce) {
   .product-card, .product-image, .btn { transition: none; }
+}
+.sidebar a {
+  background: transparent !important;
+  color: #334155 !important;
+  border: none !important;
+}
+
+.sidebar a:hover {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* Chỉ mục đang active (aria-current="page") mới có nền xanh và chữ xanh */
+.sidebar a[aria-current="page"] {
+  background: #edf5ff !important;
+  color: #1d68e3 !important;
+  font-weight: 700 !important;
+}
+
+.sidebar a[aria-current="page"] .sidebar__count {
+  background: #ffffff !important;
+  color: #1d68e3 !important;
 }

@@ -1,0 +1,95 @@
+<!-- Khối trên cùng: Service bar & Topbar Header -->
+<div class="service-bar">
+  PCMatch Operations • Giám sát đơn hàng, shop và chất lượng nền tảng
+</div>
+
+<header class="topbar">
+  <div class="container topbar__inner" style="max-width: none;">
+    <a href="dashboard.html" class="logo">
+      <span class="logo__mark"></span>
+      <span>PC Match Admin</span>
+    </a>
+
+    <label class="search">
+      <span class="sr-only">Tìm đơn hàng, shop, sản phẩm, khách hàng hoặc mã giao dịch</span>
+      <input type="text" placeholder="Tìm đơn hàng, shop, sản phẩm, khách hàng hoặc mã giao dịch">
+      <i class="search__glyph" aria-hidden="true"></i>
+    </label>
+
+    <nav class="nav-links">
+      <a href="#">Trợ giúp</a>
+      <a href="#" style="color: var(--color-cobalt-deep); font-weight: 700;">Platform Admin ▾</a>
+    </nav>
+
+    <button class="menu-toggle" type="button" data-sidebar-toggle aria-expanded="false" aria-label="Mở sidebar">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Khối Sidebar dọc bên trái -->
+<aside class="sidebar">
+  <div class="sidebar__brand">
+    <strong>Vận hành sàn</strong>
+    <small class="muted">Quyền: Platform Admin</small>
+  </div>
+
+  <nav>
+    <div class="sidebar__group">Tổng quan</div>
+    <a href="dashboard.html">
+      <span>Dashboard</span>
+    </a>
+
+    <div class="sidebar__group">Vận hành</div>
+    <a href="#">
+      <span>Đơn hàng</span>
+      <span class="sidebar__count">428</span>
+    </a>
+    <a href="#">
+      <span>Giao dịch</span>
+    </a>
+    <a href="#">
+      <span>Hoàn trả</span>
+      <span class="sidebar__count">232</span>
+    </a>
+
+    <div class="sidebar__group">Hệ sinh thái</div>
+    <a href="#">
+      <span>Shop</span>
+      <span class="sidebar__count">6</span>
+    </a>
+    <a href="#">
+      <span>Sản phẩm</span>
+    </a>
+    <a href="#">
+      <span>Danh mục</span>
+    </a>
+    <a href="#">
+      <span>Phí &amp; Chính sách</span>
+    </a>
+
+    <div class="sidebar__group">Người dùng</div>
+    <a href="guest.html">
+      <span>Khách hàng</span>
+    </a>
+    <a href="#">
+      <span>Đánh giá</span>
+    </a>
+    <a href="#">
+      <span>Phản hồi &amp; Khiếu nại</span>
+      <span class="sidebar__count">12</span>
+    </a>
+
+    <div class="sidebar__group">Quản trị</div>
+    <a href="#">
+      <span>Phân quyền</span>
+    </a>
+    <a href="#">
+      <span>Nhật ký hoạt động</span>
+    </a>
+  </nav>
+
+  <div style="padding: 16px 14px; margin-top: auto; font-size: 11px; color: var(--color-slate);">
+    PCMatch Platform • v1.4.0
+  </div>
+</aside>
