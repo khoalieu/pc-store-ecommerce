@@ -569,3 +569,105 @@ if (returnRows.length > 0) {
 
   updateReturnTable();
 }
+
+//add sidebar admin
+(async function initSharedComponent() {
+    const sidebarHost = document.querySelector('[data-sidebar-host]');
+
+    const currentFile =
+        (window.location.pathname.split('/').pop() || '').toLowerCase();
+
+    try {
+        const res = await fetch('sidebar.html', {
+            cache: 'no-store'
+        });
+
+        if (!res.ok) {
+            throw new Error(
+                `Không tải được sidebar.html (HTTP ${res.status})`
+            );
+        }
+
+        const buffer = await res.arrayBuffer();
+        const html = new TextDecoder('utf-8').decode(buffer);
+
+        const doc = new DOMParser().parseFromString(
+            html,
+            'text/html'
+        );
+
+        const serviceBar = doc.querySelector('.service-bar');
+        const topbar = doc.querySelector('.topbar');
+        const headerHost = document.getElementById('header-host');
+
+        if (headerHost && serviceBar && topbar) {
+            headerHost.replaceWith(serviceBar, topbar);
+        }
+
+        const sidebar = doc.querySelector('.sidebar');
+
+        if (sidebarHost && sidebar) {
+
+            sidebarHost.replaceWith(sidebar);
+
+            sidebar.querySelectorAll('a').forEach((link) => {
+
+                link.removeAttribute('aria-current');
+
+                const href = (link.getAttribute('href') || '')
+                    .split('#')[0]
+                    .split('?')[0]
+                    .toLowerCase();
+
+                if (
+                    href &&
+                    href !== '#' &&
+                    href === currentFile
+                ) {
+                    link.setAttribute(
+                        'aria-current',
+                        'page'
+                    );
+                }
+            });
+        }
+
+        document
+            .querySelectorAll('[data-sidebar-toggle]')
+            .forEach((button) => {
+
+                if (button.dataset.sidebarBound === '1') {
+                    return;
+                }
+
+                button.dataset.sidebarBound = '1';
+
+                button.addEventListener('click', () => {
+
+                    const shell =
+                        document.querySelector('.shell');
+
+                    if (!shell) {
+                        return;
+                    }
+
+                    const open =
+                        shell.classList.toggle(
+                            'is-sidebar-open'
+                        );
+
+                    button.setAttribute(
+                        'aria-expanded',
+                        String(open)
+                    );
+                });
+            });
+
+    } catch (err) {
+
+        console.warn(
+            '[PCMatch] Không nạp được sidebar.html',
+            err
+        );
+    }
+})();
