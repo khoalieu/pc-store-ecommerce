@@ -671,3 +671,76 @@ if (returnRows.length > 0) {
         );
     }
 })();
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const points = document.querySelectorAll(".chart-points circle");
+
+    const tooltip = document.getElementById("chartTooltip");
+    const tooltipTime = document.getElementById("tooltipTime");
+    const tooltipRevenue = document.getElementById("tooltipRevenue");
+    const tooltipFee = document.getElementById("tooltipFee");
+
+    const chartContainer = document.querySelector(".chart-container");
+
+    if (!points.length || !tooltip || !chartContainer) {
+        return;
+    }
+
+    points.forEach(point => {
+
+        point.addEventListener("mouseenter", function () {
+
+            tooltipTime.textContent = this.dataset.time;
+            tooltipRevenue.textContent = this.dataset.revenue;
+            tooltipFee.textContent = this.dataset.fee;
+
+            tooltip.classList.add("show");
+
+            const pointRect = this.getBoundingClientRect();
+            const containerRect =
+                chartContainer.getBoundingClientRect();
+
+            const pointX =
+                pointRect.left -
+                containerRect.left +
+                pointRect.width / 2;
+
+            const pointY =
+                pointRect.top -
+                containerRect.top;
+
+            const tooltipWidth = tooltip.offsetWidth;
+            const tooltipHeight = tooltip.offsetHeight;
+
+            let left = pointX - tooltipWidth / 2;
+            let top = pointY - tooltipHeight - 14;
+
+            if (left < 5) {
+                left = 5;
+            }
+
+            if (left + tooltipWidth >
+                chartContainer.clientWidth - 5) {
+
+                left =
+                    chartContainer.clientWidth -
+                    tooltipWidth -
+                    5;
+            }
+
+            if (top < 5) {
+                top = pointY + 18;
+            }
+
+            tooltip.style.left = `${left}px`;
+            tooltip.style.top = `${top}px`;
+        });
+
+        point.addEventListener("mouseleave", function () {
+            tooltip.classList.remove("show");
+        });
+
+    });
+
+});

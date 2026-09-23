@@ -1721,9 +1721,9 @@ p {
 }
 
 .admin-side-stack {
-    display: grid;
-    gap: 14px;
-    align-content: start;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
 }
 
 .admin-chart-panel {
@@ -1745,14 +1745,14 @@ p {
 
 .admin-section-title h2, .admin-section-title h3 {
     margin: 0;
-    font-size: 14px;
+    font-size: 15px;
     letter-spacing: -.015em;
 }
 
 .admin-section-title p {
     margin: 1px 0 0;
     color: #748094;
-    font-size: 10px;
+    font-size: 11px;
 }
 
 .admin-icon {
@@ -1829,8 +1829,8 @@ p {
 }
 
 .admin-chart-wrap {
-    height: 205px;
-    padding-top: 2px;
+    height: 315px;
+    padding-top: 4px;
 }
 
 .admin-chart {
@@ -1840,14 +1840,14 @@ p {
 }
 
 .chart-grid-lines line {
-    stroke: #dbe2ea;
+    stroke: #d9e0e8;
     stroke-width: 1;
-    stroke-dasharray: 2 4;
+    stroke-dasharray: 3 4;
 }
 
 .chart-y-labels text, .chart-x-labels text, .chart-right-labels text {
-    fill: #748094;
-    font: 9px var(--font-body);
+    fill: #64748b;
+    font: 11px var(--font-body);
 }
 
 .chart-bars rect {
@@ -1857,12 +1857,165 @@ p {
 .chart-line {
     fill: none;
     stroke: #ef8a08;
-    stroke-width: 2.2;
+    stroke-width: 2.5;
     stroke-linecap: round;
+
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+
+    animation: drawChartLine 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    vector-effect: non-scaling-stroke;
+}
+
+@keyframes drawChartLine {
+    from {
+        stroke-dashoffset: 1;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 390px;
+}
+
+.chart-container svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.chart-tooltip {
+    position: absolute;
+
+    min-width: 230px;
+    padding: 14px 16px;
+
+    background: #fff;
+    border: 1px solid #d9dee7;
+    border-radius: 8px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    pointer-events: none;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(6px);
+
+    transition: opacity 0.15s ease,
+    transform 0.15s ease;
+
+    z-index: 20;
+}
+
+.chart-tooltip.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.tooltip-time {
+    font-size: 15px;
+    font-weight: 700;
+    color: #111827;
+
+    margin-bottom: 10px;
+}
+
+.tooltip-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    font-size: 14px;
+    color: #374151;
+
+    line-height: 1.8;
+}
+
+.tooltip-row strong {
+    margin-left: auto;
+
+    color: #111827;
+    font-weight: 700;
+}
+
+.tooltip-dot {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    flex-shrink: 0;
+}
+
+.tooltip-dot.revenue {
+    background: #2f6ce5;
+}
+
+.tooltip-dot.fee {
+    background: #ef8a08;
 }
 
 .chart-points circle {
     fill: #ef8a08;
+
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: scale(0.3);
+
+    animation: showChartPoint 0.35s ease-out forwards;
+}
+
+.chart-points circle:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.chart-points circle:nth-child(2) {
+    animation-delay: 0.30s;
+}
+
+.chart-points circle:nth-child(3) {
+    animation-delay: 0.60s;
+}
+
+.chart-points circle:nth-child(4) {
+    animation-delay: 0.90s;
+}
+
+.chart-points circle:nth-child(5) {
+    animation-delay: 1.20s;
+}
+
+.chart-points circle:nth-child(6) {
+    animation-delay: 1.50s;
+}
+
+.chart-points circle:nth-child(7) {
+    animation-delay: 1.85s;
+}
+
+.chart-points circle:nth-child(8) {
+    animation-delay: 2.15s;
+}
+
+@keyframes showChartPoint {
+    from {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .admin-chart-note {
@@ -1918,17 +2071,17 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .status-list div span {
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 10px;
 }
 
 .status-list strong {
-    font-size: 11px;
+    font-size: 14px;
 }
 
 .status-list strong small {
@@ -1936,7 +2089,7 @@ p {
     min-width: 35px;
     margin-left: 6px;
     color: #8b95a4;
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 500;
 }
 
@@ -1975,7 +2128,7 @@ p {
     display: flex;
     justify-content: space-between;
     gap: 10px;
-    font-size: 10px
+    font-size: 12px
 }
 
 .health-item strong {
@@ -1986,7 +2139,7 @@ p {
     display: block;
     margin-top: 3px;
     color: #788497;
-    font-size: 8px
+    font-size: 11px
 }
 
 .health-track {
@@ -2028,7 +2181,7 @@ p {
     background: #fff;
     padding: 5px 11px;
     color: #738096;
-    font-size: 9px
+    font-size: 12px
 }
 
 .segmented .is-active {
@@ -2081,7 +2234,7 @@ p {
 
 .rank-shop strong {
     display: block;
-    font-size: 11px;
+    font-size: 13px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis
@@ -2093,13 +2246,13 @@ p {
     border-radius: 999px;
     background: #eaf3ff;
     color: #1d68e3;
-    font-size: 8px
+    font-size: 10px
 }
 
 .rank-shop small, .rank-number small, .rank-fee span {
     display: block;
     color: #7a8595;
-    font-size: 8px
+    font-size: 11px
 }
 
 .rank-number {
@@ -2107,7 +2260,7 @@ p {
 }
 
 .rank-number strong {
-    font-size: 10px
+    font-size: 12.5px
 }
 
 .rank-fee {
@@ -2116,7 +2269,7 @@ p {
 
 .rank-fee strong {
     display: block;
-    font-size: 10px
+    font-size: 11.5px
 }
 
 .row-arrow {
@@ -2158,20 +2311,20 @@ p {
 
 .new-shop strong {
     display: block;
-    font-size: 10px
+    font-size: 13px
 }
 
 .new-shop small {
     display: block;
     color: #778397;
-    font-size: 8px
+    font-size: 10px
 }
 
 .new-shop span {
     display: block;
     margin-top: 3px;
     color: #7b8696;
-    font-size: 7px
+    font-size: 9px
 }
 
 .new-shop-actions {
@@ -2193,7 +2346,7 @@ p {
     padding-top: 8px;
     text-align: center;
     color: #1d68e3;
-    font-size: 9px;
+    font-size: 10px;
     text-decoration: none
 }
 
@@ -2211,8 +2364,8 @@ p {
 }
 
 .product-admin-row img {
-    width: 42px;
-    height: 42px;
+    width: 45px;
+    height: 45px;
     object-fit: contain;
     border-radius: 5px;
     background: #fff0d6
@@ -2228,7 +2381,7 @@ p {
 
 .product-admin-row strong {
     display: block;
-    font-size: 10px;
+    font-size: 13px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis
@@ -2237,7 +2390,7 @@ p {
 .product-admin-row small {
     display: block;
     color: #778397;
-    font-size: 8px
+    font-size: 11px
 }
 
 .low-stock-list > div {
@@ -2250,16 +2403,18 @@ p {
 }
 
 .low-stock-list > div > div {
-    min-width: 0
+    min-width: 0;
+    display: flex;
+    flex-flow: column;
 }
 
 .low-stock-list strong {
-    font-size: 10px
+    font-size: 13px
 }
 
 .low-stock-list small {
     color: #778397;
-    font-size: 8px
+    font-size: 11px
 }
 
 .low-stock-list > div > small {
@@ -2269,7 +2424,7 @@ p {
 .low-stock-list em {
     grid-column: 1/2;
     color: #7a8595;
-    font-size: 8px;
+    font-size: 10px;
     font-style: normal
 }
 
@@ -2306,12 +2461,12 @@ p {
 
 .admin-activity-table th {
     padding: 8px 10px;
-    font-size: 8px
+    font-size: 11px
 }
 
 .admin-activity-table td {
     padding: 8px 10px;
-    font-size: 9px
+    font-size: 10px
 }
 
 .actor {
@@ -2328,18 +2483,18 @@ p {
     border-radius: 50%;
     background: #edf1f4;
     color: #687588;
-    font-size: 9px
+    font-size: 11px
 }
 
 .actor strong {
     display: block;
-    font-size: 9px
+    font-size: 11px
 }
 
 .actor small {
     display: block;
     color: #8490a0;
-    font-size: 7px
+    font-size: 10px
 }
 
 .activity-tag {
@@ -2347,7 +2502,7 @@ p {
     padding: 3px 7px;
     border: 1px solid;
     border-radius: 999px;
-    font-size: 8px;
+    font-size: 10px;
     font-weight: 650
 }
 
@@ -2375,7 +2530,7 @@ p {
     gap: 12px;
     padding-top: 8px;
     color: #7c8797;
-    font-size: 8px
+    font-size: 10px
 }
 
 @media (max-width: 1100px) {
