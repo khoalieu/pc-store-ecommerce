@@ -577,8 +577,14 @@ if (returnRows.length > 0) {
     const currentFile =
         (window.location.pathname.split('/').pop() || '').toLowerCase();
 
+    const adminBasePath =
+        window.location.pathname.split('/admin/')[0] || '';
+
+    const sharedSidebarUrl =
+        `${adminBasePath}/admin/sidebar.html`;
+
     try {
-        const res = await fetch('sidebar.html', {
+        const res = await fetch(sharedSidebarUrl, {
             cache: 'no-store'
         });
 
@@ -607,30 +613,75 @@ if (returnRows.length > 0) {
         const sidebar = doc.querySelector('.sidebar');
 
         if (sidebarHost && sidebar) {
-
             sidebarHost.replaceWith(sidebar);
-
-            sidebar.querySelectorAll('a').forEach((link) => {
-
-                link.removeAttribute('aria-current');
-
-                const href = (link.getAttribute('href') || '')
-                    .split('#')[0]
-                    .split('?')[0]
-                    .toLowerCase();
-
-                if (
-                    href &&
-                    href !== '#' &&
-                    href === currentFile
-                ) {
-                    link.setAttribute(
-                        'aria-current',
-                        'page'
-                    );
-                }
-            });
         }
+
+        // Tất cả link trong component dùng chung phải được tính tương đối
+        // với admin/sidebar.html, không phụ thuộc trang đang mở nằm trong
+        // admin/ecosystem hay các thư mục con khác.
+        const sharedComponents = [
+            serviceBar,
+            topbar,
+            sidebar
+        ].filter(Boolean);
+
+        const sharedLinks = [
+            ...new Set(
+                sharedComponents.flatMap((component) => [
+                    ...component.querySelectorAll('a')
+                ])
+            )
+        ];
+
+        sharedLinks.forEach((link) => {
+
+            link.removeAttribute('aria-current');
+
+            const rawHref =
+                link.getAttribute('href') || '';
+
+            if (
+                rawHref &&
+                !rawHref.startsWith('#') &&
+                !rawHref.startsWith('http://') &&
+                !rawHref.startsWith('https://') &&
+                !rawHref.startsWith('mailto:') &&
+                !rawHref.startsWith('tel:')
+            ) {
+                const resolvedLink = new URL(
+                    rawHref,
+                    new URL(
+                        sharedSidebarUrl,
+                        window.location.origin
+                    )
+                );
+
+                link.setAttribute(
+                    'href',
+                    `${resolvedLink.pathname}${resolvedLink.search}${resolvedLink.hash}`
+                );
+            }
+
+            const hrefPath = (link.getAttribute('href') || '')
+                .split('#')[0]
+                .split('?')[0]
+                .toLowerCase();
+
+            const href = hrefPath
+                ? hrefPath.split('/').pop()
+                : '';
+
+            if (
+                href &&
+                href !== '#' &&
+                href === currentFile
+            ) {
+                link.setAttribute(
+                    'aria-current',
+                    'page'
+                );
+            }
+        });
 
         document
             .querySelectorAll('[data-sidebar-toggle]')
