@@ -81,6 +81,231 @@ if (userDropdownTrigger && userDropdown) {
   });
 }
 
+//add sidebar admin
+(async function initSharedComponent() {
+    const sidebarHost = document.querySelector('[data-sidebar-host]');
+
+    const currentFile =
+        (window.location.pathname.split('/').pop() || '').toLowerCase();
+
+    const adminBasePath =
+        window.location.pathname.split('/admin/')[0] || '';
+
+    const sharedSidebarUrl =
+        `${adminBasePath}/admin/sidebar.html`;
+
+    try {
+        const res = await fetch(sharedSidebarUrl, {
+            cache: 'no-store'
+        });
+
+        if (!res.ok) {
+            throw new Error(
+                `Không tải được sidebar.html (HTTP ${res.status})`
+            );
+        }
+
+        const buffer = await res.arrayBuffer();
+        const html = new TextDecoder('utf-8').decode(buffer);
+
+        const doc = new DOMParser().parseFromString(
+            html,
+            'text/html'
+        );
+
+        const serviceBar = doc.querySelector('.service-bar');
+        const topbar = doc.querySelector('.topbar');
+        const headerHost = document.getElementById('header-host');
+
+        if (headerHost && serviceBar && topbar) {
+            headerHost.replaceWith(serviceBar, topbar);
+        }
+
+        const sidebar = doc.querySelector('.sidebar');
+
+        if (sidebarHost && sidebar) {
+            sidebarHost.replaceWith(sidebar);
+        }
+
+        // Tất cả link trong component dùng chung phải được tính tương đối
+        // với admin/sidebar.html, không phụ thuộc trang đang mở nằm trong
+        // admin/ecosystem hay các thư mục con khác.
+        const sharedComponents = [
+            serviceBar,
+            topbar,
+            sidebar
+        ].filter(Boolean);
+
+        const sharedLinks = [
+            ...new Set(
+                sharedComponents.flatMap((component) => [
+                    ...component.querySelectorAll('a')
+                ])
+            )
+        ];
+
+        sharedLinks.forEach((link) => {
+
+            link.removeAttribute('aria-current');
+
+            const rawHref =
+                link.getAttribute('href') || '';
+
+            if (
+                rawHref &&
+                !rawHref.startsWith('#') &&
+                !rawHref.startsWith('http://') &&
+                !rawHref.startsWith('https://') &&
+                !rawHref.startsWith('mailto:') &&
+                !rawHref.startsWith('tel:')
+            ) {
+                const resolvedLink = new URL(
+                    rawHref,
+                    new URL(
+                        sharedSidebarUrl,
+                        window.location.origin
+                    )
+                );
+
+                link.setAttribute(
+                    'href',
+                    `${resolvedLink.pathname}${resolvedLink.search}${resolvedLink.hash}`
+                );
+            }
+
+            const hrefPath = (link.getAttribute('href') || '')
+                .split('#')[0]
+                .split('?')[0]
+                .toLowerCase();
+
+            const href = hrefPath
+                ? hrefPath.split('/').pop()
+                : '';
+
+            if (
+                href &&
+                href !== '#' &&
+                href === currentFile
+            ) {
+                link.setAttribute(
+                    'aria-current',
+                    'page'
+                );
+            }
+        });
+
+        document
+            .querySelectorAll('[data-sidebar-toggle]')
+            .forEach((button) => {
+
+                if (button.dataset.sidebarBound === '1') {
+                    return;
+                }
+
+                button.dataset.sidebarBound = '1';
+
+                button.addEventListener('click', () => {
+
+                    const shell =
+                        document.querySelector('.shell');
+
+                    if (!shell) {
+                        return;
+                    }
+
+                    const open =
+                        shell.classList.toggle(
+                            'is-sidebar-open'
+                        );
+
+                    button.setAttribute(
+                        'aria-expanded',
+                        String(open)
+                    );
+                });
+            });
+
+    } catch (err) {
+
+        console.warn(
+            '[PCMatch] Không nạp được sidebar.html',
+            err
+        );
+    }
+})();
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const points = document.querySelectorAll(".chart-points circle");
+
+    const tooltip = document.getElementById("chartTooltip");
+    const tooltipTime = document.getElementById("tooltipTime");
+    const tooltipRevenue = document.getElementById("tooltipRevenue");
+    const tooltipFee = document.getElementById("tooltipFee");
+
+    const chartContainer = document.querySelector(".chart-container");
+
+    if (!points.length || !tooltip || !chartContainer) {
+        return;
+    }
+
+    points.forEach(point => {
+
+        point.addEventListener("mouseenter", function () {
+
+            tooltipTime.textContent = this.dataset.time;
+            tooltipRevenue.textContent = this.dataset.revenue;
+            tooltipFee.textContent = this.dataset.fee;
+
+            tooltip.classList.add("show");
+
+            const pointRect = this.getBoundingClientRect();
+            const containerRect =
+                chartContainer.getBoundingClientRect();
+
+            const pointX =
+                pointRect.left -
+                containerRect.left +
+                pointRect.width / 2;
+
+            const pointY =
+                pointRect.top -
+                containerRect.top;
+
+            const tooltipWidth = tooltip.offsetWidth;
+            const tooltipHeight = tooltip.offsetHeight;
+
+            let left = pointX - tooltipWidth / 2;
+            let top = pointY - tooltipHeight - 14;
+
+            if (left < 5) {
+                left = 5;
+            }
+
+            if (left + tooltipWidth >
+                chartContainer.clientWidth - 5) {
+
+                left =
+                    chartContainer.clientWidth -
+                    tooltipWidth -
+                    5;
+            }
+
+            if (top < 5) {
+                top = pointY + 18;
+            }
+
+            tooltip.style.left = `${left}px`;
+            tooltip.style.top = `${top}px`;
+        });
+
+        point.addEventListener("mouseleave", function () {
+            tooltip.classList.remove("show");
+        });
+
+    });
+
+});
 // Keyboard navigation for legacy Shop/Admin tabs. Buyer state lives in buyer.js modules.
 selectAll("[role=tablist]").forEach(list => list.addEventListener("keydown", event => {
  const tabs=selectAll("[role=tab]",list);const index=tabs.indexOf(document.activeElement);
