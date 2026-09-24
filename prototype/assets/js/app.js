@@ -65,3 +65,15 @@ selectAll("[data-dropdown]").forEach((button) => {
     button.setAttribute("aria-expanded", String(!open));
   });
 });
+
+const userDropdownTrigger = document.querySelector('.user-dropdown > a');
+const userDropdown = document.querySelector('.user-dropdown');
+if (userDropdownTrigger && userDropdown) {
+  userDropdownTrigger.addEventListener('click', function(e) { 
+    e.preventDefault(); 
+    userDropdown.classList.toggle('open'); 
+  });
+  document.addEventListener('click', function(e) { 
+    if (!userDropdown.contains(e.target)) userDropdown.classList.remove('open'); 
+  });
+}

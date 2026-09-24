@@ -3,7 +3,25 @@
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard Admin — PCMatch</title><link rel="stylesheet" href="../assets/css/tokens.css?v=20260917b"><link rel="stylesheet" href="../assets/css/base.css?v=20260917b"><link rel="stylesheet" href="../assets/css/components.css?v=20260917b"><link rel="stylesheet" href="../assets/css/pages.css?v=20260917b"><link rel="stylesheet" href="../assets/css/production.css?v=20260917"></head>
 <body>
   <a class="skip-link" href="#main">Bỏ qua điều hướng</a><div class="service-bar">PCMatch Operations · Giám sát ngoại lệ và chất lượng nền tảng</div>
-  <header class="topbar"><div class="container topbar__inner" style="max-width:none"><button class="menu-toggle" data-sidebar-toggle aria-label="Mở sidebar"><span></span></button><a class="logo" href="dashboard.html"><i class="logo__mark"></i><span>PC</span><span>Match Admin</span></a><label class="search"><span class="sr-only">Tìm toàn hệ thống</span><input placeholder="Tìm tài khoản, shop, model, đơn, case hoặc tracking"><i class="search__glyph"></i></label><nav class="nav-links"><a href="#">Trợ giúp</a><a href="dashboard.html" aria-current="page">Platform Admin</a></nav></div></header>
+  <header class="topbar"><div class="container topbar__inner" style="max-width:none"><button class="menu-toggle" data-sidebar-toggle aria-label="Mở sidebar"><span></span></button><a class="logo" href="dashboard.html"><i class="logo__mark"></i><span>PC</span><span>Match Admin</span></a><label class="search"><span class="sr-only">Tìm toàn hệ thống</span><input placeholder="Tìm tài khoản, shop, model, đơn, case hoặc tracking"><i class="search__glyph"></i></label><nav class="nav-links"><a href="#">Trợ giúp</a>
+<div class="user-dropdown">
+  <a href="#" class="admin-link">Platform Admin <i class="fa-solid fa-chevron-down" style="font-size:0.75rem;"></i></a>
+  <div class="user-dropdown-menu">
+    <div class="udm-header">
+      <div class="udm-name">Platform Admin</div>
+      <div class="udm-email">admin@pcmatch.vn</div>
+      <span class="udm-badge">Quản trị cấp cao</span>
+    </div>
+    <div class="udm-links">
+      <a href="profile.html"><i class="fa-solid fa-user-gear"></i> Thông tin tài khoản</a>
+      <a href="password.html"><i class="fa-solid fa-shield-halved"></i> Đổi mật khẩu</a>
+      <a href="activity-log.html"><i class="fa-solid fa-user-clock"></i> Hoạt động của tôi</a>
+      <a href="policies.html"><i class="fa-solid fa-book-open"></i> Chính sách nền tảng</a>
+      <hr />
+      <a href="#" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</a>
+    </div>
+  </div>
+</div></nav></div></header>
   <div class="shell"><aside class="sidebar"><div class="sidebar__brand"><strong>Vận hành nền tảng</strong><small>Quyền: Platform Admin</small></div><nav><p class="sidebar__group">Tổng quan</p><a href="dashboard.html" aria-current="page">Dashboard</a><a href="#">Tài khoản & quyền</a><a href="#">Shop <span class="sidebar__count">6</span></a><p class="sidebar__group">Kỹ thuật</p><a href="#">Danh mục & model <span class="sidebar__count">14</span></a><a href="rules.html">Rule tương thích <span class="sidebar__count">3 test</span></a><p class="sidebar__group">Tin cậy</p><a href="#">Kiểm duyệt <span class="sidebar__count">19</span></a><a href="#">Vụ việc <span class="sidebar__count">8</span></a><p class="sidebar__group">Tiền & vận hành</p><a href="#">Giao dịch</a><a href="#">Hoàn tiền <span class="sidebar__count">4</span></a><a href="#">Đối soát</a><a href="#">Vận chuyển</a><a href="#">Nhật ký</a></nav></aside>
     <main class="shell__content operations-page" id="main"><nav class="breadcrumb"><a href="dashboard.html">Admin</a><span>Tổng quan vận hành</span></nav><div class="page-head"><div><h1>Ngoại lệ cần điều phối</h1><p>GMV, doanh thu nền tảng và tiền shop thực nhận được tách riêng.</p></div><div class="cluster"><label class="field"><span class="sr-only">Khoảng thời gian</span><select><option>Hôm nay · 16/09/2026</option><option>7 ngày</option></select></label><button class="btn btn--secondary">Xuất báo cáo</button></div></div>
       <div class="dashboard-metrics"><article class="panel metric-panel metric-panel--revenue"><span class="metric-label">GMV hôm nay</span><strong class="metric-value">1,84<small>tỷ ₫</small></strong><p>Giá trị hàng hóa, không phải doanh thu sàn</p></article><article class="panel metric-panel metric-panel--proposal"><span class="metric-label">Doanh thu phí</span><strong class="metric-value">76,2<small>triệu ₫</small></strong><p>Hoa hồng và phí nền tảng đã ghi nhận</p></article><article class="panel metric-panel metric-panel--urgent"><span class="metric-label">Payment mismatch</span><strong class="metric-value">3<small>giao dịch</small></strong><p>Callback muộn hoặc trùng cần đối chiếu</p></article><article class="panel metric-panel metric-panel--stock"><span class="metric-label">Vụ việc quá SLA</span><strong class="metric-value">2<small>/ 8 mở</small></strong><p>Một vụ chờ tài chính, một chờ shop</p></article></div>

@@ -3,7 +3,25 @@
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Quy tắc tương thích — PCMatch Admin</title><link rel="stylesheet" href="../assets/css/tokens.css?v=20260917b"><link rel="stylesheet" href="../assets/css/base.css?v=20260917b"><link rel="stylesheet" href="../assets/css/components.css?v=20260917b"><link rel="stylesheet" href="../assets/css/pages.css?v=20260917b"><link rel="stylesheet" href="../assets/css/production.css?v=20260917"></head>
 <body>
   <a class="skip-link" href="#main">Bỏ qua điều hướng</a><div class="service-bar">Compatibility Engine · Quản lý version và kiểm thử quy tắc</div>
-  <header class="topbar"><div class="container topbar__inner" style="max-width:none"><button class="menu-toggle" data-sidebar-toggle aria-label="Mở sidebar"><span></span></button><a class="logo" href="dashboard.html"><i class="logo__mark"></i><span>PC</span><span>Match Admin</span></a><label class="search"><span class="sr-only">Tìm rule</span><input placeholder="Tìm rule, model hoặc test case"><i class="search__glyph"></i></label><nav class="nav-links"><a href="#">Trợ giúp</a><a href="dashboard.html">Platform Admin</a></nav></div></header>
+  <header class="topbar"><div class="container topbar__inner" style="max-width:none"><button class="menu-toggle" data-sidebar-toggle aria-label="Mở sidebar"><span></span></button><a class="logo" href="dashboard.html"><i class="logo__mark"></i><span>PC</span><span>Match Admin</span></a><label class="search"><span class="sr-only">Tìm rule</span><input placeholder="Tìm rule, model hoặc test case"><i class="search__glyph"></i></label><nav class="nav-links"><a href="#">Trợ giúp</a>
+<div class="user-dropdown">
+  <a href="#" class="admin-link">Platform Admin <i class="fa-solid fa-chevron-down" style="font-size:0.75rem;"></i></a>
+  <div class="user-dropdown-menu">
+    <div class="udm-header">
+      <div class="udm-name">Platform Admin</div>
+      <div class="udm-email">admin@pcmatch.vn</div>
+      <span class="udm-badge">Quản trị cấp cao</span>
+    </div>
+    <div class="udm-links">
+      <a href="profile.html"><i class="fa-solid fa-user-gear"></i> Thông tin tài khoản</a>
+      <a href="password.html"><i class="fa-solid fa-shield-halved"></i> Đổi mật khẩu</a>
+      <a href="activity-log.html"><i class="fa-solid fa-user-clock"></i> Hoạt động của tôi</a>
+      <a href="policies.html"><i class="fa-solid fa-book-open"></i> Chính sách nền tảng</a>
+      <hr />
+      <a href="#" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</a>
+    </div>
+  </div>
+</div></nav></div></header>
   <div class="shell"><aside class="sidebar"><div class="sidebar__brand"><strong>Vận hành nền tảng</strong><small>Quyền: Quản trị danh mục</small></div><nav><p class="sidebar__group">Tổng quan</p><a href="dashboard.html">Dashboard</a><a href="#">Danh mục & hãng</a><a href="#">Model chuẩn</a><a href="#">Thông số & nguồn</a><p class="sidebar__group">Tương thích</p><a href="rules.html" aria-current="page">Quy tắc <span class="sidebar__count">48</span></a><a href="#">Phòng kiểm thử <span class="sidebar__count">3</span></a><a href="#">Lịch sử phiên bản</a></nav></aside>
     <main class="shell__content" id="main"><nav class="breadcrumb"><a href="dashboard.html">Admin</a><span>Dữ liệu kỹ thuật</span><span>Quy tắc tương thích</span></nav><div class="page-head"><div><h1>CPU ↔ BIOS mainboard</h1><p>RULE-CPU-BIOS-04 · Version 13 nháp · Version 12 đang công bố</p></div><div class="cluster"><span class="status status--warn">Nháp cần test</span><button class="btn btn--secondary">Lưu nháp</button><button class="btn btn--primary">Chạy test</button></div></div>
       <div class="rule-builder">
