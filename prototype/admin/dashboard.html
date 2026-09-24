@@ -14,7 +14,27 @@
 <body class="admin-dashboard">
 <a class="skip-link" href="#main">Chuyển đến nội dung chính</a>
 
-<div id="header-host"></div>
+<div class="service-bar">PCMatch Operations · Giám sát ngoại lệ và chất lượng nền tảng</div>
+
+<header class="topbar"><div class="container topbar__inner" style="max-width:none"><button class="menu-toggle" data-sidebar-toggle aria-label="Mở sidebar"><span></span></button><a class="logo" href="dashboard.html"><i class="logo__mark"></i><span>PC</span><span>Match Admin</span></a><label class="search"><span class="sr-only">Tìm toàn hệ thống</span><input placeholder="Tìm tài khoản, shop, model, đơn, case hoặc tracking"><i class="search__glyph"></i></label><nav class="nav-links"><a href="#">Trợ giúp</a>
+<div class="user-dropdown">
+  <a href="#" class="admin-link">Platform Admin <i class="fa-solid fa-chevron-down" style="font-size:0.75rem;"></i></a>
+  <div class="user-dropdown-menu">
+    <div class="udm-header">
+      <div class="udm-name">Platform Admin</div>
+      <div class="udm-email">admin@pcmatch.vn</div>
+      <span class="udm-badge">Quản trị cấp cao</span>
+    </div>
+    <div class="udm-links">
+      <a href="profile.html"><i class="fa-solid fa-user-gear"></i> Thông tin tài khoản</a>
+      <a href="password.html"><i class="fa-solid fa-shield-halved"></i> Đổi mật khẩu</a>
+      <a href="activity-log.html"><i class="fa-solid fa-user-clock"></i> Hoạt động của tôi</a>
+      <a href="policies.html"><i class="fa-solid fa-book-open"></i> Chính sách nền tảng</a>
+      <hr />
+      <a href="#" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</a>
+    </div>
+  </div>
+</div></nav></div></header>
 
 <div class="shell">
     <div data-sidebar-host></div>
@@ -110,52 +130,18 @@
                             <rect x="640" y="33" width="29" height="227" rx="3"></rect>
                             <rect x="734" y="115" width="29" height="145" rx="3"></rect>
                         </g>
-                        <path class="chart-line"
-                              pathLength="1"
+                        <path class="chart-line" pathLength="1"
                               d="M90 242 C125 248 157 252 184 250 S248 238 278 231 S340 188 372 153 S440 95 466 86 S533 105 560 99 S628 52 654 34 S720 78 748 112">
                         </path>
                         <g class="chart-points">
-
-                            <circle cx="90" cy="242" r="4"
-                                    data-time="00h"
-                                    data-revenue="0,30 tỷ ₫"
-                                    data-fee="0,014 tỷ ₫"></circle>
-
-                            <circle cx="184" cy="250" r="4"
-                                    data-time="03h"
-                                    data-revenue="0,18 tỷ ₫"
-                                    data-fee="0,008 tỷ ₫"></circle>
-
-                            <circle cx="278" cy="231" r="4"
-                                    data-time="06h"
-                                    data-revenue="0,46 tỷ ₫"
-                                    data-fee="0,019 tỷ ₫"></circle>
-
-                            <circle cx="372" cy="153" r="4"
-                                    data-time="09h"
-                                    data-revenue="1,50 tỷ ₫"
-                                    data-fee="0,061 tỷ ₫"></circle>
-
-                            <circle cx="466" cy="86" r="4"
-                                    data-time="12h"
-                                    data-revenue="2,32 tỷ ₫"
-                                    data-fee="0,098 tỷ ₫"></circle>
-
-                            <circle cx="560" cy="99" r="4"
-                                    data-time="15h"
-                                    data-revenue="2,08 tỷ ₫"
-                                    data-fee="0,085 tỷ ₫"></circle>
-
-                            <circle cx="654" cy="34" r="4"
-                                    data-time="18h"
-                                    data-revenue="2,85 tỷ ₫"
-                                    data-fee="0,118 tỷ ₫"></circle>
-
-                            <circle cx="748" cy="112" r="4"
-                                    data-time="21h"
-                                    data-revenue="1,95 tỷ ₫"
-                                    data-fee="0,082 tỷ ₫"></circle>
-
+                            <circle cx="90" cy="242" r="4" data-time="00h" data-revenue="0,30 tỷ ₫" data-fee="0,014 tỷ ₫"></circle>
+                            <circle cx="184" cy="250" r="4" data-time="03h" data-revenue="0,18 tỷ ₫" data-fee="0,008 tỷ ₫"></circle>
+                            <circle cx="278" cy="231" r="4" data-time="06h" data-revenue="0,46 tỷ ₫" data-fee="0,019 tỷ ₫"></circle>
+                            <circle cx="372" cy="153" r="4" data-time="09h" data-revenue="1,50 tỷ ₫" data-fee="0,061 tỷ ₫"></circle>
+                            <circle cx="466" cy="86" r="4" data-time="12h" data-revenue="2,32 tỷ ₫" data-fee="0,098 tỷ ₫"></circle>
+                            <circle cx="560" cy="99" r="4" data-time="15h" data-revenue="2,08 tỷ ₫" data-fee="0,085 tỷ ₫"></circle>
+                            <circle cx="654" cy="34" r="4" data-time="18h" data-revenue="2,85 tỷ ₫" data-fee="0,118 tỷ ₫"></circle>
+                            <circle cx="748" cy="112" r="4" data-time="21h" data-revenue="1,95 tỷ ₫" data-fee="0,082 tỷ ₫"></circle>
                         </g>
                         <g class="chart-x-labels">
                             <text x="82" y="283">00h</text>
@@ -177,13 +163,11 @@
                     </svg>
                     <div class="chart-tooltip" id="chartTooltip">
                         <div class="tooltip-time" id="tooltipTime">06h</div>
-
                         <div class="tooltip-row">
                             <span class="tooltip-dot revenue"></span>
                             <span>Doanh thu:</span>
                             <strong id="tooltipRevenue">0,46 tỷ ₫</strong>
                         </div>
-
                         <div class="tooltip-row">
                             <span class="tooltip-dot fee"></span>
                             <span>Phí & hoa hồng:</span>
@@ -342,70 +326,6 @@
             </article>
         </section>
 
-        <section class="admin-dashboard-grid admin-dashboard-grid--products">
-            <article class="panel admin-products-panel">
-                <div class="panel__head admin-panel-head">
-                    <div class="admin-section-title"><span class="admin-icon admin-icon--blue">◔</span>
-                        <div><h3>Sản phẩm tiêu biểu</h3>
-                            <p>Bán chạy nhất toàn sàn trong kỳ đang chọn</p></div>
-                    </div>
-                    <span class="status status--info">Top bán chạy</span></div>
-                <div class="product-admin-list">
-                    <div class="product-admin-row"><img src="../assets/images/products/arduino-uno-r3.jpg" alt=""
-                                                        onerror="this.style.display='none'">
-                        <div><strong>Kit Arduino Uno R3 kèm 30 cảm biến</strong><small>Linh Kiện Sao Việt · Kit phát
-                            triển</small></div>
-                        <div><strong>1.290.000 ₫</strong><small>Đã bán 1.842</small></div>
-                    </div>
-                    <div class="product-admin-row"><img src="../assets/images/products/esp32-devkit-v1.jpg" alt=""
-                                                        onerror="this.style.display='none'">
-                        <div><strong>ESP32 DevKit V1 WiFi Bluetooth</strong><small>Linh Kiện TechZone · Vi điều khiển
-                            &amp; board mạch</small></div>
-                        <div><strong>320.000 ₫</strong><small>Đã bán 1.520</small></div>
-                    </div>
-                    <div class="product-admin-row"><img src="../assets/images/products/dht22.jpg" alt=""
-                                                        onerror="this.style.display='none'">
-                        <div><strong>Cảm biến nhiệt độ độ ẩm DHT22</strong><small>Module &amp; Cảm Biến 24H · Cảm
-                            biến</small></div>
-                        <div><strong>85.000 ₫</strong><small>Đã bán 934</small></div>
-                    </div>
-                    <div class="product-admin-row"><img src="../assets/images/products/relay-5v.jpg" alt=""
-                                                        onerror="this.style.display='none'">
-                        <div><strong>Module Relay 5V 4 kênh chống nhiễu</strong><small>Linh Kiện TechZone · Module chức
-                            năng</small></div>
-                        <div><strong>145.000 ₫</strong><small>Đã bán 2.416</small></div>
-                    </div>
-                </div>
-            </article>
-
-            <article class="panel admin-products-panel">
-                <div class="panel__head admin-panel-head">
-                    <div class="admin-section-title"><span class="admin-icon admin-icon--blue">⊙</span>
-                        <div><h3>Sản phẩm ít được mua</h3>
-                            <p>Tồn kho cao nhưng sức mua thấp — cần đẩy hiển thị</p></div>
-                    </div>
-                    <span class="status status--warn">△ Cảnh chú ý</span></div>
-                <div class="low-stock-list">
-                    <div>
-                        <div><strong>Đèn LED 7 màu 5mm (100 con)</strong><small>Linh Kiện Sao Việt</small></div>
-                        <strong>25.000 ₫</strong><small>Bán 6 · Tồn 480</small><span class="mini-progress"><i
-                            style="width:1.3%"></i></span><em>Tỷ lệ bán 1.3%</em></div>
-                    <div>
-                        <div><strong>Biến trở 10K (combo 50 con)</strong><small>Chip Bán Dẫn Á Châu</small></div>
-                        <strong>60.000 ₫</strong><small>Bán 11 · Tồn 620</small><span class="mini-progress"><i
-                            style="width:1.8%"></i></span><em>Tỷ lệ bán 1.8%</em></div>
-                    <div>
-                        <div><strong>Jack cái DC 5.5mm nguồn</strong><small>Nguồn &amp; Adapter Pro</small></div>
-                        <strong>15.000 ₫</strong><small>Bán 14 · Tồn 350</small><span class="mini-progress"><i
-                            style="width:4%"></i></span><em>Tỷ lệ bán 4%</em></div>
-                    <div>
-                        <div><strong>Tụ điện 100uF 25V (50 con)</strong><small>Chip Bán Dẫn Á Châu</small></div>
-                        <strong>45.000 ₫</strong><small>Bán 18 · Tồn 410</small><span class="mini-progress"><i
-                            style="width:4.4%"></i></span><em>Tỷ lệ bán 4.4%</em></div>
-                </div>
-            </article>
-        </section>
-
         <section class="panel admin-activity-panel">
             <div class="panel__head admin-panel-head">
                 <div class="admin-section-title"><span class="admin-icon admin-icon--blue">◷</span>
@@ -429,52 +349,42 @@
                     <tbody>
                     <tr>
                         <td>16:21:04</td>
-                        <td><span
-                                class="actor"><b>A</b><span><strong>admin.finance</strong><small>Tài chính</small></span></span>
-                        </td>
+                        <td><span class="actor"><b>A</b><span><strong>admin.finance</strong><small>Tài chính</small></span></span></td>
                         <td><span class="activity-tag activity-tag--amber">Duyệt hoàn tiền</span></td>
                         <td>REF-260916-09</td>
                         <td>Shop huỷ sau khi thanh toán</td>
                     </tr>
                     <tr>
                         <td>16:18:42</td>
-                        <td><span class="actor"><b>C</b><span><strong>catalog.lan</strong><small>Danh mục</small></span></span>
-                        </td>
+                        <td><span class="actor"><b>C</b><span><strong>catalog.lan</strong><small>Danh mục</small></span></span></td>
                         <td><span class="activity-tag activity-tag--blue">Cập nhật danh mục</span></td>
                         <td>CAT-MODULE-04</td>
                         <td>Bổ sung 12 danh mục con</td>
                     </tr>
                     <tr>
                         <td>16:12:10</td>
-                        <td><span
-                                class="actor"><b>S</b><span><strong>support.minh</strong><small>CSKH</small></span></span>
-                        </td>
+                        <td><span class="actor"><b>S</b><span><strong>support.minh</strong><small>CSKH</small></span></span></td>
                         <td><span class="activity-tag activity-tag--slate">Phân loại khiếu nại</span></td>
                         <td>FB-260916-102</td>
                         <td>Thiếu chứng từ giao hàng</td>
                     </tr>
                     <tr>
                         <td>15:58:37</td>
-                        <td><span
-                                class="actor"><b>O</b><span><strong>ops.duyen</strong><small>Vận hành</small></span></span>
-                        </td>
+                        <td><span class="actor"><b>O</b><span><strong>ops.duyen</strong><small>Vận hành</small></span></span></td>
                         <td><span class="activity-tag activity-tag--blue">Duyệt shop</span></td>
                         <td>SHOP-2609-118</td>
                         <td>Hồ sơ pháp lý hợp lệ</td>
                     </tr>
                     <tr>
                         <td>15:41:22</td>
-                        <td><span class="actor"><b>A</b><span><strong>admin.hoang</strong><small>Quản trị</small></span></span>
-                        </td>
+                        <td><span class="actor"><b>A</b><span><strong>admin.hoang</strong><small>Quản trị</small></span></span></td>
                         <td><span class="activity-tag activity-tag--amber">Cấp quyền</span></td>
                         <td>USER-4821</td>
                         <td>Thêm quyền xem giao dịch</td>
                     </tr>
                     <tr>
                         <td>15:26:05</td>
-                        <td><span
-                                class="actor"><b>O</b><span><strong>ops.duyen</strong><small>Vận hành</small></span></span>
-                        </td>
+                        <td><span class="actor"><b>O</b><span><strong>ops.duyen</strong><small>Vận hành</small></span></span></td>
                         <td><span class="activity-tag activity-tag--slate">Xác nhận đơn hàng</span></td>
                         <td>ORD-260916-7741</td>
                         <td>Đơn hợp lệ, đẩy về shop</td>
@@ -489,6 +399,41 @@
     </main>
 </div>
 
+<script>
+    (async function initSharedComponent() {
+      const sidebarHost = document.querySelector('[data-sidebar-host]');
+      const currentFile = (window.location.pathname.split('/').pop() || '').toLowerCase();
+      try {
+        const res = await fetch('sidebar.html', { cache: 'no-store' });
+        if (!res.ok) throw new Error(`Không tải được sidebar.html (HTTP ${res.status})`);
+        const buffer = await res.arrayBuffer();
+        const html = new TextDecoder('utf-8').decode(buffer);
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        
+        const sidebar = doc.querySelector('.sidebar');
+        if (sidebarHost && sidebar) {
+          sidebarHost.replaceWith(sidebar);
+          sidebar.querySelectorAll('a').forEach((link) => {
+            link.removeAttribute('aria-current');
+            const href = (link.getAttribute('href') || '').split('#')[0].split('?')[0].toLowerCase();
+            if (href && href !== '#' && href === currentFile) link.setAttribute('aria-current', 'page');
+          });
+        }
+        document.querySelectorAll('[data-sidebar-toggle]').forEach((button) => {
+          if (button.dataset.sidebarBound === '1') return;
+          button.dataset.sidebarBound = '1';
+          button.addEventListener('click', () => {
+            const shell = document.querySelector('.shell');
+            if (!shell) return;
+            const open = shell.classList.toggle('is-sidebar-open');
+            button.setAttribute('aria-expanded', String(open));
+          });
+        });
+      } catch (err) {
+        console.warn('[PCMatch] Không nạp được sidebar.html', err);
+      }
+    })();
+</script>
 <script src="../assets/js/app.js"></script>
 </body>
 </html>

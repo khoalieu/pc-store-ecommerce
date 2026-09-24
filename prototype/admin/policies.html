@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Chính sách nền tảng PCMatch - Quản lý các văn bản chính sách và điều khoản của sàn thương mại điện tử." />
+  <title>Chính sách nền tảng · PCMatch Admin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+  <link rel="stylesheet" href="../assets/css/pages.css" />
+  <link rel="stylesheet" href="../assets/css/production.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body, 'Inter', sans-serif); background: var(--color-canvas); color: var(--color-ink); display: flex; flex-direction: column; min-height: 100vh; }
+
+
+
+    .page-title { font-size: 1.75rem; font-weight: 800; color: var(--color-ink); letter-spacing: -0.02em; margin-bottom: 8px; }
+    .page-subtitle-row { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; color: var(--color-slate); margin-bottom: 24px; }
+    .page-subtitle-row i { color: var(--color-cobalt); }
+    .page-header-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--color-cobalt); color: #fff; border: none; border-radius: 8px; font-size: 0.875rem; font-weight: 700; cursor: pointer; text-decoration: none; transition: background 0.15s; }
+    .btn-primary:hover { background: var(--color-cobalt-deep); color: #fff; }
+
+    .filter-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .filter-input-wrap { position: relative; flex: 0 0 280px; }
+    .filter-input-wrap i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--color-slate); font-size: 0.8125rem; }
+    .filter-input { width: 100%; padding: 9px 12px 9px 34px; border: 1px solid var(--color-border); border-radius: 8px; font-size: 0.875rem; color: var(--color-ink); background: var(--color-surface); outline: none; }
+    .filter-input:focus { border-color: var(--color-cobalt); }
+    .pills { display: flex; gap: 6px; flex-wrap: wrap; }
+    .pill { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-slate); font-size: 0.8125rem; font-weight: 600; cursor: pointer; transition: all 0.12s; }
+    .pill:hover { border-color: var(--color-cobalt); color: var(--color-cobalt); }
+    .pill.active { background: var(--color-cobalt); color: #fff; border-color: var(--color-cobalt); }
+
+    .policies-layout { display: grid; grid-template-columns: 300px 1fr; border: 1px solid var(--color-border); border-radius: 12px; overflow: hidden; background: var(--color-surface); min-height: 560px; }
+
+    .policy-list-panel { border-right: 1px solid var(--color-border); display: flex; flex-direction: column; }
+    .policy-list-header { padding: 14px 18px; border-bottom: 1px solid var(--color-border); background: var(--color-canvas); }
+    .policy-list-header-title { font-size: 0.75rem; font-weight: 700; color: var(--color-slate); text-transform: uppercase; letter-spacing: 0.06em; }
+    .policy-list-header-count { font-size: 0.8125rem; color: var(--color-slate); margin-top: 2px; }
+    .policy-list { list-style: none; padding: 8px 0; }
+    .policy-list-item { display: flex; align-items: center; gap: 12px; padding: 12px 18px; cursor: pointer; transition: background 0.12s; border-left: 3px solid transparent; }
+    .policy-list-item:hover { background: var(--color-canvas); }
+    .policy-list-item.active { background: var(--color-cobalt-soft); border-left-color: var(--color-cobalt); }
+    .policy-list-icon { width: 34px; height: 34px; border-radius: 8px; background: var(--color-canvas); display: flex; align-items: center; justify-content: center; font-size: 0.875rem; color: var(--color-cobalt); flex-shrink: 0; }
+    .policy-list-item.active .policy-list-icon { background: rgba(19,95,210,0.12); }
+    .policy-list-info { min-width: 0; }
+    .policy-list-name { font-size: 0.875rem; font-weight: 600; color: var(--color-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .policy-list-item.active .policy-list-name { color: var(--color-cobalt); }
+    .policy-list-meta { font-size: 0.75rem; color: var(--color-slate); margin-top: 2px; }
+
+    .policy-content-panel { display: flex; flex-direction: column; overflow: hidden; }
+    .policy-content-header { padding: 20px 24px; border-bottom: 1px solid var(--color-border); display: flex; align-items: flex-start; gap: 16px; }
+    .policy-content-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--color-cobalt); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .policy-content-title-group { flex: 1; }
+    .policy-content-title { font-size: 1.0625rem; font-weight: 800; color: var(--color-ink); display: flex; align-items: center; gap: 10px; margin: 0 0 8px; }
+    .version-badge { padding: 2px 10px; background: var(--color-cobalt-soft); color: var(--color-cobalt-deep); border-radius: 12px; font-size: 0.75rem; font-weight: 700; }
+    .policy-meta-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .policy-meta-item { display: flex; align-items: center; gap: 6px; font-size: 0.8125rem; color: var(--color-slate); }
+    .policy-meta-item i { color: var(--color-cobalt); }
+
+    .policy-content-body { padding: 24px; overflow-y: auto; flex: 1; }
+    .policy-summary-box { background: var(--color-canvas); border: 1px solid var(--color-border); border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; font-size: 0.875rem; color: var(--color-slate); line-height: 1.65; }
+
+    .policy-section { margin-bottom: 24px; }
+    .policy-section h3 { font-size: 0.9375rem; font-weight: 700; color: var(--color-ink); margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+    .policy-section h3::before { content: ''; display: inline-block; width: 4px; height: 16px; background: var(--color-cobalt); border-radius: 2px; flex-shrink: 0; }
+    .policy-section p { font-size: 0.875rem; color: var(--color-ink); line-height: 1.75; }
+    .policy-section p a, .policy-section p strong { color: var(--color-cobalt); font-weight: 600; }
+
+    .policy-content-footer { padding: 14px 24px; border-top: 1px solid var(--color-border); background: var(--color-canvas); display: flex; align-items: flex-start; gap: 10px; font-size: 0.8125rem; color: var(--color-slate); }
+    .policy-content-footer i { color: var(--color-cobalt); margin-top: 1px; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<div class="service-bar">PCMatch Operations · Giám sát ngoại lệ và chất lượng nền tảng</div>
+
+<header class="topbar">
+  <div class="container topbar__inner" style="max-width:none">
+    <button class="menu-toggle" data-sidebar-toggle aria-label="Mở sidebar"><span></span></button>
+    <a class="logo" href="dashboard.html"><i class="logo__mark"></i><span>PC</span> <span>Match Admin</span></a>
+    <label class="search">
+      <span class="sr-only">Tìm kiếm</span>
+      <input placeholder="Tìm tài khoản, shop, model, đơn, case hoặc tracking">
+      <i class="search__glyph"></i>
+    </label>
+    <nav class="nav-links">
+      <a href="#">Trợ giúp</a>
+      <div class="user-dropdown">
+        <a href="#" class="admin-link">Platform Admin <i class="fa-solid fa-chevron-down" style="font-size:0.75rem;"></i></a>
+        <div class="user-dropdown-menu">
+          <div class="udm-header">
+            <div class="udm-name">Platform Admin</div>
+            <div class="udm-email">admin@pcmatch.vn</div>
+            <span class="udm-badge">Quản trị cấp cao</span>
+          </div>
+          <div class="udm-links">
+            <a href="profile.html"><i class="fa-solid fa-user-gear"></i> Thông tin tài khoản</a>
+            <a href="password.html"><i class="fa-solid fa-shield-halved"></i> Đổi mật khẩu</a>
+            <a href="activity-log.html"><i class="fa-solid fa-user-clock"></i> Hoạt động của tôi</a>
+            <a href="policies.html"><i class="fa-solid fa-book-open"></i> Chính sách nền tảng</a>
+            <hr />
+            <a href="#" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="sidebar">
+    <div class="sidebar__brand">
+      <strong>Vận hành nền tảng</strong>
+      <small class="muted">Quyền: Platform Admin</small>
+    </div>
+    <nav>
+      <p class="sidebar__group">TỔNG QUAN</p>
+      <a href="dashboard.html"><span>Dashboard</span></a>
+      <a href="#"><span>Tài khoản & quyền</span></a>
+      <a href="#"><span>Shop</span><span class="sidebar__count">6</span></a>
+
+      <p class="sidebar__group">KỸ THUẬT</p>
+      <a href="#"><span>Danh mục & model</span><span class="sidebar__count">14</span></a>
+      <a href="#"><span>Rule tương thích</span><span class="sidebar__count">3 test</span></a>
+
+      <p class="sidebar__group">TIN CẬY</p>
+      <a href="#"><span>Kiểm duyệt</span><span class="sidebar__count">19</span></a>
+      <a href="#"><span>Vụ việc</span><span class="sidebar__count">8</span></a>
+
+      <p class="sidebar__group">TIỀN & VẬN HÀNH</p>
+      <a href="#"><span>Giao dịch</span></a>
+      <a href="#"><span>Hoàn tiền</span><span class="sidebar__count">4</span></a>
+      <a href="#"><span>Đối soát</span></a>
+      <a href="#"><span>Vận chuyển</span></a>
+      <a href="#"><span>Nhật ký</span></a>
+    </nav>
+  </aside>
+
+  <main class="shell__content operations-page" id="main">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="dashboard.html">Admin</a>
+      /
+      <span>Chính sách nền tảng</span>
+    </nav>
+
+    <div class="page-header-row">
+      <div>
+        <h1 class="page-title">Chính sách nền tảng</h1>
+        <div class="page-subtitle-row">
+          <i class="fa-solid fa-file-lines"></i>
+          5 văn bản đang hiệu lực · cập nhật gần nhất 18/09/2026
+        </div>
+      </div>
+      <a href="#" class="btn-primary" id="btn-download-policies">
+        <i class="fa-solid fa-download"></i>
+        Tải bộ chính sách
+      </a>
+    </div>
+
+    <div class="filter-bar">
+      <div class="filter-input-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" class="filter-input" id="policy-search" placeholder="Tìm kiếm chính sách..." />
+      </div>
+      <div class="pills">
+        <button class="pill active" id="pill-all">Tất cả <strong>5</strong></button>
+        <button class="pill" id="pill-seller">Người bán <strong>2</strong></button>
+        <button class="pill" id="pill-buyer">Người mua <strong>1</strong></button>
+        <button class="pill" id="pill-data">Dữ liệu <strong>1</strong></button>
+        <button class="pill" id="pill-violation">Xử lý vi phạm <strong>1</strong></button>
+      </div>
+    </div>
+
+    <div class="policies-layout">
+      <div class="policy-list-panel">
+        <div class="policy-list-header">
+          <div class="policy-list-header-title">Danh mục chính sách</div>
+          <div class="policy-list-header-count">5 văn bản</div>
+        </div>
+        <ul class="policy-list" id="policy-list">
+          <li class="policy-list-item active" data-policy="seller-terms" id="policy-item-1" tabindex="0" role="button" aria-pressed="true">
+            <div class="policy-list-icon"><i class="fa-solid fa-store"></i></div>
+            <div class="policy-list-info">
+              <div class="policy-list-name">Điều khoản người bán</div>
+              <div class="policy-list-meta">v3.2 · hiệu lực 01/08/2026</div>
+            </div>
+          </li>
+          <li class="policy-list-item" data-policy="return-refund" id="policy-item-2" tabindex="0" role="button" aria-pressed="false">
+            <div class="policy-list-icon"><i class="fa-solid fa-rotate-right"></i></div>
+            <div class="policy-list-info">
+              <div class="policy-list-name">Chính sách đổi trả & hoàn tiền</div>
+              <div class="policy-list-meta">v2.8 · 15/07/2026</div>
+            </div>
+          </li>
+          <li class="policy-list-item" data-policy="listing-rules" id="policy-item-3" tabindex="0" role="button" aria-pressed="false">
+            <div class="policy-list-icon"><i class="fa-solid fa-box"></i></div>
+            <div class="policy-list-info">
+              <div class="policy-list-name">Quy định đăng bán sản phẩm</div>
+              <div class="policy-list-meta">v2.1 · 01/06/2026</div>
+            </div>
+          </li>
+          <li class="policy-list-item" data-policy="privacy" id="policy-item-4" tabindex="0" role="button" aria-pressed="false">
+            <div class="policy-list-icon"><i class="fa-solid fa-shield"></i></div>
+            <div class="policy-list-info">
+              <div class="policy-list-name">Chính sách bảo mật dữ liệu</div>
+              <div class="policy-list-meta">v1.9 · 10/06/2026</div>
+            </div>
+          </li>
+          <li class="policy-list-item" data-policy="violation" id="policy-item-5" tabindex="0" role="button" aria-pressed="false">
+            <div class="policy-list-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="policy-list-info">
+              <div class="policy-list-name">Chính sách xử lý vi phạm</div>
+              <div class="policy-list-meta">v2.0 · 20/05/2026</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="policy-content-panel" id="policy-content-panel">
+        <div class="policy-content-header">
+          <div class="policy-content-icon">
+            <i class="fa-solid fa-store"></i>
+          </div>
+          <div class="policy-content-title-group">
+            <h2 class="policy-content-title">
+              Điều khoản người bán
+              <span class="version-badge">v3.2</span>
+            </h2>
+            <div class="policy-meta-row">
+              <span class="policy-meta-item"><i class="fa-solid fa-user"></i> Người bán</span>
+              <span class="policy-meta-item"><i class="fa-solid fa-calendar"></i> Hiệu lực 01/08/2026</span>
+              <span class="policy-meta-item"><i class="fa-solid fa-clock"></i> Cập nhật 18/09/2026 10:20</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="policy-content-body">
+          <div class="policy-summary-box">
+            Quy định quyền và nghĩa vụ của shop khi tham gia sàn thương mại điện tử PCMatch. Tài liệu này áp dụng cho tất cả tài khoản người bán đã được xác minh và đang hoạt động trên nền tảng, bao gồm cá nhân kinh doanh, hộ kinh doanh và doanh nghiệp.
+          </div>
+
+          <div class="policy-section">
+            <h3>1. Điều kiện tham gia sàn</h3>
+            <p>Người bán phải hoàn tất quá trình đăng ký và xác minh danh tính theo quy trình của <strong>PCMatch</strong>, bao gồm cung cấp đầy đủ giấy tờ pháp lý hợp lệ. Tài khoản người bán chỉ được kích hoạt sau khi đội ngũ kiểm duyệt xác nhận thành công. PCMatch có quyền từ chối hoặc tạm khóa tài khoản nếu phát hiện thông tin không trung thực hoặc vi phạm các quy định hiện hành của pháp luật Việt Nam.</p>
+          </div>
+
+          <div class="policy-section">
+            <h3>2. Nghĩa vụ xử lý đơn hàng</h3>
+            <p>Người bán có trách nhiệm xác nhận và xử lý đơn hàng trong vòng 24 giờ kể từ thời điểm đặt hàng thành công. Trong trường hợp sản phẩm hết hàng hoặc không thể giao, người bán phải thông báo ngay cho khách hàng và đề xuất phương án thay thế hoặc <strong>hoàn tiền</strong>. Tỷ lệ hủy đơn do lỗi người bán không được vượt quá 3% trong vòng 30 ngày liên tiếp; vi phạm ngưỡng này sẽ dẫn đến việc <strong>tạm ngưng hiển thị gian hàng</strong>.</p>
+          </div>
+
+          <div class="policy-section">
+            <h3>3. Chất lượng sản phẩm và mô tả</h3>
+            <p>Tất cả sản phẩm đăng bán trên PCMatch phải là hàng chính hãng, có nguồn gốc xuất xứ rõ ràng và đáp ứng các tiêu chuẩn chất lượng quy định. Hình ảnh và mô tả sản phẩm phải trung thực, phản ánh chính xác tình trạng thực tế của hàng hóa. Nghiêm cấm đăng bán hàng giả, hàng nhái, hàng kém chất lượng hoặc các mặt hàng bị cấm theo quy định pháp luật.</p>
+          </div>
+
+          <div class="policy-section">
+            <h3>4. Phí và thanh toán</h3>
+            <p>Người bán chịu <strong>phí hoa hồng</strong> theo mức phân loại danh mục sản phẩm, dao động từ 1% đến 8% trên giá trị đơn hàng hoàn tất. Ngoài ra, các khoản <strong>phí dịch vụ</strong> quảng cáo, phí vận chuyển ưu tiên và phí gói đăng ký nâng cao sẽ được tính riêng theo bảng giá hiện hành. Tiền <strong>thanh toán</strong> từ đơn hàng thành công sẽ được giải ngân vào tài khoản người bán trong chu kỳ 7 ngày sau khi khách hàng xác nhận nhận hàng.</p>
+          </div>
+        </div>
+
+        <div class="policy-content-footer">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Văn bản này áp dụng cho toàn bộ người bán và người mua trên sàn PCMatch. Khi chính sách được cập nhật, hệ thống sẽ ghi nhận vào nhật ký hoạt động và thông báo tới các bên liên quan.</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="../assets/js/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var items = document.querySelectorAll('.policy-list-item');
+    var pills = document.querySelectorAll('.pill');
+
+    items.forEach(function(item) {
+      item.addEventListener('click', function() {
+        items.forEach(function(i) { i.classList.remove('active'); i.setAttribute('aria-pressed','false'); });
+        item.classList.add('active');
+        item.setAttribute('aria-pressed','true');
+      });
+      item.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); }
+      });
+    });
+
+    pills.forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        pills.forEach(function(p) { p.classList.remove('active'); });
+        pill.classList.add('active');
+      });
+    });
+  });
+</script>
+</body>
+</html>
