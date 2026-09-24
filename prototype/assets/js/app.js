@@ -68,18 +68,32 @@ selectAll("[data-dropdown]").forEach((button) => {
     });
 });
 
-// User dropdown toggle (admin profile pages)
-const userDropdownTrigger = document.querySelector('.user-dropdown > a');
-const userDropdown = document.querySelector('.user-dropdown');
-if (userDropdownTrigger && userDropdown) {
-  userDropdownTrigger.addEventListener('click', function(e) { 
-    e.preventDefault(); 
-    userDropdown.classList.toggle('open'); 
-  });
-  document.addEventListener('click', function(e) { 
-    if (!userDropdown.contains(e.target)) userDropdown.classList.remove('open'); 
-  });
-}
+// User dropdown toggle
+document.addEventListener('click', function (e) {
+    const trigger = e.target.closest('.user-dropdown > a');
+
+    if (trigger) {
+        e.preventDefault();
+
+        const dropdown = trigger.closest('.user-dropdown');
+
+        if (!dropdown) return;
+
+        document.querySelectorAll('.user-dropdown.open').forEach(item => {
+            if (item !== dropdown) {
+                item.classList.remove('open');
+            }
+        });
+
+        dropdown.classList.toggle('open');
+        return;
+    }
+
+    if (!e.target.closest('.user-dropdown')) {
+        document.querySelectorAll('.user-dropdown.open')
+            .forEach(item => item.classList.remove('open'));
+    }
+});
 
 //add sidebar admin
 (async function initSharedComponent() {
@@ -308,8 +322,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 // Keyboard navigation for legacy Shop/Admin tabs. Buyer state lives in buyer.js modules.
 selectAll("[role=tablist]").forEach(list => list.addEventListener("keydown", event => {
- const tabs=selectAll("[role=tab]",list);const index=tabs.indexOf(document.activeElement);
- if(index<0 || !["ArrowLeft","ArrowRight","Home","End"].includes(event.key)) return;
- event.preventDefault();const next=event.key==="Home"?0:event.key==="End"?tabs.length-1:(index+(event.key==="ArrowRight"?1:-1)+tabs.length)%tabs.length;
- tabs[next].focus();tabs[next].click();
+    const tabs = selectAll("[role=tab]", list);
+    const index = tabs.indexOf(document.activeElement);
+    if (index < 0 || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+    const next = event.key === "Home" ? 0 : event.key === "End" ? tabs.length - 1 : (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+    tabs[next].focus();
+    tabs[next].click();
 }));
