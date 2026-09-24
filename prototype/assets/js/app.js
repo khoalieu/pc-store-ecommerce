@@ -68,6 +68,19 @@ selectAll("[data-dropdown]").forEach((button) => {
     });
 });
 
+// User dropdown toggle (admin profile pages)
+const userDropdownTrigger = document.querySelector('.user-dropdown > a');
+const userDropdown = document.querySelector('.user-dropdown');
+if (userDropdownTrigger && userDropdown) {
+  userDropdownTrigger.addEventListener('click', function(e) { 
+    e.preventDefault(); 
+    userDropdown.classList.toggle('open'); 
+  });
+  document.addEventListener('click', function(e) { 
+    if (!userDropdown.contains(e.target)) userDropdown.classList.remove('open'); 
+  });
+}
+
 // Keyboard navigation for legacy Shop/Admin tabs. Buyer state lives in buyer.js modules.
 selectAll("[role=tablist]").forEach(list => list.addEventListener("keydown", event => {
  const tabs=selectAll("[role=tab]",list);const index=tabs.indexOf(document.activeElement);

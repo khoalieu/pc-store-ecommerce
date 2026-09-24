@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lịch sử hoạt động cá nhân tài khoản quản trị viên PCMatch.">
+  <title>Hoạt động của tôi — PCMatch Admin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages.css">
+  <link rel="stylesheet" href="../assets/css/production.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body, 'Inter', sans-serif); background: var(--color-canvas); color: var(--color-ink); display: flex; flex-direction: column; min-height: 100vh; }
+
+
+
+    .main { flex: 1; overflow-y: auto; padding: 32px 40px; }
+
+    .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; color: var(--color-slate); margin-bottom: 12px; font-weight: 500; }
+    .breadcrumb a { color: var(--color-slate); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--color-ink); }
+    .breadcrumb span { color: var(--color-ink); font-weight: 600; }
+
+    .page-header-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; }
+    .page-title { font-size: 1.75rem; font-weight: 800; color: var(--color-ink); letter-spacing: -0.02em; margin-bottom: 6px; }
+    .page-desc { font-size: 0.9375rem; color: var(--color-slate); line-height: 1.5; }
+    .page-info { display: flex; align-items: center; gap: 8px; font-size: 0.8125rem; color: var(--color-slate); margin-bottom: 24px; margin-top: 8px; }
+    .page-info i { color: var(--color-cobalt); }
+    .header-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--color-surface); color: var(--color-ink); border: 1px solid var(--color-border); border-radius: 8px; font-size: 0.875rem; font-weight: 700; cursor: pointer; text-decoration: none; transition: background 0.15s; }
+    .btn-secondary:hover { background: var(--color-canvas); }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--color-cobalt); color: #fff; border: none; border-radius: 8px; font-size: 0.875rem; font-weight: 700; cursor: pointer; text-decoration: none; transition: background 0.15s; }
+    .btn-primary:hover { background: var(--color-cobalt-deep); }
+
+    .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--color-border); border-radius: 12px; overflow: hidden; background: var(--color-surface); margin-bottom: 20px; }
+    .stat-cell { padding: 20px 22px; border-right: 1px solid var(--color-border); }
+    .stat-cell:last-child { border-right: none; }
+    .stat-label { font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-slate); margin-bottom: 8px; }
+    .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--color-ink); line-height: 1.1; margin-bottom: 4px; }
+    .stat-value small { font-size: 0.875rem; font-weight: 500; color: var(--color-slate); }
+    .stat-sub { font-size: 0.75rem; color: var(--color-slate); }
+    .stat-sub .up { color: #16a34a; font-weight: 600; }
+    .stat-sub .amber { color: var(--color-amber-deep); font-weight: 600; }
+    .stat-sub .down { color: #dc2626; font-weight: 600; }
+
+    .table-panel { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; overflow: hidden; }
+
+    .search-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 16px 20px; border-bottom: 1px solid var(--color-border); }
+    .search-left { display: flex; align-items: center; gap: 10px; flex: 1; flex-wrap: wrap; }
+    .search-input-wrap { position: relative; min-width: 260px; }
+    .search-input-wrap i { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--color-slate); font-size: 0.8125rem; pointer-events: none; }
+    .search-input-wrap input { padding: 8px 12px 8px 32px; font-size: 0.8125rem; border-radius: 8px; border: 1px solid var(--color-border); background: var(--color-canvas); color: var(--color-ink); outline: none; width: 100%; }
+    .search-input-wrap input:focus { border-color: var(--color-cobalt); box-shadow: 0 0 0 3px rgba(19,95,210,0.1); }
+
+    .filter-pills { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .filter-pill { border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-slate); font-size: 0.8125rem; font-weight: 600; padding: 5px 13px; border-radius: 20px; cursor: pointer; transition: background 0.15s, color 0.15s; display: flex; align-items: center; gap: 5px; }
+    .filter-pill .pill-count { font-size: 0.6875rem; background: var(--color-canvas); border: 1px solid var(--color-border); color: var(--color-slate); border-radius: 10px; padding: 1px 6px; font-weight: 600; }
+    .filter-pill.is-active { background: var(--color-cobalt); color: #fff; border-color: var(--color-cobalt); }
+    .filter-pill.is-active .pill-count { background: rgba(255,255,255,0.2); color: #fff; border-color: transparent; }
+    .filter-pill:not(.is-active):hover { background: var(--color-canvas); color: var(--color-ink); }
+
+    .toolbar-info { display: flex; align-items: center; gap: 6px; font-size: 0.8125rem; color: var(--color-slate); white-space: nowrap; }
+    .toolbar-info i { color: var(--color-cobalt); font-size: 0.8125rem; }
+
+    .log-badge { display: inline-flex; align-items: center; font-size: 0.6875rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+    .log-badge--blue { background: var(--color-cobalt-soft); color: var(--color-cobalt-deep); }
+    .log-badge--gray { background: var(--color-canvas); color: var(--color-slate); border: 1px solid var(--color-border); }
+    .log-badge--red { background: #fef2f2; color: #dc2626; }
+
+    .imp-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 0.6875rem; font-weight: 700; padding: 2px 7px; border-radius: 20px; background: var(--color-amber-soft); color: var(--color-amber-deep); margin-left: 6px; vertical-align: middle; }
+
+    .action-time .date { font-size: 0.8125rem; font-weight: 600; color: var(--color-ink); }
+    .action-time .time { font-size: 0.75rem; color: var(--color-slate); }
+    .action-name { font-size: 0.875rem; font-weight: 600; color: var(--color-ink); }
+    .action-code { font-size: 0.6875rem; color: var(--color-slate); margin-top: 2px; font-weight: 500; font-variant-numeric: tabular-nums; }
+    .obj-cell { font-size: 0.8125rem; color: var(--color-ink); }
+    .obj-cell small { display: block; font-size: 0.75rem; color: var(--color-slate); margin-top: 2px; }
+    .ip-cell { font-size: 0.8125rem; color: var(--color-slate); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .follow-cell { font-size: 0.8125rem; color: var(--color-muted-strong); text-align: center; }
+
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+    .data-table th { padding: 11px 14px; border-bottom: 1px solid var(--color-border); background: var(--color-canvas); color: var(--color-slate); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.05em; text-align: left; text-transform: uppercase; white-space: nowrap; }
+    .data-table td { padding: 14px; border-bottom: 1px solid var(--color-border); vertical-align: middle; }
+    .data-table tbody tr:last-child td { border-bottom: none; }
+    .data-table tbody tr:hover { background: var(--color-canvas); }
+
+    .btn-detail { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border: 1px solid var(--color-border); border-radius: 20px; background: var(--color-surface); color: var(--color-cobalt); font-size: 0.8125rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: background 0.15s; }
+    .btn-detail:hover { background: var(--color-cobalt-soft); }
+
+    .table-footer { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; font-size: 0.8125rem; color: var(--color-slate); }
+    .pagination { display: flex; gap: 4px; }
+    .page-btn { min-width: 32px; min-height: 32px; padding: 0 10px; border: 1px solid var(--color-border); border-radius: 6px; background: var(--color-surface); color: var(--color-ink); font-size: 0.8125rem; font-weight: 600; cursor: pointer; }
+    .page-btn[aria-current="page"] { background: var(--color-cobalt); color: #fff; border-color: var(--color-cobalt); }
+    .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+
+<div class="service-bar">PCMatch Operations · Giám sát ngoại lệ và chất lượng nền tảng</div>
+
+<header class="topbar">
+  <div class="container topbar__inner" style="max-width:none">
+    <button class="menu-toggle" data-sidebar-toggle aria-label="Mở sidebar"><span></span></button>
+    <a class="logo" href="dashboard.html"><i class="logo__mark"></i><span>PC</span> <span>Match Admin</span></a>
+    <label class="search">
+      <span class="sr-only">Tìm kiếm</span>
+      <input placeholder="Tìm tài khoản, shop, model, đơn, case hoặc tracking">
+      <i class="search__glyph"></i>
+    </label>
+    <nav class="nav-links">
+      <a href="#">Trợ giúp</a>
+      <div class="user-dropdown">
+        <a href="#" class="admin-link">Platform Admin <i class="fa-solid fa-chevron-down" style="font-size:0.75rem;"></i></a>
+        <div class="user-dropdown-menu">
+          <div class="udm-header">
+            <div class="udm-name">Platform Admin</div>
+            <div class="udm-email">admin@pcmatch.vn</div>
+            <span class="udm-badge">Quản trị cấp cao</span>
+          </div>
+          <div class="udm-links">
+            <a href="profile.html"><i class="fa-solid fa-user-gear"></i> Thông tin tài khoản</a>
+            <a href="password.html"><i class="fa-solid fa-shield-halved"></i> Đổi mật khẩu</a>
+            <a href="activity-log.html"><i class="fa-solid fa-user-clock"></i> Hoạt động của tôi</a>
+            <a href="policies.html"><i class="fa-solid fa-book-open"></i> Chính sách nền tảng</a>
+            <hr />
+            <a href="#" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="sidebar">
+    <div class="sidebar__brand">
+      <strong>Vận hành nền tảng</strong>
+      <small class="muted">Quyền: Platform Admin</small>
+    </div>
+    <nav>
+      <p class="sidebar__group">TỔNG QUAN</p>
+      <a href="dashboard.html"><span>Dashboard</span></a>
+      <a href="#"><span>Tài khoản & quyền</span></a>
+      <a href="#"><span>Shop</span><span class="sidebar__count">6</span></a>
+
+      <p class="sidebar__group">KỸ THUẬT</p>
+      <a href="#"><span>Danh mục & model</span><span class="sidebar__count">14</span></a>
+      <a href="#"><span>Rule tương thích</span><span class="sidebar__count">3 test</span></a>
+
+      <p class="sidebar__group">TIN CẬY</p>
+      <a href="#"><span>Kiểm duyệt</span><span class="sidebar__count">19</span></a>
+      <a href="#"><span>Vụ việc</span><span class="sidebar__count">8</span></a>
+
+      <p class="sidebar__group">TIỀN & VẬN HÀNH</p>
+      <a href="#"><span>Giao dịch</span></a>
+      <a href="#"><span>Hoàn tiền</span><span class="sidebar__count">4</span></a>
+      <a href="#"><span>Đối soát</span></a>
+      <a href="#"><span>Vận chuyển</span></a>
+      <a href="#"><span>Nhật ký</span></a>
+    </nav>
+  </aside>
+
+  <main class="shell__content operations-page" id="main">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="dashboard.html">Admin</a>
+      /
+      <span>Hoạt động của tôi</span>
+    </nav>
+
+    <div class="page-header-row">
+      <div>
+        <h1 class="page-title">Hoạt động của tôi</h1>
+        <p class="page-desc">Lịch sử thao tác của tài khoản đang đăng nhập: xử lý đơn, đối soát, cấu hình và các thay đổi bảo mật.</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn-secondary" type="button">
+          <i class="fa-regular fa-calendar"></i>
+          Tất cả thời gian
+          <i class="fa-solid fa-chevron-down" style="font-size:0.65rem;"></i>
+        </button>
+        <button class="btn-primary" type="button">
+          <i class="fa-solid fa-download"></i>
+          Xuất lịch sử
+        </button>
+      </div>
+    </div>
+    <div class="page-info">
+      <i class="fa-solid fa-bolt"></i>
+      14 thao tác của Nguyễn Hoàng Long trong 7 ngày gần nhất
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Thao tác hôm nay</div>
+        <div class="stat-value">126 <small>lượt</small></div>
+        <div class="stat-sub"><span class="up">↑ +18</span></div>
+        <div class="stat-sub" style="margin-top:4px;">55 hành động bạn đã thực hiện trên hệ thống hôm nay</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Thao tác 7 ngày</div>
+        <div class="stat-value">842 <small>lượt</small></div>
+        <div class="stat-sub"><span class="up">↑ +8,2%</span></div>
+        <div class="stat-sub" style="margin-top:4px;">Tổng thao tác trong 7 ngày gần nhất</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Thao tác quan trọng</div>
+        <div class="stat-value">23 <small>lượt</small></div>
+        <div class="stat-sub"><span class="amber">↑ 4 duyệt hoàn tiền</span></div>
+        <div class="stat-sub" style="margin-top:4px;">Hành động ảnh hưởng trực tiếp tới tiền và quyền hệ thống</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Phiên đăng nhập</div>
+        <div class="stat-value">6 <small>phiên</small></div>
+        <div class="stat-sub"><span class="down">↑ 1 phiên lạ đã thu hồi</span></div>
+        <div class="stat-sub" style="margin-top:4px;">Số lần đăng nhập trong / ngày gần nhất</div>
+      </div>
+    </div>
+
+    <div class="table-panel">
+      <div class="search-toolbar">
+        <div class="search-left">
+          <div class="search-input-wrap">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="activity-search" placeholder="Tìm thao tác, hành động, đối tượng tác động hoặc mã">
+          </div>
+        </div>
+        <div class="toolbar-info">
+          <i class="fa-solid fa-user"></i>
+          Chỉ hiển thị thao tác của tài khoản đang đăng nhập · <strong>14 bản ghi</strong>
+        </div>
+      </div>
+
+      <div style="padding: 12px 20px; border-bottom: 1px solid var(--color-border);">
+        <div class="filter-pills">
+          <button class="filter-pill is-active" type="button" data-filter="all">Tất cả <span class="pill-count">14</span></button>
+          <button class="filter-pill" type="button" data-filter="don-hang">Đơn hàng <span class="pill-count">2</span></button>
+          <button class="filter-pill" type="button" data-filter="thanh-toan">Thanh toán <span class="pill-count">2</span></button>
+          <button class="filter-pill" type="button" data-filter="danh-muc">Danh mục <span class="pill-count">3</span></button>
+          <button class="filter-pill" type="button" data-filter="cau-hinh">Cấu hình <span class="pill-count">3</span></button>
+          <button class="filter-pill" type="button" data-filter="bao-mat">Bảo mật <span class="pill-count">2</span></button>
+          <button class="filter-pill" type="button" data-filter="dang-nhap">Đăng nhập <span class="pill-count">2</span></button>
+        </div>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:40px;"><input type="checkbox" aria-label="Chọn tất cả"></th>
+            <th>THỜI GIAN</th>
+            <th>THAO TÁC</th>
+            <th>LOẠI</th>
+            <th>ĐỐI TƯỢNG TÁC ĐỘNG</th>
+            <th>ĐỊA CHỈ IP</th>
+            <th>THEO DÕI</th>
+            <th style="text-align:right;">THAO TÁC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-type="danh-muc">
+            <td><input type="checkbox" aria-label="Chọn bản ghi"></td>
+            <td><div class="action-time"><div class="date">20/09/2026</div><div class="time">09:12</div></div></td>
+            <td>
+              <span class="action-name">Duyệt shop tham gia sàn<span class="imp-badge"><i class="fa-solid fa-star" style="font-size:9px;"></i> Quan trọng</span></span>
+              <div class="action-code">MY-260920-01</div>
+            </td>
+            <td><span class="log-badge log-badge--blue">Danh mục</span></td>
+            <td><div class="obj-cell">SH-100312<small>IoT Maker Store</small></div></td>
+            <td class="ip-cell">203.113.44.10</td>
+            <td class="follow-cell">—</td>
+            <td style="text-align:right;"><button class="btn-detail" type="button"><i class="fa-solid fa-eye"></i> Chi tiết</button></td>
+          </tr>
+          <tr data-type="don-hang">
+            <td><input type="checkbox" aria-label="Chọn bản ghi"></td>
+            <td><div class="action-time"><div class="date">20/09/2026</div><div class="time">08:58</div></div></td>
+            <td>
+              <span class="action-name">Xác nhận đơn hàng hàng loạt</span>
+              <div class="action-code">MY-260920-02</div>
+            </td>
+            <td><span class="log-badge log-badge--blue">Đơn hàng</span></td>
+            <td><div class="obj-cell">18 đơn<small>Linh Kiện TechZone</small></div></td>
+            <td class="ip-cell">203.113.44.10</td>
+            <td class="follow-cell">—</td>
+            <td style="text-align:right;"><button class="btn-detail" type="button"><i class="fa-solid fa-eye"></i> Chi tiết</button></td>
+          </tr>
+          <tr data-type="dang-nhap">
+            <td><input type="checkbox" aria-label="Chọn bản ghi"></td>
+            <td><div class="action-time"><div class="date">20/09/2026</div><div class="time">08:12</div></div></td>
+            <td>
+              <span class="action-name">Đăng nhập hệ thống</span>
+              <div class="action-code">MY-260920-03</div>
+            </td>
+            <td><span class="log-badge log-badge--gray">Đăng nhập</span></td>
+            <td><div class="obj-cell">MacBook Pro 14"<small>Chrome</small></div></td>
+            <td class="ip-cell">203.113.44.10</td>
+            <td class="follow-cell">—</td>
+            <td style="text-align:right;"><button class="btn-detail" type="button"><i class="fa-solid fa-eye"></i> Chi tiết</button></td>
+          </tr>
+          <tr data-type="thanh-toan">
+            <td><input type="checkbox" aria-label="Chọn bản ghi"></td>
+            <td><div class="action-time"><div class="date">19/09/2026</div><div class="time">18:30</div></div></td>
+            <td>
+              <span class="action-name">Thực hiện hoàn tiền<span class="imp-badge"><i class="fa-solid fa-star" style="font-size:9px;"></i> Quan trọng</span></span>
+              <div class="action-code">MY-260919-01</div>
+            </td>
+            <td><span class="log-badge log-badge--red">Thanh toán</span></td>
+            <td><div class="obj-cell">GD-770128<small>1.580.000₫</small></div></td>
+            <td class="ip-cell">203.113.44.10</td>
+            <td class="follow-cell">—</td>
+            <td style="text-align:right;"><button class="btn-detail" type="button"><i class="fa-solid fa-eye"></i> Chi tiết</button></td>
+          </tr>
+          <tr data-type="cau-hinh">
+            <td><input type="checkbox" aria-label="Chọn bản ghi"></td>
+            <td><div class="action-time"><div class="date">19/09/2026</div><div class="time">16:12</div></div></td>
+            <td>
+              <span class="action-name">Cập nhật biểu phí<span class="imp-badge"><i class="fa-solid fa-star" style="font-size:9px;"></i> Quan trọng</span></span>
+              <div class="action-code">MY-260919-05</div>
+            </td>
+            <td><span class="log-badge log-badge--gray">Cấu hình</span></td>
+            <td><div class="obj-cell">PB-05<small>Nguồn &amp; Pin</small></div></td>
+            <td class="ip-cell">203.113.44.10</td>
+            <td class="follow-cell">—</td>
+            <td style="text-align:right;"><button class="btn-detail" type="button"><i class="fa-solid fa-eye"></i> Chi tiết</button></td>
+          </tr>
+          <tr data-type="bao-mat">
+            <td><input type="checkbox" aria-label="Chọn bản ghi"></td>
+            <td><div class="action-time"><div class="date">19/09/2026</div><div class="time">15:05</div></div></td>
+            <td>
+              <span class="action-name">Thu hồi phiên đăng nhập<span class="imp-badge"><i class="fa-solid fa-star" style="font-size:9px;"></i> Quan trọng</span></span>
+              <div class="action-code">MY-260919-06</div>
+            </td>
+            <td><span class="log-badge log-badge--red">Bảo mật</span></td>
+            <td><div class="obj-cell">SS-2ef1<small>Thiết bị không xác định</small></div></td>
+            <td class="ip-cell">203.113.44.10</td>
+            <td class="follow-cell">—</td>
+            <td style="text-align:right;"><button class="btn-detail" type="button"><i class="fa-solid fa-eye"></i> Chi tiết</button></td>
+          </tr>
+          <tr data-type="danh-muc">
+            <td><input type="checkbox" aria-label="Chọn bản ghi"></td>
+            <td><div class="action-time"><div class="date">18/09/2026</div><div class="time">14:20</div></div></td>
+            <td>
+              <span class="action-name">Kiểm duyệt sản phẩm</span>
+              <div class="action-code">MY-260918-01</div>
+            </td>
+            <td><span class="log-badge log-badge--blue">Danh mục</span></td>
+            <td><div class="obj-cell">24 sản phẩm</div></td>
+            <td class="ip-cell">203.113.44.10</td>
+            <td class="follow-cell">—</td>
+            <td style="text-align:right;"><button class="btn-detail" type="button"><i class="fa-solid fa-eye"></i> Chi tiết</button></td>
+          </tr>
+          <tr data-type="thanh-toan">
+            <td><input type="checkbox" aria-label="Chọn bản ghi"></td>
+            <td><div class="action-time"><div class="date">18/09/2026</div><div class="time">11:02</div></div></td>
+            <td>
+              <span class="action-name">Xử lý giao dịch lỗi<span class="imp-badge"><i class="fa-solid fa-star" style="font-size:9px;"></i> Quan trọng</span></span>
+              <div class="action-code">MY-260918-02</div>
+            </td>
+            <td><span class="log-badge log-badge--red">Thanh toán</span></td>
+            <td><div class="obj-cell">GD-769980</div></td>
+            <td class="ip-cell">203.113.44.10</td>
+            <td class="follow-cell">—</td>
+            <td style="text-align:right;"><button class="btn-detail" type="button"><i class="fa-solid fa-eye"></i> Chi tiết</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="table-footer">
+        <div>Hiển thị <strong>1–8</strong> trên <strong>14</strong> bản ghi</div>
+        <div class="pagination">
+          <button class="page-btn" disabled aria-label="Trang trước">‹</button>
+          <button class="page-btn" aria-current="page" aria-label="Trang 1">1</button>
+          <button class="page-btn" aria-label="Trang 2">2</button>
+          <button class="page-btn" aria-label="Trang tiếp">›</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="../assets/js/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var pills = document.querySelectorAll('.filter-pill');
+    pills.forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        pills.forEach(function(p) { p.classList.remove('is-active'); });
+        pill.classList.add('is-active');
+      });
+    });
+  });
+</script>
+</body>
+</html>
