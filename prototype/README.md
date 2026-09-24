@@ -60,3 +60,14 @@ Các trang Search, Model, Shop, Compare sử dụng template HTML tại chính f
 Kiểm thử mua hàng (Chrome CDP cổng 9229, máy chủ prototype cổng 4173):
 `node prototype/tests/cdp-runner.cjs prototype/tests/purchase-flows.js`
 Chạy từ gốc repository. Bộ kiểm thử xóa dữ liệu PCMatch trong profile Chrome kiểm thử; dùng profile riêng.
+
+Kiểm thử hai dịch vụ build: `node prototype/tests/cdp-runner.cjs prototype/tests/build-flows.js`.
+Bao gồm tư vấn riêng, yêu cầu ngân sách/proposal có phiên bản, chia sẻ chỉ đọc và giỏ một shop. Phản hồi shop được kích hoạt qua mục kịch bản demo.
+
+Rà soát tài khoản và sau mua:
+- `node prototype/tests/cdp-runner.cjs prototype/tests/aftersale-flows.js`
+- `node prototype/tests/cdp-runner.cjs prototype/tests/sitemap-flows.js`
+- Bảng truy vết đủ 45 mã: [BUYER_SITEMAP_AUDIT.md](BUYER_SITEMAP_AUDIT.md).
+
+Dữ liệu làm việc (giỏ, checkout, Builder, so sánh) được lưu theo tài khoản demo. Đăng xuất chuyển sang không gian khách; đăng nhập khôi phục không gian cá nhân và ghép giỏ khách nếu có. Giỏ ghép vượt tồn được giữ để khách sửa tại checkout, không tự bỏ hàng. Quyền trong prototype chỉ là mô phỏng, không phải cơ chế bảo mật server.
+Kiểm tra cuối sau `purchase-flows.js`: `node prototype/tests/cdp-runner.cjs prototype/tests/final-checks.js` (tìm sitemap, mốc giao nhận/hoàn hàng và làm tròn giảm giá khi hoàn theo serial).

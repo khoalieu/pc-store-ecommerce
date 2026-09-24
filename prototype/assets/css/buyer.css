@@ -230,3 +230,5 @@
 .account-menu summary{cursor:pointer;padding:10px}
 .account-menu[open]>.stack{position:absolute;right:0;top:100%;z-index:20;min-width:210px;padding:16px;background:var(--surface,#fff);border:1px solid #cbd5e1;border-radius:12px}
 @media(max-width:600px){.account-menu{margin-left:0}.account-menu[open]>.stack{position:static}}
+
+.builder-layout aside .panel > form + .stack { margin-top: 16px; }
