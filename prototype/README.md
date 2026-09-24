@@ -48,3 +48,15 @@ Cần Node có `fetch` và `WebSocket` toàn cục (Node 22+). Chạy hai suite 
 Không có backend, xác thực/ủy quyền thật, kiểm tra giá/tồn đồng thời, thanh toán, email hoặc vận chuyển thật. Chia sẻ cấu hình chỉ hoạt động trong cùng kho trình duyệt. Tệp bằng chứng dùng dung lượng localStorage; lỗi dung lượng không tạo hồ sơ giả thành công. Chính sách hủy/hậu mãi và thời gian giao là giả định demo hiển thị rõ, không phải cam kết thương mại.
 
 PDF, so sánh cấu hình tự lưu và trung tâm bài viết lớn thuộc P2 chưa chốt theo tài liệu; không bổ sung trong đợt này. Không COD, hàng cũ, AI sinh cấu hình hoặc benchmark/FPS giả.
+
+Kiểm thử riêng hành trình khám phá sản phẩm (chạy lần lượt với các suite khác):
+
+```bash
+node prototype/tests/cdp-runner.cjs prototype/tests/discovery-flows.js
+```
+
+Các trang Search, Model, Shop, Compare sử dụng template HTML tại chính file trang; `catalog-data.js` truy vấn fixture và `catalog-view.js` gắn dữ liệu/ảnh vào template. Khi tích hợp backend, thay lớp đọc dữ liệu bằng API và tiếp tục kiểm tra quyền/giá/tồn ở máy chủ.
+
+Kiểm thử mua hàng (Chrome CDP cổng 9229, máy chủ prototype cổng 4173):
+`node prototype/tests/cdp-runner.cjs prototype/tests/purchase-flows.js`
+Chạy từ gốc repository. Bộ kiểm thử xóa dữ liệu PCMatch trong profile Chrome kiểm thử; dùng profile riêng.

@@ -159,3 +159,74 @@
 .buyer-app .panel,.buyer-app .list-row,.buyer-app .catalog-body,.buyer-app .message{min-width:0;overflow-wrap:anywhere}
 .buyer-app input,.buyer-app select,.buyer-app textarea{font-size:1rem;max-width:100%}
 .buyer-app .demo-dialog .form-error{overflow-wrap:anywhere}
+
+/* Product discovery pages use their own HTML templates; Home retains its layout. */
+.catalog-breadcrumb{display:flex;gap:10px;flex-wrap:wrap;color:var(--color-slate);font-size:.875rem;line-height:1.6}
+.catalog-breadcrumb a{color:var(--color-cobalt-deep);text-underline-offset:3px}
+.catalog-toolbar{display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.catalog-toolbar p{margin:0}
+.filter-sidebar{border:1px solid var(--color-border);padding:20px;background:#fff;min-width:0}
+.filter-sidebar h2{font-size:1.25rem}
+.technical-fields{border:0;border-block:1px solid var(--color-border);padding:16px 0;margin:0;min-width:0}
+.technical-fields legend{font-weight:600;font-size:.875rem;padding-right:8px}
+.price-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;min-width:0}
+.price-fields input{min-width:0;width:100%}
+.filter-hint{font-size:.875rem;line-height:1.5}
+.filter-submit{display:grid;gap:10px}
+.filter-toggle{display:none!important}
+.filter-drawer{width:min(420px,100%);max-width:100%;height:100dvh;max-height:100dvh;margin:0 0 0 auto;border:0;padding:20px;background:#fff;overflow-y:auto;overscroll-behavior:contain}
+.filter-drawer::backdrop{background:rgba(21,32,43,.55)}
+.filter-drawer .drawer-close{margin-bottom:24px}
+.filter-drawer .filter-submit{position:sticky;bottom:-20px;background:#fff;padding:16px 0 20px;border-top:1px solid var(--color-border);z-index:1}
+.catalog-product-image{display:block;background:var(--color-cobalt-soft);text-decoration:none;border-bottom:1px solid var(--color-border)}
+.product-image{min-height:140px;display:grid;place-items:center;background:var(--color-cobalt-soft)}
+.product-image img{display:block;width:100%;height:auto;max-height:260px;object-fit:contain}
+.image-caption{display:block;text-align:center;font-size:.75rem;color:var(--color-cobalt-deep);padding:8px 12px}
+.product-figure{margin:0;border:1px solid var(--color-border);background:var(--color-cobalt-soft)}
+.product-figure .product-image{min-height:260px}
+.image-fallback{padding:24px;display:grid;text-align:center;gap:12px;color:var(--color-cobalt-deep)}
+.image-fallback strong{font-size:2rem}
+.compare-tray:empty{display:none}
+.compare-tray-inner{background:#fff;border-block:1px solid var(--color-border);padding:20px;display:grid;gap:16px}
+.compare-tray-inner .cluster .btn{font-size:.8125rem}
+#offer-comparison{margin-block:24px}
+.offer-cards{margin-top:24px}
+.offer-table{max-width:100%;border:1px solid var(--color-border)}
+.offer-table table{min-width:1200px}
+.buyer-app .data-table caption{text-align:left;padding:16px;background:#fff;font-size:.875rem}
+.buyer-app .data-table td,.buyer-app .data-table th{white-space:normal;vertical-align:top}
+.buyer-app .table-wrap{min-width:0;max-width:100%;overflow:auto}
+.shop-heading{display:flex;align-items:flex-start;gap:24px}
+.shop-heading .page-head{flex:1;min-width:0}
+.shop-monogram{background:var(--color-cobalt-soft);color:var(--color-cobalt-deep);font-size:1.75rem;font-weight:700;width:80px;height:80px;display:grid;place-items:center;flex-shrink:0;border:1px solid var(--color-border)}
+.shop-policies{display:grid;grid-template-columns:95px 1fr;gap:12px;font-size:.95rem;margin-bottom:24px}
+.shop-policies dt{font-weight:600}.shop-policies dd{margin:0}
+.buyer-app .results>.empty{grid-column:1/-1}
+@media(max-width:767px){
+ .filter-sidebar{display:none}
+ .filter-toggle{display:inline-flex!important}
+ .shop-heading{flex-direction:column;gap:16px}
+ .catalog-product-image .product-image{min-height:100px}
+ .catalog-product-image .image-caption{font-size:.7rem;padding:6px}
+ .compare-tray-inner{padding:16px}
+ .shop-policies{grid-template-columns:1fr;gap:6px}.shop-policies dd{margin-bottom:10px}
+}
+@media(prefers-reduced-motion:no-preference){.filter-drawer[open]{animation:filter-in 160ms ease-out}@keyframes filter-in{from{transform:translateX(24px)}to{transform:translateX(0)}}}
+
+/* Keep wide comparison tables inside their scroll regions instead of sizing the page. */
+.catalog-page #main>.container{grid-template-columns:minmax(0,1fr)}
+.catalog-page #main>.container>*,.catalog-page .model-overview>*{min-width:0}
+.catalog-page .model-overview{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
+.catalog-page [data-content="status"]:empty,.catalog-page .page-head>.cluster:empty{display:none}
+@media(max-width:767px){.catalog-page .model-overview{grid-template-columns:minmax(0,1fr)}}
+
+/* Purchase controls and persistent field feedback. */
+.buyer-app .field-error{color:#a02323;font-size:.875rem;line-height:1.5}
+.buyer-app [aria-invalid=true]{border-color:#a02323}
+.buyer-app .cart-row form{min-width:0}
+.buyer-app .cart-row .cluster{gap:6px;flex-wrap:wrap}
+.buyer-app .cart-row .cluster .btn{padding-inline:12px}
+.account-menu{position:relative;margin-left:auto}
+.account-menu summary{cursor:pointer;padding:10px}
+.account-menu[open]>.stack{position:absolute;right:0;top:100%;z-index:20;min-width:210px;padding:16px;background:var(--surface,#fff);border:1px solid #cbd5e1;border-radius:12px}
+@media(max-width:600px){.account-menu{margin-left:0}.account-menu[open]>.stack{position:static}}

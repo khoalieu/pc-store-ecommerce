@@ -58,3 +58,32 @@ Home mua sắm, các trang buyer bổ sung và phần lớn luồng đã tồn t
 Đây là nghiệm thu thao tác frontend với dữ liệu trong trình duyệt. Phân quyền thật, tính nguyên tử nhiều máy, chống đặt/thu/hoàn trùng qua mạng, tồn kho, xác minh tài khoản, kiểm duyệt nội dung và thanh toán/vận chuyển cần backend. Các kịch bản shop/nhà vận chuyển nằm trong khối “mô phỏng”, không phải kết nối thực tế.
 
 Giỏ demo dùng chung thiết bị và giữ qua đăng nhập, không có chính sách ghép giỏ trên server. Chia sẻ chỉ trong kho trình duyệt. Phí, khuyến mại, thời hạn hậu mãi là quy ước kiểm thử được ghi rõ tại UI. Mô hình hiện tại giới hạn một khoản hoàn trên mỗi đơn con; hoàn từng phần nhiều lần và chính sách cộng dồn cần chốt trước khi mở rộng. Không tự bổ sung PDF, so cấu hình tự lưu hoặc FAQ lớn thuộc đợt P2 trong tài liệu.
+
+## Đợt khám phá và chọn sản phẩm
+
+Phạm vi A2–A3, B5–B6: giữ Home và giỏ đã có; hoàn thiện Search/Category → Model → Offer → Giỏ, gian hàng và so sánh.
+
+- Bốn trang `buyer/search.html`, `model.html`, `shop.html`, `compare.html` chứa template HTML có cấu trúc: form lọc, vị trí kết quả, breadcrumb, phần model/offer và bảng so sánh. `catalog-view.js` đọc template và điền dữ liệu; không thay kiến trúc các trang khác.
+- `catalog-data.js` tách truy vấn dữ liệu khỏi hiển thị. Giá, shop, vùng giao và tồn phải cùng khớp một offer; bộ lọc kỹ thuật theo danh mục. Khu vực là **nơi nhận hàng**, không phải vị trí kho shop; ý nghĩa ghi tại form.
+- Search có khay so sánh, chip điều kiện dễ đọc, phân trang, lỗi tải/thử lại, empty và giữ URL quay lại. Drawer mobile dùng native dialog, cùng một form với desktop; Escape trả focus và giữ điều kiện chưa áp dụng.
+- Model có biến thể, hình minh họa danh mục cục bộ và fallback ảnh lỗi; nguồn thông số vẫn là fixture, không nhận là ảnh hay thông số đã xác minh bởi hãng. Offer thể hiện khu vực shop, số lượng, CTA “Thêm vào giỏ”; offer bị khóa có lý do. Bảng so sánh cùng model cập nhật phí theo khu vực.
+- Gian hàng có biểu trưng chữ demo, chính sách công khai, đánh giá từ giao dịch demo và lọc sản phẩm riêng. Không có thông tin tài khoản/ngân hàng/hồ sơ riêng của chủ shop.
+- Fixture `TZ-COOL-AK` hết hàng để kiểm tra trạng thái; `NV` tiếp tục là shop tạm dừng. Không đổi ID hay thêm sản phẩm giả để tăng số kết quả.
+- `tests/discovery-flows.js` kiểm tra các đường đi nghiệm thu, lọc kỹ thuật, so sánh cùng loại, phân trang, khóa mua, ảnh lỗi, modal mobile và overflow ở ba độ rộng.
+
+Ảnh SVG trong `assets/images/catalog/` là sơ đồ hình học tự tạo cho 8 loại linh kiện, được ghi nhãn minh họa; chưa có bộ ảnh sản phẩm chính thức được cung cấp.
+
+Kết quả xác nhận đợt khám phá: `discovery-flows.js` đạt toàn bộ hành trình và kiểm tra responsive/bàn phím; `buyer-flows.js` đạt lại toàn bộ luồng mua nhiều shop, thanh toán, đơn, Builder và proposal. Kiểm tra cú pháp module, SVG/XML và `git diff --check` đều đạt. Đã kiểm tra ảnh Search/Model/Shop và drawer mobile; bảng so shop cuộn trong vùng riêng, không kéo rộng trang.
+
+## Đợt mua hàng — 24/09/2026
+
+Bổ sung trên các trang cart/login/addresses/checkout/payment/orders/order đã tồn tại, không tạo trang trùng:
+- Lỗi validation tại trường, giữ dữ liệu khi lỗi; menu tài khoản có đăng xuất.
+- Giỏ tăng/giảm, tự cập nhật khi sửa số lượng, lưu snapshot tồn; giữ shop khi mở lại model.
+- Checkout đối chiếu tồn và phí giao cũ/mới, tổng riêng mỗi shop; bỏ lựa chọn giao cũ khi đổi địa chỉ. Checkbox luôn yêu cầu xác nhận lại sau tính lại.
+- Mã lượt checkout lưu cùng đơn để nhận diện gửi lặp trong demo; thanh toán có trạng thái đang xử lý, chưa rõ kết quả yêu cầu kiểm tra lại, tự đóng phiên hết hạn. Tải lại lúc đang xử lý chuyển sang chưa rõ kết quả.
+- Danh sách đơn hiển thị trạng thái từng shop và lọc kết quả chưa rõ.
+
+Kiểm thử trình duyệt: `tests/purchase-flows.js` gồm hành trình mua lẻ, đăng ký/đăng nhập giữ giỏ, lỗi trường, voucher hết hạn, đổi giá/phí, chặn thiếu xác nhận, lỗi tính phí, gửi đặt đơn hai lần, thanh toán thất bại/chưa rõ/đang xử lý/thành công/hết hạn, đúng đơn và responsive 360/768/1440. Fixture riêng xác nhận 20.150.000 → 20.095.000 khi phí BuildPro 120.000 → 65.000. `tests/buyer-flows.js` kiểm tra hồi quy hai shop, hủy/hoàn một shop, hậu mãi và nguồn Builder/Proposal.
+
+Giới hạn: phiên, quyền, mật khẩu, giá/tồn, chống trùng và thanh toán đều mô phỏng trong trình duyệt. Backend cần kiểm tra quyền, giá/phí, giữ tồn đồng thời, khóa/idempotency bền vững và đối chiếu kết quả cổng thanh toán thật.
