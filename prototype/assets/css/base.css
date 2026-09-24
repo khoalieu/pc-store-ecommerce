@@ -25,6 +25,7 @@ a:hover { color: var(--color-cobalt-deep); }
 button, input, select, textarea { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
 img, svg { display: block; max-width: 100%; }
 
 :focus-visible {
@@ -47,8 +48,10 @@ p { max-width: 72ch; }
 .muted { color: var(--color-slate); }
 .tabular { font-variant-numeric: tabular-nums; }
 .nowrap { white-space: nowrap; }
-.stack { display: grid; gap: var(--space-4); }
-.cluster { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+.stack { display: grid; gap: var(--space-4); min-width: 0; }
+.cluster { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; min-width: 0; }
+.stack > *, .cluster > *, .panel, main, section, article, aside { min-width: 0; }
+.wrap-anywhere { overflow-wrap: anywhere; word-break: break-word; }
 .page-main { min-height: calc(100vh - 72px); padding: var(--space-8) 0 var(--space-18); }
 .section { padding-block: var(--space-18); }
 .section + .section { border-top: 1px solid var(--color-border); }
@@ -76,3 +79,12 @@ body {
 
 a { transition: color var(--ease-signal), background-color var(--ease-signal), border-color var(--ease-signal); }
 input::placeholder, textarea::placeholder { color: #74818c; opacity: 1; }
+
+@supports not (backdrop-filter: blur(1px)) {
+  .topbar { background: rgba(255, 255, 255, 0.99); }
+}
+
+@media (forced-colors: active) {
+  .status::before, .meter > span, .signal-rail::after { forced-color-adjust: none; }
+  .btn, .panel, .field input, .field select, .field textarea { border: 1px solid ButtonText; }
+}
