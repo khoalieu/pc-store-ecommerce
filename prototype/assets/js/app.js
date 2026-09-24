@@ -65,3 +65,11 @@ selectAll("[data-dropdown]").forEach((button) => {
     button.setAttribute("aria-expanded", String(!open));
   });
 });
+
+// Keyboard navigation for legacy Shop/Admin tabs. Buyer state lives in buyer.js modules.
+selectAll("[role=tablist]").forEach(list => list.addEventListener("keydown", event => {
+ const tabs=selectAll("[role=tab]",list);const index=tabs.indexOf(document.activeElement);
+ if(index<0 || !["ArrowLeft","ArrowRight","Home","End"].includes(event.key)) return;
+ event.preventDefault();const next=event.key==="Home"?0:event.key==="End"?tabs.length-1:(index+(event.key==="ArrowRight"?1:-1)+tabs.length)%tabs.length;
+ tabs[next].focus();tabs[next].click();
+}));

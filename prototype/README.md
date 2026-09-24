@@ -1,34 +1,50 @@
-# PCMatch static UI prototype
+# PCMatch buyer prototype
 
-## Open the prototype
+Frontend HTML/CSS/JavaScript thuần. Trang mua sắm là `buyer/home.html`; `index.html` chỉ là sitemap. Shop/Admin là các màn hình minh họa cũ, ngoài phạm vi hoàn thiện giao diện người mua.
 
-From the repository root:
+## Chạy
+
+Từ thư mục gốc repository:
 
 ```bash
 python3 -m http.server 4173 -d prototype
 ```
 
-Then open `http://127.0.0.1:4173/`.
+Mở `http://127.0.0.1:4173/buyer/home.html`. Nếu Python bị ảnh hưởng bởi môi trường AppImage, dùng `env -u PYTHONHOME -u PYTHONPATH python3 -m http.server 4173 -d prototype`.
 
-No build step, backend, API, authentication, database, payment, or carrier integration is required. JavaScript is limited to preview interactions: responsive menus/sidebar, tabs, dialogs, dropdowns, and synchronized slot focus.
+Không cần build hay cài package. Phải chạy qua localhost hoặc HTTPS để dùng JavaScript modules và Web Crypto; không mở bằng `file://`.
 
-## Representative responsive screens
+## Dữ liệu và các luồng đã có
 
-| Requirement family | Prototype file |
-|---|---|
-| Sitemap and all B01–B45, S01–S31, A01–A31 IDs | `index.html` |
-| B01 Home | `buyer/home.html` |
-| B02/B03 Search and category | `buyer/search.html` |
-| B04/B05 Model and offers | `buyer/model.html` |
-| B14/B15 Builder and slot selection | `buyer/builder.html` |
-| B21–B27 Budget request and proposal comparison | `buyer/proposals.html` |
-| B28–B34 Cart, checkout, diff, payment result | `buyer/checkout.html` |
-| B35–B45 Order, shipping, after-sales, cases | `buyer/order.html` |
-| S01–S16 and S27–S31 Shop overview | `shop/dashboard.html` |
-| S17–S26 Shop order and after-sales family | `shop/order.html` |
-| A01–A05 and A12–A31 Admin operations | `admin/dashboard.html` |
-| A06–A11 Catalogue and compatibility rules | `admin/rules.html` |
-| B08–B13 Account and authentication family | `auth/login.html` |
-| Shared loading/empty/error/permission/confirmation states | `states/index.html` |
+- `assets/js/data.js`: model, shop và offer là các đối tượng riêng, ID nhất quán.
+- `store.js`: dữ liệu localStorage `pcmatch-demo-v2`; phiên và bản nháp nằm trong sessionStorage. Lỗi ghi dữ liệu hoàn tác thay đổi và cho phép thử lại.
+- `buyer.js`, `ui.js`: điều hướng, bản nháp theo đối tượng/tài khoản, xác nhận, thông báo, lỗi và trạng thái đang xử lý.
+- `catalog.js`: Home mua sắm, tìm/lọc, so model, so offer và gian hàng.
+- `account.js`: đăng ký/đăng nhập/khôi phục, hồ sơ, địa chỉ và thông báo.
+- `commerce.js`: giỏ theo shop, checkout, mã demo, thanh toán, đơn con, giao nhận và hoàn tiền.
+- `builds.js`: Builder, lưu/chia sẻ, tư vấn theo phiên bản, yêu cầu ngân sách và proposal.
+- `support.js`: đánh giá, khiếu nại, hậu mãi và bằng chứng.
 
-All values are illustrative and remain consistent with the Nguyễn Minh / BuildPro Sài Gòn / TechZone Hà Nội scenario in the requirements specification.
+Khách xem/tìm/thêm giỏ được trước đăng nhập. Giỏ được giữ trên trình duyệt qua đăng nhập; đây là một giỏ demo dùng chung trên thiết bị, không đồng bộ hoặc ghép giỏ từ máy chủ. Form có bản nháp riêng theo URL đối tượng và tài khoản. Chỉ dùng thông tin thử nghiệm.
+
+Tạo tài khoản từ màn đăng nhập. Công cụ demo ở footer có reset, hết hạn phiên và lỗi thao tác kế tiếp. Checkout có kịch bản đổi giá/bảo hành, hết hàng/ngừng bán và lỗi báo phí. Mã `PC100` do nền tảng tài trợ, `BP50` do BuildPro tài trợ; điều kiện và quy tắc không kết hợp được ghi ngay tại form. `EXPIRED` thử lỗi mã hết hạn.
+
+## Kiểm thử bằng Chrome
+
+Dùng **profile Chrome riêng**: các bài kiểm thử xóa dữ liệu demo trên origin đang kiểm thử.
+
+```bash
+google-chrome --headless=new --disable-gpu --remote-debugging-port=9229 --user-data-dir=/tmp/pcmatch-qa about:blank
+node prototype/tests/cdp-runner.cjs prototype/tests/buyer-flows.js
+node prototype/tests/cdp-runner.cjs prototype/tests/buyer-regressions.js
+```
+
+Cần Node có `fetch` và `WebSocket` toàn cục (Node 22+). Chạy hai suite lần lượt, không song song vì chúng dùng cùng tab. Suite đầu kiểm thử các luồng nền; suite hồi quy kiểm thử phần bổ sung, lỗi lưu/thử lại và 20 trang buyer ở 360/768/1440px. Ảnh QA được lưu dưới `/tmp/pcmatch-*.png`.
+
+Đối chiếu chi tiết với tài liệu kiểm thử nằm trong `BUYER_AUDIT.md`.
+
+## Giới hạn
+
+Không có backend, xác thực/ủy quyền thật, kiểm tra giá/tồn đồng thời, thanh toán, email hoặc vận chuyển thật. Chia sẻ cấu hình chỉ hoạt động trong cùng kho trình duyệt. Tệp bằng chứng dùng dung lượng localStorage; lỗi dung lượng không tạo hồ sơ giả thành công. Chính sách hủy/hậu mãi và thời gian giao là giả định demo hiển thị rõ, không phải cam kết thương mại.
+
+PDF, so sánh cấu hình tự lưu và trung tâm bài viết lớn thuộc P2 chưa chốt theo tài liệu; không bổ sung trong đợt này. Không COD, hàng cũ, AI sinh cấu hình hoặc benchmark/FPS giả.
