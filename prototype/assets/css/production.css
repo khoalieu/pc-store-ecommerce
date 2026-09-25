@@ -256,6 +256,7 @@ p {
     bottom: -12px;
     height: 2px;
     border-radius: 2px;
+     display: none !important;
 }
 
 /* Buttons and controls */
@@ -3753,4 +3754,66 @@ p {
     padding-right: 14px !important;
 
     text-align: center;
+}
+
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.user-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 240px;
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    z-index: 200;
+    overflow: hidden;
+}
+
+.user-dropdown.open .user-dropdown-menu {
+    display: block;
+}
+
+.udm-header {
+    padding: 16px;
+    background: var(--color-canvas);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.udm-links a {
+   display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    color: var(--color-ink);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background 0.15s;
+}
+
+.udm-links a:hover {
+    background: var(--color-canvas);
+}
+
+.udm-links hr {
+    border: none;
+    border-top: 1px solid var(--color-muted);
+    margin: 6px 0;
+}
+
+.udm-badge {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: var(--color-cobalt-soft);
+    color: var(--color-cobalt-deep);
+    font-size: 0.6875rem;
+    font-weight: 700;
 }
