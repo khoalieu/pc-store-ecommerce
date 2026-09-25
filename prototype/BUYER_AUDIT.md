@@ -119,3 +119,16 @@ Bộ trình duyệt: `aftersale-flows.js` (tài khoản A/B, khôi phục, Back,
 Giới hạn còn lại: tài khoản, phân quyền, lưu trữ, serial, giữ tồn, phê duyệt của shop/nền tảng, vận chuyển, thanh toán và hoàn tiền đều mô phỏng. B16, PDF và trung tâm bài viết lớn là P2 chưa triển khai, không gắn nhãn chức năng đã hoàn tất.
 
 Kết quả chạy cuối: `AFTERSALE FLOWS PASSED`, `BUILD FLOWS PASSED` (cả tự build và proposal đến đơn đã thanh toán), `PURCHASE FLOWS PASSED`, `SITEMAP FLOWS PASSED`. Sitemap: 45/45 điểm vào render được, 88 đích link được render trả về hợp lệ. Đây là kiểm tra điểm vào, không có nghĩa B16/P2 đã được triển khai. Đã bổ sung tìm mã/tên trên sitemap, trạng thái không có kết quả, và giới hạn các mốc vận chuyển theo trạng thái hợp lệ.
+
+## Home: banner và trưng bày sản phẩm — 24/09/2026
+
+Giữ danh mục, đường mua lẻ, hai dịch vụ build và gian hàng. Chuyển khung Home vào HTML template có ngữ nghĩa; bổ sung hai banner tĩnh, model mới nhất theo `createdAt` và bốn model bán chạy theo `soldCount`. Ngày/số bán là fixture demo có nhãn rõ. Search nhận `sort=sold`; giá/số shop Home lấy từ offer hiện tại đang bán và còn hàng.
+
+`home-flows.js` đã kiểm tra hai đích banner, model mới nhất, bảng offer đúng model, thứ tự bán chạy theo toàn dữ liệu, Search giữ sắp xếp, card → offer → giỏ, focus bàn phím, ảnh tải và responsive 360/768/1440. Kiểm tra dữ liệu trống/ngày không hợp lệ ẩn banner; không còn offer không giữ giá cũ; ảnh lỗi hiện fallback. Hai banner đầu tải eager; ảnh mới nhất/card lazy và vùng ảnh giữ tỷ lệ để hạn chế nhảy bố cục.
+
+## Chat người mua
+- Trang: `buyer/chat.html`; điều hướng Chat dùng chung + bubble; đường vào offer Model, gian hàng, đơn con và phiên bản Builder. Account có lối vào Chat.
+- JS: tìm hội thoại theo shop, lịch sử và draft theo user/shop, badge đọc/chưa đọc, gửi văn bản, Enter/Shift+Enter, bỏ context, đăng nhập rồi quay lại draft, gửi lỗi/thử lại, phản hồi có nhãn mô phỏng.
+- Quyền riêng tư: khách không thấy lịch sử; đổi tài khoản tách dữ liệu, đăng xuất và Back tải lại trạng thái phiên. Thẻ đơn chỉ mang mã đơn; không sao chép địa chỉ/người nhận sang chat.
+- Backend cần bổ sung: xác thực/phân quyền phía máy chủ, lưu lịch sử bền vững, dịch vụ gửi/nhận, thông báo, trạng thái giao tin, kiểm soát lạm dụng. Không có tin nào được gửi tới shop thật.
+- Kết quả kiểm thử: chat flows và edge cases đạt; kiểm tra lại discovery và purchase flows đều đạt. Đã xem ảnh 360/768/1440px, kiểm tra tên truy cập trong Accessibility tree, Esc/trả focus, menu mobile, URL dài, bubble tránh CTA và ẩn khi có modal khác. Viewport thấp mô phỏng bàn phím đạt; chưa kiểm tra với bàn phím ảo/trình đọc màn hình trên thiết bị vật lý.

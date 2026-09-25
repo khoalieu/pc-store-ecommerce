@@ -71,3 +71,14 @@ Rà soát tài khoản và sau mua:
 
 Dữ liệu làm việc (giỏ, checkout, Builder, so sánh) được lưu theo tài khoản demo. Đăng xuất chuyển sang không gian khách; đăng nhập khôi phục không gian cá nhân và ghép giỏ khách nếu có. Giỏ ghép vượt tồn được giữ để khách sửa tại checkout, không tự bỏ hàng. Quyền trong prototype chỉ là mô phỏng, không phải cơ chế bảo mật server.
 Kiểm tra cuối sau `purchase-flows.js`: `node prototype/tests/cdp-runner.cjs prototype/tests/final-checks.js` (tìm sitemap, mốc giao nhận/hoàn hàng và làm tròn giảm giá khi hoàn theo serial).
+
+Home mua sắm: hai banner tĩnh lấy cấu hình từ `assets/js/merchandising-data.js`; `createdAt` là ngày thêm model vào catalogue demo (không phải ngày hãng ra mắt), `soldCount` là số lượng bán minh họa cố định. Home và Search dùng cùng thứ tự bán chạy. Giá từ/số shop trên Home chỉ tính offer còn hàng của shop đang bán. Ảnh tái sử dụng trong `assets/images/products/`, nguồn tại `SOURCES.md`; các model chưa có ảnh riêng dùng hình danh mục.
+Kiểm thử Home: `node prototype/tests/cdp-runner.cjs prototype/tests/home-flows.js`.
+
+### Chat người mua
+- Mở `buyer/chat.html` hoặc nút Chat nổi. Menu dùng chung có badge đếm **hội thoại** chưa đọc; mỗi dòng chat có số **tin** chưa đọc.
+- Lịch sử nằm trong `pcmatch-demo-v2.chats`, khóa hội thoại theo `userId` + `shopId`. Hai lời chào mẫu được tạo riêng cho mỗi tài khoản. Bản nháp nằm trong sessionStorage theo tài khoản/shop; đăng nhập từ chat giữ shop, ngữ cảnh và nội dung nhưng không tự gửi.
+- Model đính kèm snapshot tên/mã model, offer và giá. Đơn đính kèm ID cha/con; Builder đính kèm phiên bản và các slot, không thay thế form tư vấn. Có thể bỏ đính kèm trước khi gửi.
+- Checkbox “Mô phỏng gửi lỗi” giữ bản nháp để thử lại. Sau khi gửi thành công, phản hồi mẫu có nhãn rõ; không có backend, WebSocket hoặc nhân viên trực. Reload trước khi bộ hẹn giờ trả lời chạy có thể không sinh phản hồi mẫu; tin đã lưu vẫn còn.
+- Công cụ demo → Reset toàn bộ demo xóa cả lịch sử và nháp chat. Bubble ẩn trên trang thanh toán, khi có modal khác; tự dịch lên nếu chồng lên CTA chính; tab Chat vẫn truy cập được.
+- Kiểm thử: `node prototype/tests/cdp-runner.cjs prototype/tests/chat-flows.js` (server 4173, Chrome CDP 9229, dùng profile kiểm thử riêng). Có kiểm tra 360/768/1440px, viewport thấp mô phỏng bàn phím, Esc/focus, trạng thái gửi/lỗi, lưu trữ và phân tách tài khoản.
