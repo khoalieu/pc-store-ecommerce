@@ -1,7 +1,7 @@
 import {categories,models,model,shop,money,regions} from './data.js';
 import {db,tx,uid,currentOffer,clone} from './store.js';
 import {compatibility} from './builds.js';
-import {appendRefund} from './aftersale-data.js';
+import {appendRefund,refundsFor} from './aftersale-data.js';
 
 const SHOP_ID='BP';
 const qs=new URLSearchParams(location.search);
@@ -110,7 +110,7 @@ function pushBuyerNotification(state,userId,title,path){state.notifications.unsh
 function sidebar(){
  const active=(file)=>file==='proposal-list'?['proposal-list','proposal','proposal-builder'].includes(page):file==='orders'?['orders','order'].includes(page):file==='fulfillment'?page==='fulfillment':page===file;
  const item=(file,label,count='')=>'<a href="'+file+'.html" '+(active(file)?'aria-current="page"':'')+'>'+esc(label)+(count!==''?'<span class="sidebar__count">'+esc(count)+'</span>':'')+'</a>';
- return '<aside class="shop-sidebar"><div class="shop-sidebar__brand"><strong>'+esc(shopInfo.name)+'</strong><small>Shop đã xác minh · Chủ shop</small></div><nav><p class="sidebar__group">Vận hành</p>'+item('dashboard','Tổng quan')+item('offers','Tin bán',bpOffers().filter(o=>o.active).length)+item('inventory','Kho',bpOffers().filter(o=>o.active&&availableFor(o.id)<=2).length+' thấp')+'<p class="sidebar__group">Công việc</p>'+item('build-requests','Yêu cầu Build',liveRequests().length)+item('proposal-list','Proposal',proposals().filter(p=>['Cần sửa','Đã gửi'].includes(proposalState(p))).length)+item('orders','Đơn hàng',suborders().filter(x=>!closedOrderStates.includes(x.sub.status)).length)+item('fulfillment','Giao hàng')+'</nav></aside>';
+ return '<aside class="shop-sidebar"><div class="shop-sidebar__brand"><strong>'+esc(shopInfo.name)+'</strong><small>Shop đã xác minh · Chủ shop</small></div><nav><p class="sidebar__group">Vận hành</p>'+item('dashboard','Tổng quan')+item('offers','Tin bán',bpOffers().filter(o=>o.active).length)+item('inventory','Kho',bpOffers().filter(o=>o.active&&availableFor(o.id)<=2).length+' thấp')+'<p class="sidebar__group">Công việc</p>'+item('build-requests','Yêu cầu Build',liveRequests().length)+item('proposal-list','Proposal',proposals().filter(p=>['Cần sửa','Đã gửi'].includes(proposalState(p))).length)+item('orders','Đơn hàng',suborders().filter(x=>!closedOrderStates.includes(x.sub.status)).length)+item('fulfillment','Giao hàng')+'<p class="sidebar__group">Tài chính</p>'+item('revenue','Doanh thu')+'</nav></aside>';
 }
 
 function shell(content,title='Cổng Shop'){
@@ -136,7 +136,7 @@ function dashboard(){
    '<article class="panel shop-kpi"><span class="metric-label">Proposal cần phản hồi</span><strong class="metric-value">'+waiting.length+'<small> bản</small></strong><p>Ưu tiên các yêu cầu khách vừa phản hồi.</p></article>'+
    '<article class="panel shop-kpi"><span class="metric-label">Tồn thấp</span><strong class="metric-value">'+low.length+'<small> offer</small></strong><p>Tính theo tồn thực tế và lượng đang giữ.</p></article>'+
    '<article class="panel shop-kpi"><span class="metric-label">Request đang mở</span><strong class="metric-value">'+liveRequests().length+'<small> nhu cầu</small></strong><p>Lọc theo ngân sách, khu vực và thời hạn.</p></article>'+
-  '</div><div class="shop-grid"><section class="panel panel--padded"><div class="panel__head"><div><h2 style="font-size:var(--text-xl)">Hàng chờ ưu tiên</h2><p>Các việc có thể xử lý ngay.</p></div></div><div class="task-list">'+(tasks||'<p>Không có việc cần ưu tiên.</p>')+'</div></section>'+panel('Thao tác nhanh','<div class="stack"><a class="btn btn--secondary" href="offers.html">Tạo tin bán</a><a class="btn btn--secondary" href="inventory.html">Điều chỉnh tồn kho</a><a class="btn btn--secondary" href="build-requests.html">Mở yêu cầu Build</a><a class="btn btn--secondary" href="orders.html">Mở hàng chờ đơn</a></div>')+'</div>',
+  '</div><div class="shop-grid"><section class="panel panel--padded"><div class="panel__head"><div><h2 style="font-size:var(--text-xl)">Hàng chờ ưu tiên</h2><p>Các việc có thể xử lý ngay.</p></div></div><div class="task-list">'+(tasks||'<p>Không có việc cần ưu tiên.</p>')+'</div></section>'+panel('Thao tác nhanh','<div class="stack"><a class="btn btn--secondary" href="offers.html">Tạo tin bán</a><a class="btn btn--secondary" href="inventory.html">Điều chỉnh tồn kho</a><a class="btn btn--secondary" href="build-requests.html">Mở yêu cầu Build</a><a class="btn btn--secondary" href="orders.html">Mở hàng chờ đơn</a><a class="btn btn--secondary" href="revenue.html">Xem doanh thu</a></div>')+'</div>',
   'Tổng quan'
  );
 }
@@ -306,6 +306,60 @@ function orderPage(){
 }
 
 function serialComplete(sub){return sub.items.every(i=>Array.isArray(i.serials)&&i.serials.length===i.qty&&i.serials.every(Boolean));}
+
+const localDateValue=d=>{const x=new Date(d);x.setMinutes(x.getMinutes()-x.getTimezoneOffset());return x.toISOString().slice(0,10);};
+const startDay=value=>new Date(value+'T00:00:00').getTime();
+const endDay=value=>new Date(value+'T23:59:59.999').getTime();
+const completedRefundTotal=sub=>refundsFor(sub).filter(r=>r.status==='Hoàn thành').reduce((sum,r)=>sum+(r.amount||0),0);
+const revenueEntry=({order,sub})=>{
+ const gross=sub.subtotal||0,discount=sub.discount||0,assembly=sub.assembly||0,refund=completedRefundTotal(sub);
+ return {order,sub,gross,discount,assembly,refund,net:Math.max(0,gross-discount+assembly-refund)};
+};
+const settlementLabel=e=>{
+ if(e.sub.status==='Đã hủy'&&e.refund>0)return 'Đã hoàn';
+ if(['Đã giao','Hoàn tất'].includes(e.sub.status))return 'Chờ đối soát';
+ return 'Chưa đủ điều kiện';
+};
+function revenueRange(){
+ const today=new Date(),fallbackTo=localDateValue(today),fromDate=new Date(today);fromDate.setDate(fromDate.getDate()-6);const fallbackFrom=localDateValue(fromDate);
+ const from=qs.get('from')||fallbackFrom,to=qs.get('to')||fallbackTo;
+ return startDay(from)<=endDay(to)?{from,to,start:startDay(from),end:endDay(to)}:{from:to,to:from,start:startDay(to),end:endDay(from)};
+}
+function revenueDays(from,to){
+ const out=[],cursor=new Date(from+'T00:00:00'),last=new Date(to+'T00:00:00');
+ for(let n=0;cursor<=last&&n<92;n++,cursor.setDate(cursor.getDate()+1))out.push(localDateValue(cursor));
+ return out;
+}
+function revenuePage(){
+ const range=revenueRange();
+ const entries=suborders().filter(({order})=>order.payment==='paid'&&order.at>=range.start&&order.at<=range.end).map(revenueEntry).sort((a,b)=>b.order.at-a.order.at);
+ const totals=entries.reduce((a,e)=>({gross:a.gross+e.gross,discount:a.discount+e.discount,assembly:a.assembly+e.assembly,refund:a.refund+e.refund,net:a.net+e.net}),{gross:0,discount:0,assembly:0,refund:0,net:0});
+ const days=revenueDays(range.from,range.to),daily=Object.fromEntries(days.map(d=>[d,0]));
+ for(const e of entries){const k=localDateValue(e.order.at);if(k in daily)daily[k]+=e.net;}
+ const max=Math.max(1,...Object.values(daily));
+ const bars=days.map(d=>{const value=daily[d]||0,pct=Math.max(value?4:0,Math.round(value/max*100));return '<div class="shop-revenue-bar" title="'+esc(new Date(d+'T00:00:00').toLocaleDateString('vi-VN'))+' · '+esc(money(value))+'"><div class="shop-revenue-bar__value">'+(value?money(value):'0 ₫')+'</div><div class="shop-revenue-bar__track"><i style="--bar:'+pct+'%"></i></div><small>'+esc(new Date(d+'T00:00:00').toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit'}))+'</small></div>';}).join('');
+ const catTotals={};
+ for(const e of entries)for(const i of e.sub.items){const m=model(i.modelId||currentOffer(i.offerId)?.modelId);const label=m?categories[m.category]:'Khác';catTotals[label]=(catTotals[label]||0)+i.price*i.qty;}
+ const catRows=Object.entries(catTotals).sort((a,b)=>b[1]-a[1]).slice(0,6),catSum=catRows.reduce((a,[,v])=>a+v,0);
+ let running=0;const palette=['#135fd2','#05877e','#c87500','#566370','#8b5cf6','#c63b4b'];
+ const stops=catRows.map(([name,value],i)=>{const from=catSum?running/catSum*100:0;running+=value;const to=catSum?running/catSum*100:0;return palette[i]+' '+from.toFixed(2)+'% '+to.toFixed(2)+'%';});
+ const donut=catRows.length?'<div class="shop-revenue-donut" style="--donut:'+stops.join(',')+'"><div><strong>'+money(catSum)+'</strong><span>Tiền hàng</span></div></div><div class="shop-revenue-legend">'+catRows.map(([name,value],i)=>'<div><i style="background:'+palette[i]+'"></i><span>'+esc(name)+'</span><strong>'+money(value)+'</strong><small>'+(catSum?Math.round(value/catSum*100):0)+'%</small></div>').join('')+'</div>':'<div class="shop-empty"><p>Chưa có dữ liệu sản phẩm trong khoảng đã chọn.</p></div>';
+ const rows=entries.map(e=>'<tr><td><strong><a href="'+link('order',{sub:e.sub.id})+'">'+esc(e.sub.id)+'</a></strong><small>'+esc(e.order.id)+' · '+fmtDate(e.order.at)+'</small></td><td>'+badge(e.sub.status)+'</td><td>'+money(e.gross)+'</td><td>− '+money(e.discount)+'</td><td>'+(e.refund?'− '+money(e.refund):'0 ₫')+'</td><td><strong>'+money(e.net)+'</strong></td><td>'+badge(settlementLabel(e))+'</td></tr>').join('');
+ shell(
+  head('Doanh thu','Theo dõi doanh số của shop, khoản giảm giá, hoàn tiền và thực nhận dự kiến.','<a class="btn btn--secondary" href="orders.html">Mở đơn hàng</a>')+
+  '<form class="shop-revenue-filter" data-form="revenue-filter"><label class="field"><span>Từ ngày</span><input type="date" name="from" value="'+esc(range.from)+'" required></label><label class="field"><span>Đến ngày</span><input type="date" name="to" value="'+esc(range.to)+'" required></label><button class="btn btn--secondary">Áp dụng</button></form>'+
+  '<div class="shop-kpis">'+
+   '<article class="panel shop-kpi"><span class="metric-label">Doanh số hàng hóa</span><strong class="metric-value">'+money(totals.gross)+'</strong><p>'+entries.length+' đơn con đã thanh toán trong khoảng chọn.</p></article>'+
+   '<article class="panel shop-kpi"><span class="metric-label">Giảm giá của shop</span><strong class="metric-value">'+money(totals.discount)+'</strong><p>Khoản ưu đãi do shop tài trợ.</p></article>'+
+   '<article class="panel shop-kpi"><span class="metric-label">Hoàn tiền hoàn tất</span><strong class="metric-value">'+money(totals.refund)+'</strong><p>Chỉ tính các khoản đã hoàn thành.</p></article>'+
+   '<article class="panel shop-kpi"><span class="metric-label">Thực nhận dự kiến</span><strong class="metric-value">'+money(totals.net)+'</strong><p>Tiền hàng − giảm giá + lắp ráp − hoàn tiền.</p></article>'+
+  '</div>'+
+  '<div class="shop-grid shop-grid--equal"><section class="panel panel--padded"><div class="panel__head"><div><h2 style="font-size:var(--text-xl)">Doanh thu theo ngày</h2><p>Giá trị thực nhận dự kiến theo ngày đặt đơn.</p></div></div><div class="shop-revenue-bars" style="--days:'+Math.max(7,days.length)+'">'+bars+'</div></section><section class="panel panel--padded"><div class="panel__head"><div><h2 style="font-size:var(--text-xl)">Cơ cấu tiền hàng</h2><p>Phân bổ theo nhóm linh kiện trong các đơn đã thanh toán.</p></div></div><div class="shop-revenue-pie">'+donut+'</div></section></div>'+
+  '<section class="panel panel--padded shop-section"><div class="panel__head"><div><h2 style="font-size:var(--text-xl)">Đối soát theo đơn</h2><p>Phí giao không cộng vào thực nhận của shop trong bảng này.</p></div></div><div class="table-wrap"><table class="data-table"><thead><tr><th>Đơn con</th><th>Trạng thái</th><th>Tiền hàng</th><th>Giảm giá</th><th>Hoàn tiền</th><th>Thực nhận dự kiến</th><th>Đối soát</th></tr></thead><tbody>'+(rows||'<tr><td colspan="7"><div class="shop-empty">Chưa có giao dịch trong khoảng thời gian này.</div></td></tr>')+'</tbody></table></div></section>',
+  'Doanh thu'
+ );
+}
+
 function fulfillmentPage(){
  const entry=suborders().find(x=>x.sub.id===(qs.get('sub')||suborders().find(x=>!['Chờ shop xác nhận','Đã hủy','Đã giao'].includes(x.sub.status))?.sub.id));
  if(!entry){shell(head('Chưa có đơn cần giao','Xác nhận một đơn hàng trước khi xử lý giao nhận.','<a class="btn btn--primary" href="orders.html">Mở đơn hàng</a>'),'Giao hàng');return;}
@@ -320,7 +374,7 @@ function fulfillmentPage(){
  );
 }
 
-const renderers={dashboard,offers:offersPage,inventory:inventoryPage,'build-requests':buildRequestsPage,'build-request-detail':requestDetailPage,'proposal-builder':proposalBuilderPage,'proposal-list':proposalListPage,proposal:proposalDetailPage,orders:orderListPage,order:orderPage,fulfillment:fulfillmentPage};
+const renderers={dashboard,offers:offersPage,inventory:inventoryPage,'build-requests':buildRequestsPage,'build-request-detail':requestDetailPage,'proposal-builder':proposalBuilderPage,'proposal-list':proposalListPage,proposal:proposalDetailPage,orders:orderListPage,order:orderPage,fulfillment:fulfillmentPage,revenue:revenuePage};
 (renderers[page]||dashboard)();
 function rerender(){(renderers[page]||dashboard)();}
 function findProposal(id){return proposals().find(p=>p.id===id);}
@@ -393,7 +447,7 @@ document.addEventListener('submit',e=>{
  if(!form.reportValidity())return;
  const d=Object.fromEntries(new FormData(form));
  try{
-  if(['offer-filter','request-filter','proposal-filter','order-filter'].includes(name)){
+  if(['offer-filter','request-filter','proposal-filter','order-filter','revenue-filter'].includes(name)){
    const p=new URLSearchParams();for(const [k,v] of Object.entries(d))if(v)p.set(k,v);location.search=p;return;
   }
   if(name==='offer-editor'){
