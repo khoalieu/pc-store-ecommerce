@@ -82,3 +82,7 @@ Kiểm thử Home: `node prototype/tests/cdp-runner.cjs prototype/tests/home-flo
 - Checkbox “Mô phỏng gửi lỗi” giữ bản nháp để thử lại. Sau khi gửi thành công, phản hồi mẫu có nhãn rõ; không có backend, WebSocket hoặc nhân viên trực. Reload trước khi bộ hẹn giờ trả lời chạy có thể không sinh phản hồi mẫu; tin đã lưu vẫn còn.
 - Công cụ demo → Reset toàn bộ demo xóa cả lịch sử và nháp chat. Bubble ẩn trên trang thanh toán, khi có modal khác; tự dịch lên nếu chồng lên CTA chính; tab Chat vẫn truy cập được.
 - Kiểm thử: `node prototype/tests/cdp-runner.cjs prototype/tests/chat-flows.js` (server 4173, Chrome CDP 9229, dùng profile kiểm thử riêng). Có kiểm tra 360/768/1440px, viewport thấp mô phỏng bàn phím, Esc/focus, trạng thái gửi/lỗi, lưu trữ và phân tách tài khoản.
+
+### Header người mua
+Header dùng chung nằm trong `assets/js/header.js` và `assets/css/header.css`: thanh demo/trợ giúp, tìm kiếm có gợi ý model và lịch sử theo tài khoản, danh mục, tiện ích, tài khoản và giỏ xem nhanh. Menu mobile dùng dialog; Escape đóng và trả focus. Header giữ hàng tìm kiếm khi cuộn xuống, hiện lại điều hướng khi về gần đầu trang hoặc đưa focus vào header. Giỏ xem nhanh tính tiền hàng từ offer hiện tại, chưa gồm phí/ưu đãi; checkout vẫn dùng bước kiểm tra và xác nhận hiện có. Lịch sử tìm kiếm nằm trong `pcmatch-demo-v2.searchHistory` và được xóa cùng Reset demo.
+Kiểm thử: `node prototype/tests/cdp-runner.cjs prototype/tests/header-flows.js` (server 4173, Chrome thử nghiệm CDP 9229).
