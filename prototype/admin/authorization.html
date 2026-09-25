@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../assets/css/base.css?v=20260917b">
     <link rel="stylesheet" href="../assets/css/components.css?v=20260917b">
     <link rel="stylesheet" href="../assets/css/pages.css?v=20260917b">
-    <link rel="stylesheet" href="../assets/css/production.css?v=20260917">
+    <link rel="stylesheet" href="../assets/css/production.css?v=20260926k">
 </head>
 <body class="operations-page">
 <a class="skip-link" href="#main">Chuyển đến nội dung chính</a>
@@ -37,12 +37,12 @@
                 <p>Gán quyền cho người dùng và chủ shop: mỗi vai trò được phép xem, xử lý hoặc thay đổi những nghiệp vụ
                     nào trên sàn.</p>
                 <div style="margin-top: 6px; font-size: 13px; color: var(--color-slate); font-weight: 600;">
-                    🛡️ 6 vai trò · 12 tài khoản được phân quyền
+                    <i class="fa-solid fa-user-shield"></i> 6 vai trò · 12 tài khoản được phân quyền
                 </div>
             </div>
             <div class="cluster">
                 <button class="btn btn--secondary" type="button">
-                    <span>📄 Xuất ma trận</span>
+                    <span><i class="fa-solid fa-file"></i> Xuất ma trận</span>
                 </button>
             </div>
         </div>
@@ -52,7 +52,7 @@
                 <span class="metric-label">Vai trò quyền</span>
                 <div class="metric-value">
                     6 <small>vai trò</small>
-                    <span class="status status--info" style="margin-left: 6px;">↑ Ổn định</span>
+                    <span class="status status--info" style="margin-left: 6px;"><i class="fa-solid fa-arrow-up"></i> Ổn định</span>
                 </div>
                 <p class="muted">Nhóm quyền đang áp dụng cho người dùng sàn</p>
             </div>
@@ -61,7 +61,7 @@
                 <span class="metric-label">Tài khoản quản trị</span>
                 <div class="metric-value">
                     12 <small>tài khoản</small>
-                    <span class="status status--info" style="margin-left: 6px;">↑ +2 tháng này</span>
+                    <span class="status status--info" style="margin-left: 6px;"><i class="fa-solid fa-arrow-up"></i> +2 tháng này</span>
                 </div>
                 <p class="muted">Admin, vận hành, tài chính và chủ shop</p>
             </div>
@@ -70,7 +70,7 @@
                 <span class="metric-label">Tổng quyền hệ thống</span>
                 <div class="metric-value">
                     19 <small>quyền</small>
-                    <span class="status status--ok" style="margin-left: 6px;">↑ +3</span>
+                    <span class="status status--ok" style="margin-left: 6px;"><i class="fa-solid fa-arrow-up"></i> +3</span>
                 </div>
                 <p class="muted">Quyền chi tiết có thể bật/tắt cho từng vai trò</p>
             </div>
@@ -79,7 +79,7 @@
                 <span class="metric-label">Tạm ngưng quyền</span>
                 <div class="metric-value">
                     1 <small>tài khoản</small>
-                    <span class="status status--bad" style="margin-left: 6px;">↓ -1</span>
+                    <span class="status status--bad" style="margin-left: 6px;"><i class="fa-solid fa-arrow-down"></i> -1</span>
                 </div>
                 <p class="muted">Tài khoản đang bị tạm ngưng quyền truy cập</p>
             </div>
@@ -411,7 +411,7 @@
         }
     })();
 </script>
-<script src="../assets/js/app.js"></script>
+<script src="../assets/js/app.js?v=20260926e"></script>
 
 <script>
     (function initRoleTabs() {

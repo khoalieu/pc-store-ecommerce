@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../../assets/css/base.css">
     <link rel="stylesheet" href="../../assets/css/components.css">
     <link rel="stylesheet" href="../../assets/css/pages.css">
-    <link rel="stylesheet" href="../../assets/css/production.css">
+    <link rel="stylesheet" href="../../assets/css/production.css?v=20260926k">
     <link rel="stylesheet" href="../../assets/css/reusable-controls.css">
     <link rel="stylesheet" href="../../assets/css/ecosystem/shop.css">
     <link rel="stylesheet" href="../../assets/css/ecosystem/categories.css">
@@ -32,20 +32,17 @@
                 <h1>Quản lý danh mục</h1>
                 <p>Thêm, chỉnh sửa, ẩn hoặc xóa các danh mục ngành hàng trên sàn để shop đăng bán đúng chỗ.</p>
                 <div class="pending-note">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M3 7h18M5 7v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7M8 7V4h8v3M9 11v6M15 11v6"
-                              stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <i class="fa-solid fa-layer-group"></i>
                     <span>58 sản phẩm chưa được gán danh mục cần phân loại</span>
                 </div>
             </div>
             <div class="page-actions">
-                <button class="button button--secondary" type="button">
+                <button class="button button--secondary" type="button" data-time-filter>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path d="M8 7V3m8 4V3M5 11h14M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"
                               stroke-linecap="round"/>
                     </svg>
-                    <span>Tất cả thời gian</span>
+                    <span data-time-label>Hôm nay · 26/09/2026</span>
                     <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                          aria-hidden="true">
                         <path d="m19 9-7 7-7-7" stroke-linecap="round"/>
@@ -341,6 +338,6 @@
 
 <script src="../../assets/js/reusable-controls.js"></script>
 <script src="../../assets/js/category-effects.js"></script>
-<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/app.js?v=20260926e"></script>
 </body>
 </html>

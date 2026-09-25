@@ -10,13 +10,9 @@
     <link rel="stylesheet" href="../assets/css/base.css">
     <link rel="stylesheet" href="../assets/css/components.css">
     <link rel="stylesheet" href="../assets/css/pages.css">
-    <link rel="stylesheet" href="../assets/css/production.css">
+    <link rel="stylesheet" href="../assets/css/production.css?v=20260926k">
+    <link rel="stylesheet" href="../assets/css/reusable-controls.css?v=20260926">
     <style>
-        .main {
-            flex: 1;
-            overflow-y: auto;
-            padding: 32px 40px;
-        }
 
         .breadcrumb {
             display: flex;
@@ -498,7 +494,6 @@
     <main class="shell__content operations-page" id="main">
         <nav class="breadcrumb" aria-label="Breadcrumb">
             <a href="dashboard.html">Admin</a>
-            /
             <span>Hoạt động của tôi</span>
         </nav>
 
@@ -507,48 +502,50 @@
                 <h1 class="page-title">Hoạt động của tôi</h1>
                 <p class="page-desc">Lịch sử thao tác của tài khoản đang đăng nhập: xử lý đơn, đối soát, cấu hình và các
                     thay đổi bảo mật.</p>
+                <div class="page-info">
+                    <i class="fa-solid fa-bolt"></i>
+                    14 thao tác của Nguyễn Hoàng Long trong 7 ngày gần nhất
+                </div>
             </div>
+
             <div class="header-actions">
-                <button class="btn-secondary" type="button">
+                <button class="btn-secondary" type="button" data-time-filter>
                     <i class="fa-regular fa-calendar"></i>
-                    Tất cả thời gian
-                    <i class="fa-solid fa-chevron-down" style="font-size:0.65rem;"></i>
+                    <span data-time-label>Hôm nay · 26/09/2026</span>
+                    <i class="fa-solid fa-chevron-down chevron" style="font-size:0.65rem;"></i>
                 </button>
                 <button class="btn-primary" type="button">
-                    <i class="fa-solid fa-download"></i>
+                    <i class="fa-solid fa-file"></i>
                     Xuất lịch sử
                 </button>
             </div>
         </div>
-        <div class="page-info">
-            <i class="fa-solid fa-bolt"></i>
-            14 thao tác của Nguyễn Hoàng Long trong 7 ngày gần nhất
-        </div>
+
 
         <div class="stat-grid">
             <div class="stat-cell">
                 <div class="stat-label">Thao tác hôm nay</div>
                 <div class="stat-value">126 <small>lượt</small></div>
-                <div class="stat-sub"><span class="up">↑ +18</span></div>
+                <div class="stat-sub"><span class="up"><i class="fa-solid fa-arrow-up"></i> +18</span></div>
                 <div class="stat-sub" style="margin-top:4px;">55 hành động bạn đã thực hiện trên hệ thống hôm nay</div>
             </div>
             <div class="stat-cell">
                 <div class="stat-label">Thao tác 7 ngày</div>
                 <div class="stat-value">842 <small>lượt</small></div>
-                <div class="stat-sub"><span class="up">↑ +8,2%</span></div>
+                <div class="stat-sub"><span class="up"><i class="fa-solid fa-arrow-up"></i> +8,2%</span></div>
                 <div class="stat-sub" style="margin-top:4px;">Tổng thao tác trong 7 ngày gần nhất</div>
             </div>
             <div class="stat-cell">
                 <div class="stat-label">Thao tác quan trọng</div>
                 <div class="stat-value">23 <small>lượt</small></div>
-                <div class="stat-sub"><span class="amber">↑ 4 duyệt hoàn tiền</span></div>
+                <div class="stat-sub"><span class="amber"><i class="fa-solid fa-arrow-up"></i> 4 duyệt hoàn tiền</span></div>
                 <div class="stat-sub" style="margin-top:4px;">Hành động ảnh hưởng trực tiếp tới tiền và quyền hệ thống
                 </div>
             </div>
             <div class="stat-cell">
                 <div class="stat-label">Phiên đăng nhập</div>
                 <div class="stat-value">6 <small>phiên</small></div>
-                <div class="stat-sub"><span class="down">↑ 1 phiên lạ đã thu hồi</span></div>
+                <div class="stat-sub"><span class="down"><i class="fa-solid fa-arrow-down"></i> 1 phiên lạ đã thu hồi</span></div>
                 <div class="stat-sub" style="margin-top:4px;">Số lần đăng nhập trong / ngày gần nhất</div>
             </div>
         </div>
@@ -799,7 +796,8 @@
     </main>
 </div>
 
-<script src="../assets/js/app.js"></script>
+<script src="../assets/js/reusable-controls.js?v=20260926"></script>
+<script src="../assets/js/app.js?v=20260926e"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var pills = document.querySelectorAll('.filter-pill');

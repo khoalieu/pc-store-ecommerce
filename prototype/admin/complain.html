@@ -15,7 +15,8 @@
     <link rel="stylesheet" href="../assets/css/base.css?v=20260917b">
     <link rel="stylesheet" href="../assets/css/components.css?v=20260917b">
     <link rel="stylesheet" href="../assets/css/pages.css?v=20260917b">
-    <link rel="stylesheet" href="../assets/css/production.css?v=20260917">
+    <link rel="stylesheet" href="../assets/css/production.css?v=20260926k">
+    <link rel="stylesheet" href="../assets/css/reusable-controls.css?v=20260926">
 </head>
 <body class="operations-page">
 <a class="skip-link" href="#main">Chuyển đến nội dung chính</a>
@@ -37,19 +38,14 @@
                 <p>Tiếp nhận phản hồi ngoài luồng của người mua, xem thông tin người gửi và xử lý phản hồi trực tiếp
                     trên sàn.</p>
                 <div style="margin-top: 6px; font-size: 13px; color: var(--color-amber-deep); font-weight: 600;">
-                    ⚠️ 12 phản hồi mới chưa được phản hồi
+                    <i class="fa-regular fa-comment"></i> 12 phản hồi mới chưa được phản hồi
                 </div>
             </div>
             <div class="cluster">
-                <div class="field" style="margin: 0;">
-                    <select style="min-height: 42px; background: white; border-radius: var(--radius-control);">
-                        <option>📅 Tất cả thời gian</option>
-                        <option>30 ngày gần nhất</option>
-                        <option>7 ngày gần nhất</option>
-                    </select>
-                </div>
+                <button class="btn btn--secondary" type="button" data-time-filter><i class="fa-regular fa-calendar"></i>
+                    <span data-time-label>Hôm nay · 26/09/2026</span><i class="fa-solid fa-angle-down chevron"></i></button>
                 <button class="btn btn--primary" type="button">
-                    <span>📥 Xuất danh sách</span>
+                    <span><i class="fa-solid fa-file"></i> Xuất danh sách</span>
                 </button>
             </div>
         </div>
@@ -59,7 +55,7 @@
                 <span class="metric-label">Tổng phản hồi</span>
                 <div class="metric-value">
                     362 <small>phản hồi</small>
-                    <span class="status status--info" style="margin-left: 6px;">↑ +24 tuần này</span>
+                    <span class="status status--info" style="margin-left: 6px;"><i class="fa-solid fa-arrow-up"></i> +24 tuần này</span>
                 </div>
                 <p class="muted">Phản hồi và khiếu nại người mua gửi về nền tảng</p>
             </div>
@@ -68,7 +64,7 @@
                 <span class="metric-label">Chưa phản hồi</span>
                 <div class="metric-value">
                     12 <small>phản hồi</small>
-                    <span class="status status--warn" style="margin-left: 6px;">↑ +5 hôm nay</span>
+                    <span class="status status--warn" style="margin-left: 6px;"><i class="fa-solid fa-arrow-up"></i> +5 hôm nay</span>
                 </div>
                 <p class="muted">Phản hồi mới cần admin tiếp nhận và trả lời người mua</p>
             </div>
@@ -77,7 +73,7 @@
                 <span class="metric-label">Đang xử lý</span>
                 <div class="metric-value">
                     28 <small>phản hồi</small>
-                    <span class="status status--info" style="margin-left: 6px;">↑ Ổn định</span>
+                    <span class="status status--info" style="margin-left: 6px;"><i class="fa-solid fa-arrow-up"></i> Ổn định</span>
                 </div>
                 <p class="muted">Đang phối hợp với shop hoặc bộ phận tài chính để xử lý</p>
             </div>
@@ -86,7 +82,7 @@
                 <span class="metric-label">Đã phản hồi</span>
                 <div class="metric-value">
                     322 <small>phản hồi</small>
-                    <span class="status status--ok" style="margin-left: 6px;">↑ +19 tuần này</span>
+                    <span class="status status--ok" style="margin-left: 6px;"><i class="fa-solid fa-arrow-up"></i> +19 tuần này</span>
                 </div>
                 <p class="muted">Đã trả lời và đóng với người mua, tỷ lệ hài lòng 94%</p>
             </div>
@@ -411,7 +407,8 @@
         }
     })();
 </script>
-<script src="../assets/js/app.js"></script>
+<script src="../assets/js/reusable-controls.js?v=20260926"></script>
+<script src="../assets/js/app.js?v=20260926e"></script>
 
 <script>
     (function initComplaintTabs() {

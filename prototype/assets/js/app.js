@@ -1,5 +1,90 @@
 const selectAll = (selector, scope = document) => [...scope.querySelectorAll(selector)];
 
+document.body.classList.add("admin-ui");
+
+// Normalize the compact KPI cards shared by the admin screens.
+selectAll(".admin-metrics, .dashboard-metrics, .kpi-grid, .policy-kpi-grid, .support-kpi-grid, .stat-grid, .summary-cards").forEach((grid) => {
+    grid.classList.add("quick-stats");
+    [...grid.children].forEach((card) => card.classList.add("quick-stat-card"));
+});
+
+selectAll([
+    ".quick-stats .metric-value > .status",
+    ".quick-stats .metric-value > em",
+    ".quick-stats .trend",
+    ".quick-stats .product-trend",
+    ".quick-stats .category-trend",
+    ".quick-stats .policy-trend",
+    ".quick-stats .stat-sub > span",
+    ".quick-stats .sc-badge",
+    ".quick-stats article > div > em"
+].join(",")).forEach((trend) => {
+    const rawText = trend.textContent.trim();
+    const className = trend.className.toLowerCase();
+    const isDown = /^[↓↘]/.test(rawText) ||
+        trend.querySelector(".fa-arrow-down") ||
+        /(^|[-_\s])(down|bad|red|negative)($|[-_\s])/.test(className);
+    const label = rawText.replace(/^[↑↓↗↘]\s*/, "");
+    const icon = document.createElement("i");
+
+    icon.className = `fa-solid fa-arrow-${isDown ? "down" : "up"}`;
+    icon.setAttribute("aria-hidden", "true");
+    trend.classList.add("quick-trend", isDown ? "quick-trend--down" : "quick-trend--up");
+    trend.replaceChildren(icon, document.createTextNode(label));
+});
+
+// Activity cards keep the trend beside the primary value instead of on a separate row.
+selectAll(".quick-stat-card .stat-sub > .quick-trend").forEach((trend) => {
+    const holder = trend.parentElement;
+    const value = trend.closest(".quick-stat-card")?.querySelector(".stat-value");
+
+    if (!value) return;
+    value.appendChild(trend);
+    if (holder && !holder.textContent.trim()) holder.remove();
+});
+
+// Snap legacy page-specific font sizes to the shared admin typography scale.
+const adminTypeClasses = [
+    "admin-type-caption",
+    "admin-type-small",
+    "admin-type-body",
+    "admin-type-section",
+    "admin-type-page",
+    "admin-type-metric"
+];
+
+selectAll(".shell__content *").forEach((element) => {
+    if (["SCRIPT", "STYLE", "SVG", "PATH", "TEXT", "TITLE", "DESC", "I", "BR"].includes(element.tagName)) return;
+
+    const hasDirectText = [...element.childNodes].some((node) =>
+        node.nodeType === Node.TEXT_NODE && node.textContent.trim()
+    );
+    if (!hasDirectText) return;
+
+    const size = Number.parseFloat(getComputedStyle(element).fontSize);
+    if (!Number.isFinite(size)) return;
+
+    let typeClass;
+    if (element.matches(".admin-section-title h2, .admin-section-title h3, .panel__head h2, .panel__head h3, .panel-header h2, .support-section-heading h2, .policy-content-title, .policy-section h3")) {
+        typeClass = "admin-type-section";
+    } else if (size <= 11.49) {
+        typeClass = "admin-type-caption";
+    } else if (size <= 12.49) {
+        typeClass = "admin-type-small";
+    } else if (size <= 14.49) {
+        typeClass = "admin-type-body";
+    } else if (size <= 22) {
+        typeClass = "admin-type-section";
+    } else if (size <= 27.5) {
+        typeClass = "admin-type-page";
+    } else {
+        typeClass = "admin-type-metric";
+    }
+
+    element.classList.remove(...adminTypeClasses);
+    element.classList.add(typeClass);
+});
+
 selectAll("[data-menu-toggle]").forEach((button) => {
     button.addEventListener("click", () => {
         const target = document.querySelector(button.dataset.menuToggle);
