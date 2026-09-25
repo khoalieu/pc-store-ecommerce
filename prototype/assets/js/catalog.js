@@ -1,7 +1,7 @@
 import {chatButton,productContext} from './chat.js';
 import {models,offers,shops,categories,regions,model,shop,money,shipping} from './data.js';
-import {db,tx,user,mine,uid,addItems,currentOffer} from './store.js';
-import {esc,params,link,go,a,button,field,select,textarea,submit,form,notice,empty,panel,head,mount,toast,dialog,requireUser,page} from './ui.js';
+import {db,tx,addItems,currentOffer} from './store.js';
+import {esc,params,link,go,a,button,field,select,submit,form,notice,empty,head,mount,toast,dialog,page} from './ui.js';
 const price=m=>Math.min(...offers.filter(o=>o.modelId===m.id&&currentOffer(o.id).active).map(o=>currentOffer(o.id).price));
 const context=()=>Object.fromEntries(['slot','build','version'].filter(k=>params.has(k)).map(k=>[k,params.get(k)]));
 const catalogueLink=m=>link('model',{id:m.id,...context(),...(location.pathname.endsWith('/search.html')?{from:params.toString()}: {})});
@@ -20,6 +20,14 @@ function resultCard(row){
  const m=row.model,os=row.offers,seller=page==='shop'?params.get('id'):params.get('shop');
  const args={id:m.id,...context(),...(seller?{shop:seller}:{}),...(params.get('region')?{region:params.get('region')}:{}),...(page==='search'?{from:params.toString()}:page==='shop'?{shopQuery:params.toString()}:{} )};
  return '<article class="catalog-card" data-model-id="'+m.id+'"><a class="catalog-product-image" href="'+link('model',args)+'">'+productImage(m)+'</a><div class="catalog-body"><p>'+esc(categories[m.category])+' · '+esc(m.brand)+'</p><h3><a href="'+link('model',args)+'">'+esc(m.name)+'</a></h3><p>'+esc(variant(m))+'</p><div class="catalog-price"><small>Giá demo theo bộ lọc từ</small><strong>'+money(row.price)+'</strong><span>'+os.length+' offer phù hợp · '+os.filter(o=>sellable(o)&&o.stock>0).length+' còn hàng</span></div><div class="cluster"><a class="btn btn--primary" href="'+link('model',args)+'">'+(seller?'Xem offer của shop':'Chọn shop')+'</a>'+button('Thêm so sánh','compare-add',m.id)+'</div></div></article>';
+}
+function relatedProducts(current){
+ const choices=models.filter(m=>m.id!==current.id).map(m=>({model:m,offers:modelOffers(m.id).filter(o=>sellable(o)&&o.stock>0)})).filter(row=>row.offers.length).sort((a,b)=>Number(b.model.category===current.category)-Number(a.model.category===current.category)||(Number(b.model.soldCount)||0)-(Number(a.model.soldCount)||0)||a.model.id.localeCompare(b.model.id)).slice(0,4);
+ return choices.map(({model:m,offers:os})=>{
+  const args={id:m.id,...(m.category===current.category?context():{}),...(params.get('region')?{region:params.get('region')}:{})};
+  const url=link('model',args),src=m.image?'../assets/images/products/'+m.image:imagePath(m);
+  return '<article class="catalog-card" data-related-model="'+esc(m.id)+'"><a class="related-image" href="'+url+'"><img data-product-image src="'+esc(src)+'" alt="'+esc((m.image?'Ảnh tham khảo ':'Hình minh họa ')+m.name)+'" width="320" height="220" loading="lazy"><span class="image-fallback" hidden>'+esc(m.name)+' · Ảnh không khả dụng</span></a><div class="catalog-body"><p class="muted">'+esc(categories[m.category])+'</p><h3><a href="'+url+'">'+esc(m.name)+'</a></h3><p>'+esc(Object.values(m.specs).slice(0,2).join(' · '))+'</p><div class="catalog-price"><small>Giá demo từ</small><strong>'+money(Math.min(...os.map(o=>o.price)))+'</strong><span>'+new Set(os.map(o=>o.shopId)).size+' shop còn hàng</span></div><a class="btn btn--primary" href="'+url+'">Xem chi tiết</a></div></article>';
+ }).join('')||'<p>Chưa có sản phẩm khác còn offer mua được. Bạn có thể xem thêm trong danh mục.</p>';
 }
 function compareTray(){
  const chosen=db().compare.map(model).filter(Boolean);
@@ -93,7 +101,7 @@ export function detail(){
   region:form('region',select('Khu vực nhận','region',regions,region)+submit('Cập nhật phí')),
   'offer-count':os.filter(sellable).length+' shop đang bán · '+os.length+' offer trong dữ liệu demo',
   'offer-table':offerTable(os,region),offers:os.map(o=>offerCard(o,region)).join(''),
-  questions:db().questions.filter(x=>x.modelId===m.id).map(x=>'<article class="list-row"><div><strong>'+esc(x.text)+'</strong><p>'+esc(shop(x.shopId)?.name)+' · '+esc(x.reply||'Chưa có trả lời')+'</p></div></article>').join('')+form('question',select('Shop nhận câu hỏi','shopId',Object.fromEntries(os.map(o=>[o.shopId,shop(o.shopId).name])),params.get('shop')||os[0]?.shopId)+textarea('Câu hỏi (không ghi số điện thoại/địa chỉ)','text')+submit('Gửi câu hỏi')),
+  related:relatedProducts(m),
   reviews:db().reviews.filter(r=>r.modelId===m.id).map(r=>'<p><strong>Đã mua trong demo · Sản phẩm '+r.productRating+'/5 · Shop '+r.shopRating+'/5</strong><br>'+esc(r.text)+'</p>').join('')||'<p>Chưa có đánh giá. Chỉ dòng hàng đã giao mới được đánh giá.</p>'+a('Mở đơn của tôi để đánh giá','orders'),
   'compare-tray':compareTray(),report:a('Báo cáo nội dung sản phẩm','cases',{new:'report',target:m.id})
  });
@@ -152,6 +160,6 @@ export async function submitForm(name,f,d){
    if(b.slots[cat])dialog('Thay linh kiện '+cat+'?','Thay '+esc(model(currentOffer(b.slots[cat].offerId).modelId).name)+' bằng '+esc(model(o.modelId).name)+'. Các slot khác được giữ.',put);else put();
   }return true;
  }
- if(name==='question'){if(!requireUser())return true;if(!d.text.trim())throw Error('Nhập câu hỏi.');if(!modelOffers(params.get('id')).some(o=>o.shopId===d.shopId))throw Error('Shop không có offer cho model này.');tx(s=>s.questions.push({id:uid('QA'),userId:user().id,modelId:params.get('id'),shopId:d.shopId,text:d.text}));detail();toast('Đã gửi câu hỏi demo.');return true;}
+
  return false;
 }

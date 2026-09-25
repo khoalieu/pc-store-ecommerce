@@ -21,5 +21,6 @@ export const homeBanners=[
  {id:'parts',title:'Chọn linh kiện. Chọn shop phù hợp.',description:'Khám phá sản phẩm và đối chiếu giá, bảo hành từ từng cửa hàng.',cta:'Khám phá sản phẩm',route:'search',query:{},modelId:'MB-B650'},
  {id:'graphics',title:'Tìm card đồ họa cho PC của bạn',description:'Đối chiếu VRAM, kích thước và nguồn đề nghị.',cta:'Khám phá card đồ họa',route:'search',query:{category:'GPU'},modelId:'GPU-5060'}
 ];
-export const latestModel=(items)=>items.filter(m=>m.id&&m.name&&Number.isFinite(Date.parse(m.createdAt))).slice().sort((a,b)=>Date.parse(b.createdAt)-Date.parse(a.createdAt)||a.id.localeCompare(b.id))[0]||null;
+export const newestModels=(items,limit=4)=>items.filter(m=>m.id&&m.name&&Number.isFinite(Date.parse(m.createdAt))).slice().sort((a,b)=>Date.parse(b.createdAt)-Date.parse(a.createdAt)||a.id.localeCompare(b.id)).slice(0,limit);
+export const latestModel=items=>newestModels(items,1)[0]||null;
 export const bySold=(a,b)=>(Number(b.soldCount)||0)-(Number(a.soldCount)||0)||a.id.localeCompare(b.id);
