@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="../assets/css/base.css?v=20260917b">
     <link rel="stylesheet" href="../assets/css/components.css?v=20260917b">
     <link rel="stylesheet" href="../assets/css/pages.css?v=20260917b">
-    <link rel="stylesheet" href="../assets/css/production.css?v=20260917">
-    <link rel="stylesheet" href="../assets/css/admin-return.css?v=20260922">
+    <link rel="stylesheet" href="../assets/css/production.css?v=20260926k">
+    <link rel="stylesheet" href="../assets/css/reusable-controls.css?v=20260926">
+    <link rel="stylesheet" href="../assets/css/admin-table-badges.css?v=20260926">
 </head>
 <body class="admin-dashboard">
 <a class="skip-link" href="#main">Chuyển đến nội dung chính</a>
@@ -29,7 +30,8 @@
                 <p class="admin-updated"><i class="fa-solid fa-bell-concierge"></i> 48 yêu cầu đang chờ xử lý · 6 yêu cầu sắp quá hạn SLA 48 giờ</p>
             </div>
             <div class="cluster admin-page-actions">
-                <button class="btn btn--secondary" type="button"><i class="fa-regular fa-calendar"></i> Tất cả thời gian <i class="fa-solid fa-angle-down"></i></button>
+                <button class="btn btn--secondary" type="button" data-time-filter><i class="fa-regular fa-calendar"></i>
+                    <span data-time-label>Hôm nay · 26/09/2026</span><i class="fa-solid fa-angle-down chevron"></i></button>
                 <button class="btn btn--primary" type="button"><i class="fa-solid fa-file"></i> Xuất báo cáo</button>
             </div>
         </div>
@@ -57,7 +59,8 @@
             </article>
         </section>
 
-        <section class="panel return-panel">
+        <section class="panel return-panel" data-selection-container
+                 data-selection-actions="Chấp nhận hoàn tiền|Chuyển xác minh|Từ chối">
             <div class="return-toolbar">
                 <div class="return-filters">
                     <label class="return-search">
@@ -95,7 +98,8 @@
             </div>
 
             <div class="admin-table-wrap">
-                <table class="data-table return-table">
+                <table class="data-table return-table" data-selectable-table data-selection-noun="yêu cầu"
+                       data-selection-limit="8">
                     <thead>
                     <tr>
                         <th class="return-check"><input id="selectAllReturns" type="checkbox"
@@ -124,7 +128,7 @@
                         <td>Module nhận được không đúng mô tả, hộp bị móp</td>
                         <td><span class="status return-status return-status--pending">Chờ xử lý</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small return-detail" type="button">◉ &nbsp;Xử lý
+                            <button class="btn btn--secondary btn--small return-detail" type="button"><i class="fa-regular fa-eye"></i>Xử lý
                             </button>
                         </td>
                     </tr>
@@ -140,7 +144,7 @@
                         <td>Khách đổi ý, không còn nhu cầu</td>
                         <td><span class="status return-status return-status--pending">Chờ xử lý</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small return-detail" type="button">◉ &nbsp;Xử lý
+                            <button class="btn btn--secondary btn--small return-detail" type="button"><i class="fa-regular fa-eye"></i>Xử lý
                             </button>
                         </td>
                     </tr>
@@ -154,9 +158,9 @@
                         <td>PCB chấm vuông 7x9cm<br>(combo 10 tấm)</td>
                         <td><strong>78.000 ₫</strong></td>
                         <td>Giao thiếu 2 tấm PCB trong combo</td>
-                        <td><span class="status return-status return-status--accepted">Đang xác minh</span></td>
+                        <td><span class="status return-status return-status--verifying">Đang xác minh</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small return-detail" type="button">◉ &nbsp;Xử lý
+                            <button class="btn btn--secondary btn--small return-detail" type="button"><i class="fa-regular fa-eye"></i> Xử lý
                             </button>
                         </td>
                     </tr>
@@ -172,7 +176,7 @@
                         <td>Khách đổi ý, không còn nhu cầu</td>
                         <td><span class="status return-status return-status--rejected">Đã từ chối</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small return-detail" type="button">◉ &nbsp;Xử lý
+                            <button class="btn btn--secondary btn--small return-detail" type="button"><i class="fa-regular fa-eye"></i>Xử lý
                             </button>
                         </td>
                     </tr>
@@ -188,7 +192,7 @@
                         <td>Giao thiếu 2 tấm PCB trong combo</td>
                         <td><span class="status return-status return-status--accepted">Đã chấp nhận</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small return-detail" type="button">◉ &nbsp;Xử lý
+                            <button class="btn btn--secondary btn--small return-detail" type="button"><i class="fa-regular fa-eye"></i>Xử lý
                             </button>
                         </td>
                     </tr>
@@ -204,7 +208,7 @@
                         <td>Dây jumper bị đứt chân sau vài lần cắm</td>
                         <td><span class="status return-status return-status--accepted">Đã chấp nhận</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small return-detail" type="button">◉ &nbsp;Xử lý
+                            <button class="btn btn--secondary btn--small return-detail" type="button"><i class="fa-regular fa-eye"></i>Xử lý
                             </button>
                         </td>
                     </tr>
@@ -220,7 +224,7 @@
                         <td>Bo mạch bị trầy xước chân pin khi vận chuyển</td>
                         <td><span class="status return-status return-status--verifying">Đang xác minh</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small return-detail" type="button">◉ &nbsp;Xử lý
+                            <button class="btn btn--secondary btn--small return-detail" type="button"><i class="fa-regular fa-eye"></i>Xử lý
                             </button>
                         </td>
                     </tr>
@@ -236,7 +240,7 @@
                         <td>Khách đổi ý sau thời hạn đổi trả</td>
                         <td><span class="status return-status return-status--rejected">Đã từ chối</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small return-detail" type="button">◉ &nbsp;Xử lý
+                            <button class="btn btn--secondary btn--small return-detail" type="button"><i class="fa-regular fa-eye"></i>Xử lý
                             </button>
                         </td>
                     </tr>
@@ -252,7 +256,7 @@
                         <td>Sản phẩm lỗi không sáng toàn bộ dải</td>
                         <td><span class="status return-status return-status--accepted">Đã chấp nhận</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small return-detail" type="button">◉ &nbsp;Xử lý
+                            <button class="btn btn--secondary btn--small return-detail" type="button"><i class="fa-regular fa-eye"></i>Xử lý
                             </button>
                         </td>
                     </tr>
@@ -268,7 +272,7 @@
                         <td>Thiếu linh kiện trong bộ sản phẩm</td>
                         <td><span class="status return-status return-status--pending">Chờ xử lý</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small return-detail" type="button">◉ &nbsp;Xử lý
+                            <button class="btn btn--secondary btn--small return-detail" type="button"><i class="fa-regular fa-eye"></i>Xử lý
                             </button>
                         </td>
                     </tr>
@@ -284,7 +288,7 @@
                         <td>Không cung cấp đủ hình ảnh lỗi</td>
                         <td><span class="status return-status return-status--rejected">Đã từ chối</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small return-detail" type="button">◉ &nbsp;Xử lý
+                            <button class="btn btn--secondary btn--small return-detail" type="button"><i class="fa-regular fa-eye"></i>Xử lý
                             </button>
                         </td>
                     </tr>
@@ -300,7 +304,7 @@
                         <td>Sản phẩm không hoạt động khi nhận</td>
                         <td><span class="status return-status return-status--accepted">Đã chấp nhận</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small return-detail" type="button">◉ &nbsp;Xử lý
+                            <button class="btn btn--secondary btn--small return-detail" type="button"><i class="fa-regular fa-eye"></i>Xử lý
                             </button>
                         </td>
                     </tr>
@@ -323,6 +327,7 @@
     </main>
 </div>
 
-<script src="../assets/js/app.js"></script>
+<script src="../assets/js/reusable-controls.js?v=20260926"></script>
+<script src="../assets/js/app.js?v=20260926e"></script>
 </body>
 </html>

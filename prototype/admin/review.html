@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="../assets/css/base.css?v=20260917b">
     <link rel="stylesheet" href="../assets/css/components.css?v=20260917b">
     <link rel="stylesheet" href="../assets/css/pages.css?v=20260917b">
-    <link rel="stylesheet" href="../assets/css/production.css?v=20260917">
+    <link rel="stylesheet" href="../assets/css/production.css?v=20260926k">
+    <link rel="stylesheet" href="../assets/css/reusable-controls.css?v=20260926">
+    <link rel="stylesheet" href="../assets/css/admin-table-badges.css?v=20260926">
 </head>
 <body class="operations-page">
 <a class="skip-link" href="#main">Chuyển đến nội dung chính</a>
@@ -36,20 +38,15 @@
                 <h1>Quản lý đánh giá người dùng</h1>
                 <p>Theo dõi đánh giá sau khi mua thành công: người mua, sản phẩm, số sao, nội dung và phản hồi của người
                     bán.</p>
-                <div style="margin-top: 6px; font-size: 13px; color: var(--color-amber-deep); font-weight: 600;">
-                    ⚠️ 126 đánh giá 1–2 sao cần shop phản hồi và xử lý
+                <div class="pending-note">
+                    <i class="fa-regular fa-star"></i> 126 đánh giá 1–2 sao cần shop phản hồi và xử lý
                 </div>
             </div>
             <div class="cluster">
-                <div class="field" style="margin: 0;">
-                    <select style="min-height: 42px; background: white; border-radius: var(--radius-control);">
-                        <option>📅 Tất cả thời gian</option>
-                        <option>30 ngày gần nhất</option>
-                        <option>7 ngày gần nhất</option>
-                    </select>
-                </div>
+                <button class="btn btn--secondary" type="button" data-time-filter><i class="fa-regular fa-calendar"></i>
+                    <span data-time-label>Hôm nay · 26/09/2026</span><i class="fa-solid fa-angle-down chevron"></i></button>
                 <button class="btn btn--primary" type="button">
-                    <span>📥 Xuất báo cáo</span>
+                    <span><i class="fa-solid fa-file"></i> Xuất báo cáo</span>
                 </button>
             </div>
         </div>
@@ -59,7 +56,7 @@
                 <span class="metric-label">Tổng đánh giá</span>
                 <div class="metric-value">
                     18.642 <small>đánh giá</small>
-                    <span class="status status--info" style="margin-left: 6px;">↑ +312 tuần này</span>
+                    <span class="status status--info" style="margin-left: 6px;"><i class="fa-solid fa-arrow-up"></i> +312 tuần này</span>
                 </div>
                 <p class="muted">Đánh giá của người mua sau khi đơn linh kiện giao thành công</p>
             </div>
@@ -68,7 +65,7 @@
                 <span class="metric-label">Điểm trung bình</span>
                 <div class="metric-value">
                     4,6 <small>/ 5 sao</small>
-                    <span class="status status--ok" style="margin-left: 6px;">↑ +0,1</span>
+                    <span class="status status--ok" style="margin-left: 6px;"><i class="fa-solid fa-arrow-up"></i> +0,1</span>
                 </div>
                 <p class="muted">Điểm hài lòng trung bình toàn sàn trong 30 ngày</p>
             </div>
@@ -77,7 +74,7 @@
                 <span class="metric-label">Đánh giá tiêu cực</span>
                 <div class="metric-value">
                     126 <small>đánh giá</small>
-                    <span class="status status--bad" style="margin-left: 6px;">↓ -8</span>
+                    <span class="status status--bad" style="margin-left: 6px;"><i class="fa-solid fa-arrow-down"></i> -8</span>
                 </div>
                 <p class="muted">Đánh giá 1–2 sao cần shop phản hồi và xử lý</p>
             </div>
@@ -86,13 +83,14 @@
                 <span class="metric-label">Chờ shop phản hồi</span>
                 <div class="metric-value">
                     48 <small>đánh giá</small>
-                    <span class="status status--warn" style="margin-left: 6px;">↑ +6 hôm nay</span>
+                    <span class="status status--warn" style="margin-left: 6px;"><i class="fa-solid fa-arrow-up"></i> +6 hôm nay</span>
                 </div>
                 <p class="muted">Đánh giá người bán chưa trả lời lại người mua</p>
             </div>
         </div>
 
-        <div class="panel panel--padded" style="padding-inline: var(--space-5);">
+        <div class="panel panel--padded" style="padding-inline: var(--space-5);" data-selection-container
+             data-selection-actions="Duyệt hiển thị|Ẩn đánh giá|Nhắc shop phản hồi">
             <div class="cluster" style="justify-content: space-between; margin-bottom: var(--space-4);">
                 <div class="cluster" style="flex: 1; max-width: 720px;">
                     <label class="field" style="flex: 2;">
@@ -137,7 +135,7 @@
             </div>
 
             <div class="table-wrap" id="panel-reviews" role="tabpanel" aria-labelledby="tab-all">
-                <table class="data-table">
+                <table class="data-table" data-selectable-table data-selection-noun="đánh giá" data-selection-limit="8">
                     <thead>
                     <tr>
                         <th style="width: 40px;"><input type="checkbox" aria-label="Chọn tất cả"></th>
@@ -174,11 +172,11 @@
                                 gói cẩn thận và giao nhanh hơn dự kiến.</p>
                         </td>
                         <td>
-                            <span class="status status--info" style="font-size: 11px;">💬 Đã phản hồi</span>
+                            <span class="status status--info"><i class="fa-regular fa-message" aria-hidden="true"></i> Đã phản hồi</span>
                         </td>
                         <td><span class="status status--ok">Đang hiển thị</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
 
@@ -205,11 +203,11 @@
                                 hơi lỏng. Mình đã gửi yêu cầu đổi trả.</p>
                         </td>
                         <td>
-                            <span class="status status--warn" style="font-size: 11px;">⏳ Chưa phản hồi</span>
+                            <span class="status status--warn"><i class="fa-regular fa-comment" aria-hidden="true"></i> Chưa phản hồi</span>
                         </td>
                         <td><span class="status status--ok">Đang hiển thị</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
 
@@ -236,11 +234,11 @@
                                 đầy đủ. Shop tư vấn nhiệt tình.</p>
                         </td>
                         <td>
-                            <span class="status status--info" style="font-size: 11px;">💬 Đã phản hồi</span>
+                            <span class="status status--info"><i class="fa-regular fa-message" aria-hidden="true"></i> Đã phản hồi</span>
                         </td>
                         <td><span class="status status--ok">Đang hiển thị</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
 
@@ -267,11 +265,11 @@
                                 móp nhẹ khi giao hàng.</p>
                         </td>
                         <td>
-                            <span class="status status--info" style="font-size: 11px;">💬 Đã phản hồi</span>
+                            <span class="status status--info"><i class="fa-regular fa-message" aria-hidden="true"></i> Đã phản hồi</span>
                         </td>
                         <td><span class="status status--ok">Đang hiển thị</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
 
@@ -298,11 +296,11 @@
                                 mượt với FastLED.</p>
                         </td>
                         <td>
-                            <span class="status status--info" style="font-size: 11px;">💬 Đã phản hồi</span>
+                            <span class="status status--info"><i class="fa-regular fa-message" aria-hidden="true"></i> Đã phản hồi</span>
                         </td>
                         <td><span class="status status--ok">Đang hiển thị</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
 
@@ -329,11 +327,11 @@
                                 cầu hoàn tiền ngay.</p>
                         </td>
                         <td>
-                            <span class="status status--warn" style="font-size: 11px;">⏳ Chưa phản hồi</span>
+                            <span class="status status--warn"><i class="fa-regular fa-comment" aria-hidden="true"></i> Chưa phản hồi</span>
                         </td>
                         <td><span class="status status--warn">Chờ kiểm duyệt</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     </tbody>
@@ -418,7 +416,8 @@
         }
     })();
 </script>
-<script src="../assets/js/app.js"></script>
+<script src="../assets/js/reusable-controls.js?v=20260926"></script>
+<script src="../assets/js/app.js?v=20260926e"></script>
 
 <script>
     (function initReviewTabs() {

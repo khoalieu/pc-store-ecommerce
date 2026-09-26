@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="../assets/css/base.css?v=20260917b">
     <link rel="stylesheet" href="../assets/css/components.css?v=20260917b">
     <link rel="stylesheet" href="../assets/css/pages.css?v=20260917b">
-    <link rel="stylesheet" href="../assets/css/production.css?v=20260917">
+    <link rel="stylesheet" href="../assets/css/production.css?v=20260926k">
+    <link rel="stylesheet" href="../assets/css/reusable-controls.css?v=20260926">
+    <link rel="stylesheet" href="../assets/css/admin-table-badges.css?v=20260926">
 </head>
 <body class="operations-page">
 <a class="skip-link" href="#main">Chuyển đến nội dung chính</a>
@@ -36,20 +38,14 @@
                 <h1>Nhật ký hoạt động</h1>
                 <p>Ghi nhận toàn bộ hoạt động của người mua, chủ shop, quản trị viên và hệ thống trên sàn PCMatch.</p>
                 <div style="margin-top: 6px; font-size: 13px; color: var(--color-slate); font-weight: 600;">
-                    🛡️ Không thể xoá nhật ký · tự động xoá sau 180 ngày
+                    <i class="fa-solid fa-clock-rotate-left"></i> Không thể xoá nhật ký · tự động xoá sau 180 ngày
                 </div>
             </div>
             <div class="cluster">
-                <div class="field" style="margin: 0;">
-                    <select style="min-height: 42px; background: white; border-radius: var(--radius-control);">
-                        <option>📅 Tất cả thời gian</option>
-                        <option>30 ngày gần nhất</option>
-                        <option>7 ngày gần nhất</option>
-                        <option>Hôm nay</option>
-                    </select>
-                </div>
+                <button class="btn btn--secondary" type="button" data-time-filter><i class="fa-regular fa-calendar"></i>
+                    <span data-time-label>Hôm nay · 26/09/2026</span><i class="fa-solid fa-angle-down chevron"></i></button>
                 <button class="btn btn--primary" type="button">
-                    <span>📥 Xuất nhật ký</span>
+                    <span><i class="fa-solid fa-file"></i> Xuất nhật ký</span>
                 </button>
             </div>
         </div>
@@ -59,7 +55,7 @@
                 <span class="metric-label">Hoạt động hôm nay</span>
                 <div class="metric-value">
                     12.480 <small>lượt</small>
-                    <span class="status status--info" style="margin-left: 6px;">↑ +8,4%</span>
+                    <span class="status status--info" style="margin-left: 6px;"><i class="fa-solid fa-arrow-up"></i> +8,4%</span>
                 </div>
                 <p class="muted">Tổng số hoạt động được ghi nhận trên toàn sàn hôm nay</p>
             </div>
@@ -68,7 +64,7 @@
                 <span class="metric-label">Thao tác quản trị</span>
                 <div class="metric-value">
                     186 <small>lượt</small>
-                    <span class="status status--info" style="margin-left: 6px;">↑ +12</span>
+                    <span class="status status--info" style="margin-left: 6px;"><i class="fa-solid fa-arrow-up"></i> +12</span>
                 </div>
                 <p class="muted">Hành động do đội ngũ admin/vận hành thực hiện</p>
             </div>
@@ -77,7 +73,7 @@
                 <span class="metric-label">Thao tác chủ shop</span>
                 <div class="metric-value">
                     1.942 <small>lượt</small>
-                    <span class="status status--ok" style="margin-left: 6px;">↑ +4,1%</span>
+                    <span class="status status--ok" style="margin-left: 6px;"><i class="fa-solid fa-arrow-up"></i> +4,1%</span>
                 </div>
                 <p class="muted">Cập nhật đơn, sản phẩm và phí từ phía shop</p>
             </div>
@@ -86,13 +82,14 @@
                 <span class="metric-label">Cảnh báo bất thường</span>
                 <div class="metric-value">
                     7 <small>cảnh báo</small>
-                    <span class="status status--bad" style="margin-left: 6px;">↓ -2</span>
+                    <span class="status status--bad" style="margin-left: 6px;"><i class="fa-solid fa-arrow-down"></i> -2</span>
                 </div>
                 <p class="muted">Hoạt động đáng ngờ cần kiểm tra thủ công</p>
             </div>
         </div>
 
-        <div class="panel panel--padded" style="padding-inline: var(--space-5);">
+        <div class="panel panel--padded" style="padding-inline: var(--space-5);" data-selection-container
+             data-selection-actions="Xuất nhật ký đã chọn|Gắn cờ kiểm tra">
             <div class="cluster" style="justify-content: space-between; margin-bottom: var(--space-4);">
                 <div class="cluster" style="flex: 1; max-width: 600px;">
                     <label class="field" style="flex: 2;">
@@ -109,7 +106,7 @@
                     </div>
                 </div>
                 <div class="muted" style="font-size: 13px;">
-                    🛡️ Lưu trữ tối đa 180 ngày, sau đó tự động xoá
+                    <i class="fa-regular fa-clock"></i> Lưu trữ tối đa 180 ngày, sau đó tự động xoá
                 </div>
             </div>
 
@@ -128,7 +125,7 @@
             </div>
 
             <div class="table-wrap" id="panel-logs" role="tabpanel" aria-labelledby="tab-all">
-                <table class="data-table">
+                <table class="data-table" data-selectable-table data-selection-noun="hoạt động" data-selection-limit="8">
                     <thead>
                     <tr>
                         <th style="width: 40px;"><input type="checkbox" aria-label="Chọn tất cả"></th>
@@ -162,7 +159,7 @@
                         <td class="tabular muted" style="font-size: 13px;">203.113.44.10</td>
                         <td>—</td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
 
@@ -186,7 +183,7 @@
                         <td class="tabular muted" style="font-size: 13px;">203.113.44.21</td>
                         <td>—</td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
 
@@ -210,7 +207,7 @@
                         <td class="tabular muted" style="font-size: 13px;">14.161.28.77</td>
                         <td>—</td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
 
@@ -233,7 +230,7 @@
                         <td class="tabular muted" style="font-size: 13px;">113.161.74.9</td>
                         <td>—</td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
 
@@ -257,7 +254,7 @@
                         <td class="tabular muted" style="font-size: 13px;">203.113.44.35</td>
                         <td>—</td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
 
@@ -281,7 +278,7 @@
                         <td class="tabular muted" style="font-size: 13px;">203.113.44.42</td>
                         <td>—</td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
 
@@ -305,7 +302,7 @@
                         <td class="tabular muted" style="font-size: 13px;">—</td>
                         <td>—</td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
 
@@ -328,7 +325,7 @@
                         <td class="tabular muted" style="font-size: 13px;">113.161.74.9</td>
                         <td>—</td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     </tbody>
@@ -415,7 +412,8 @@
         }
     })();
 </script>
-<script src="../assets/js/app.js"></script>
+<script src="../assets/js/reusable-controls.js?v=20260926"></script>
+<script src="../assets/js/app.js?v=20260926e"></script>
 
 <script>
     (function initLogTabs() {

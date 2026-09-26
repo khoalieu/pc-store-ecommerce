@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="../assets/css/base.css?v=20260917b">
     <link rel="stylesheet" href="../assets/css/components.css?v=20260917b">
     <link rel="stylesheet" href="../assets/css/pages.css?v=20260917b">
-    <link rel="stylesheet" href="../assets/css/production.css?v=20260917">
+    <link rel="stylesheet" href="../assets/css/production.css?v=20260926k">
+    <link rel="stylesheet" href="../assets/css/reusable-controls.css?v=20260926">
+    <link rel="stylesheet" href="../assets/css/admin-table-badges.css?v=20260926">
 </head>
 <body class="operations-page">
 <a class="skip-link" href="#main">Chuyển đến nội dung chính</a>
@@ -36,20 +38,15 @@
                 <h1>Phản hồi &amp; Khiếu nại</h1>
                 <p>Tiếp nhận phản hồi ngoài luồng của người mua, xem thông tin người gửi và xử lý phản hồi trực tiếp
                     trên sàn.</p>
-                <div style="margin-top: 6px; font-size: 13px; color: var(--color-amber-deep); font-weight: 600;">
-                    ⚠️ 12 phản hồi mới chưa được phản hồi
+                <div class="pending-note">
+                    <i class="fa-regular fa-comment"></i> 12 phản hồi mới chưa được phản hồi
                 </div>
             </div>
             <div class="cluster">
-                <div class="field" style="margin: 0;">
-                    <select style="min-height: 42px; background: white; border-radius: var(--radius-control);">
-                        <option>📅 Tất cả thời gian</option>
-                        <option>30 ngày gần nhất</option>
-                        <option>7 ngày gần nhất</option>
-                    </select>
-                </div>
+                <button class="btn btn--secondary" type="button" data-time-filter><i class="fa-regular fa-calendar"></i>
+                    <span data-time-label>Hôm nay · 26/09/2026</span><i class="fa-solid fa-angle-down chevron"></i></button>
                 <button class="btn btn--primary" type="button">
-                    <span>📥 Xuất danh sách</span>
+                    <span><i class="fa-solid fa-file"></i> Xuất danh sách</span>
                 </button>
             </div>
         </div>
@@ -59,7 +56,7 @@
                 <span class="metric-label">Tổng phản hồi</span>
                 <div class="metric-value">
                     362 <small>phản hồi</small>
-                    <span class="status status--info" style="margin-left: 6px;">↑ +24 tuần này</span>
+                    <span class="status status--info" style="margin-left: 6px;"><i class="fa-solid fa-arrow-up"></i> +24 tuần này</span>
                 </div>
                 <p class="muted">Phản hồi và khiếu nại người mua gửi về nền tảng</p>
             </div>
@@ -68,7 +65,7 @@
                 <span class="metric-label">Chưa phản hồi</span>
                 <div class="metric-value">
                     12 <small>phản hồi</small>
-                    <span class="status status--warn" style="margin-left: 6px;">↑ +5 hôm nay</span>
+                    <span class="status status--warn" style="margin-left: 6px;"><i class="fa-solid fa-arrow-up"></i> +5 hôm nay</span>
                 </div>
                 <p class="muted">Phản hồi mới cần admin tiếp nhận và trả lời người mua</p>
             </div>
@@ -77,7 +74,7 @@
                 <span class="metric-label">Đang xử lý</span>
                 <div class="metric-value">
                     28 <small>phản hồi</small>
-                    <span class="status status--info" style="margin-left: 6px;">↑ Ổn định</span>
+                    <span class="status status--info" style="margin-left: 6px;"><i class="fa-solid fa-arrow-up"></i> Ổn định</span>
                 </div>
                 <p class="muted">Đang phối hợp với shop hoặc bộ phận tài chính để xử lý</p>
             </div>
@@ -86,13 +83,15 @@
                 <span class="metric-label">Đã phản hồi</span>
                 <div class="metric-value">
                     322 <small>phản hồi</small>
-                    <span class="status status--ok" style="margin-left: 6px;">↑ +19 tuần này</span>
+                    <span class="status status--ok" style="margin-left: 6px;"><i class="fa-solid fa-arrow-up"></i> +19 tuần này</span>
                 </div>
                 <p class="muted">Đã trả lời và đóng với người mua, tỷ lệ hài lòng 94%</p>
             </div>
         </div>
 
-        <div class="panel panel--padded" style="padding-inline: var(--space-5);">
+        <div class="panel panel--padded" style="padding-inline: var(--space-5);" data-selection-container
+             data-selection-actions="Tiếp nhận xử lý|Đánh dấu đã phản hồi|Gửi nhắc nội bộ"
+             data-selection-primary-action="Đánh dấu đã phản hồi">
             <div class="cluster" style="justify-content: space-between; margin-bottom: var(--space-4);">
                 <div class="cluster" style="flex: 1; max-width: 600px;">
                     <label class="field" style="flex: 2;">
@@ -128,7 +127,8 @@
             </div>
 
             <div class="table-wrap" id="panel-complaints" role="tabpanel" aria-labelledby="tab-all">
-                <table class="data-table">
+                <table class="data-table complaint-table" data-selectable-table data-selection-noun="phản hồi"
+                       data-selection-limit="8">
                     <thead>
                     <tr>
                         <th style="width: 40px;"><input type="checkbox" aria-label="Chọn tất cả"></th>
@@ -157,11 +157,11 @@
                             </div>
                         </td>
                         <td><span class="status status--info" style="font-size: 11px;">Đơn hàng</span></td>
-                        <td><span class="status status--bad" style="font-size: 11px;">⚠️ Cao</span></td>
+                        <td><span class="status status--bad"><i class="fa-solid fa-bell" aria-hidden="true"></i> Cao</span></td>
                         <td><span class="muted">Chưa phân công</span></td>
                         <td><span class="status status--warn">Chưa phản hồi</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">⚙ Xử lý</button>
+                            <button class="admin-detail-button complaint-action-button" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Xử lý</span></button>
                         </td>
                     </tr>
 
@@ -180,11 +180,11 @@
                             </div>
                         </td>
                         <td><span class="status status--info" style="font-size: 11px;">Thanh toán</span></td>
-                        <td><span class="status status--bad" style="font-size: 11px;">⚠️ Cao</span></td>
+                        <td><span class="status status--bad"><i class="fa-solid fa-bell" aria-hidden="true"></i> Cao</span></td>
                         <td><span class="muted">Chưa phân công</span></td>
                         <td><span class="status status--warn">Chưa phản hồi</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">⚙ Xử lý</button>
+                            <button class="admin-detail-button complaint-action-button" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Xử lý</span></button>
                         </td>
                     </tr>
 
@@ -203,11 +203,11 @@
                             </div>
                         </td>
                         <td><span class="status status--warn" style="font-size: 11px;">Về shop</span></td>
-                        <td><span class="muted" style="font-size: 11px;">Bình thường</span></td>
-                        <td><strong>Platform Admin</strong></td>
+                        <td><span class="status" style="font-size: 11px;">Bình thường</span></td>
+                        <td><span class="muted">Platform Admin</span></td>
                         <td><span class="status status--info">Đang xử lý</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">⚙ Xử lý</button>
+                            <button class="admin-detail-button complaint-action-button" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Xử lý</span></button>
                         </td>
                     </tr>
 
@@ -226,11 +226,11 @@
                             </div>
                         </td>
                         <td><span class="status" style="font-size: 11px;">Tài khoản</span></td>
-                        <td><span class="muted" style="font-size: 11px;">Bình thường</span></td>
-                        <td><strong>Platform Admin</strong></td>
+                        <td><span class="status" style="font-size: 11px;">Bình thường</span></td>
+                        <td><span class="muted">Platform Admin</span></td>
                         <td><span class="status status--info">Đang xử lý</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">⚙ Xử lý</button>
+                            <button class="admin-detail-button complaint-action-button" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Xử lý</span></button>
                         </td>
                     </tr>
 
@@ -249,11 +249,11 @@
                             </div>
                         </td>
                         <td><span class="status" style="font-size: 11px;">Khác</span></td>
-                        <td><span class="muted" style="font-size: 11px;">Bình thường</span></td>
-                        <td><strong>Platform Admin</strong></td>
+                        <td><span class="status" style="font-size: 11px;">Bình thường</span></td>
+                        <td><span class="muted">Platform Admin</span></td>
                         <td><span class="status status--ok">Đã phản hồi</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">⚙ Xử lý</button>
+                            <button class="admin-detail-button complaint-action-button" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Xử lý</span></button>
                         </td>
                     </tr>
 
@@ -272,11 +272,11 @@
                             </div>
                         </td>
                         <td><span class="status" style="font-size: 11px;">Tài khoản</span></td>
-                        <td><span class="status status--bad" style="font-size: 11px;">⚠️ Cao</span></td>
+                        <td><span class="status status--bad"><i class="fa-solid fa-bell" aria-hidden="true"></i> Cao</span></td>
                         <td><span class="muted">Chưa phân công</span></td>
                         <td><span class="status status--warn">Chưa phản hồi</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">⚙ Xử lý</button>
+                            <button class="admin-detail-button complaint-action-button" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Xử lý</span></button>
                         </td>
                     </tr>
 
@@ -295,11 +295,11 @@
                             </div>
                         </td>
                         <td><span class="status status--info" style="font-size: 11px;">Thanh toán</span></td>
-                        <td><span class="muted" style="font-size: 11px;">Bình thường</span></td>
-                        <td><strong>Platform Admin</strong></td>
+                        <td><span class="status" style="font-size: 11px;">Bình thường</span></td>
+                        <td><span class="muted">Platform Admin</span></td>
                         <td><span class="status status--ok">Đã phản hồi</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">⚙ Xử lý</button>
+                            <button class="admin-detail-button complaint-action-button" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Xử lý</span></button>
                         </td>
                     </tr>
 
@@ -318,11 +318,11 @@
                             </div>
                         </td>
                         <td><span class="status status--info" style="font-size: 11px;">Đơn hàng</span></td>
-                        <td><span class="muted" style="font-size: 11px;">Bình thường</span></td>
-                        <td><strong>Platform Admin</strong></td>
+                        <td><span class="status" style="font-size: 11px;">Bình thường</span></td>
+                        <td><span class="muted">Platform Admin</span></td>
                         <td><span class="status status--ok">Đã phản hồi</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">⚙ Xử lý</button>
+                            <button class="admin-detail-button complaint-action-button" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Xử lý</span></button>
                         </td>
                     </tr>
                     </tbody>
@@ -411,7 +411,8 @@
         }
     })();
 </script>
-<script src="../assets/js/app.js"></script>
+<script src="../assets/js/reusable-controls.js?v=20260926"></script>
+<script src="../assets/js/app.js?v=20260926e"></script>
 
 <script>
     (function initComplaintTabs() {

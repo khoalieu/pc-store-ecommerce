@@ -8,15 +8,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/WebAsset/FontAwesome@pro/css/all.min.css">
-    <link rel="stylesheet" href="../../assets/css/tokens.css">
-    <link rel="stylesheet" href="../../assets/css/base.css">
-    <link rel="stylesheet" href="../../assets/css/components.css">
-    <link rel="stylesheet" href="../../assets/css/pages.css">
-    <link rel="stylesheet" href="../../assets/css/production.css">
-    <link rel="stylesheet" href="../../assets/css/reusable-controls.css">
-    <link rel="stylesheet" href="../../assets/css/ecosystem/shop.css">
-    <link rel="stylesheet" href="../../assets/css/ecosystem/products.css">
-    <link rel="stylesheet" href="../../assets/css/product-effects.css">
+    <link rel="stylesheet" href="../assets/css/tokens.css">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/pages.css">
+    <link rel="stylesheet" href="../assets/css/production.css?v=20260926k">
+    <link rel="stylesheet" href="../assets/css/reusable-controls.css">
+    <link rel="stylesheet" href="../assets/css/shop-admin.css">
+    <link rel="stylesheet" href="../assets/css/products.css">
+    <link rel="stylesheet" href="../assets/css/product-effects.css">
+    <link rel="stylesheet" href="../assets/css/admin-table-badges.css?v=20260926">
 </head>
 <body class="products-page">
 <div id="header-host"></div>
@@ -28,35 +29,29 @@
         <section class="page-heading product-heading">
             <div>
                 <div class="breadcrumbs"><a
-                        href="../dashboard.html">Admin</a><span>/</span><span>Quản lý sản phẩm</span></div>
+                        href="dashboard.html">Admin</a><span>/</span><span>Quản lý sản phẩm</span></div>
                 <h1>Quản lý sản phẩm</h1>
                 <p>Kiểm duyệt sản phẩm shop đăng bán, theo dõi tồn kho, sản phẩm bán chạy và các sản phẩm bị từ
                     chối.</p>
                 <div class="pending-note">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <circle cx="12" cy="12" r="9"/>
-                        <path d="M12 7v5l3 2" stroke-linecap="round"/>
-                    </svg>
+                    <i class="fa-solid fa-tag"></i>
                     <span>37 sản phẩm mới đang chờ kiểm duyệt trước khi hiển thị</span>
                 </div>
             </div>
             <div class="page-actions">
-                <button class="button button--secondary" type="button">
+                <button class="button button--secondary" type="button" data-time-filter>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <rect x="3" y="4" width="18" height="18" rx="2"/>
                         <path d="M16 2v4M8 2v4M3 10h18"/>
                     </svg>
-                    <span>Tất cả thời gian</span>
+                    <span data-time-label>Hôm nay · 26/09/2026</span>
                     <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                          aria-hidden="true">
                         <path d="m19 9-7 7-7-7" stroke-linecap="round"/>
                     </svg>
                 </button>
                 <button class="button button--primary" type="button">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                        <path d="M14 2v6h6M9 13h6M9 17h6" stroke-linecap="round"/>
-                    </svg>
+                    <i class="fa-solid fa-file"></i>
                     <span>Xuất danh mục</span>
                 </button>
             </div>
@@ -144,7 +139,7 @@
             </div>
 
             <div class="table-scroll">
-                <table class="product-table" data-selectable-table data-selection-noun="sản phẩm">
+                <table class="product-table" data-selectable-table data-selection-noun="sản phẩm" data-selection-limit="8">
                     <thead>
                     <tr>
                         <th class="checkbox-cell"><input type="checkbox" aria-label="Chọn tất cả sản phẩm"></th>
@@ -181,12 +176,7 @@
                         <td class="center product-number">312</td>
                         <td class="center"><span class="product-status product-status--selling">Đang bán</span></td>
                         <td class="center">
-                            <button class="detail-button product-detail" type="button">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
-                                    <circle cx="12" cy="12" r="2.5"/>
-                                </svg>
-                                <span>Chi tiết</span></button>
+                            <button class="admin-detail-button detail-button product-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr>
@@ -209,12 +199,7 @@
                         <td class="center product-number">96</td>
                         <td class="center"><span class="product-status product-status--selling">Đang bán</span></td>
                         <td class="center">
-                            <button class="detail-button product-detail" type="button">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
-                                    <circle cx="12" cy="12" r="2.5"/>
-                                </svg>
-                                <span>Chi tiết</span></button>
+                            <button class="admin-detail-button detail-button product-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr>
@@ -235,12 +220,7 @@
                         <td class="center product-number">428</td>
                         <td class="center"><span class="product-status product-status--selling">Đang bán</span></td>
                         <td class="center">
-                            <button class="detail-button product-detail" type="button">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
-                                    <circle cx="12" cy="12" r="2.5"/>
-                                </svg>
-                                <span>Chi tiết</span></button>
+                            <button class="admin-detail-button detail-button product-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr class="product-row--pending">
@@ -262,12 +242,7 @@
                         <td class="center"><span class="product-status product-status--pending">Chờ kiểm duyệt</span>
                         </td>
                         <td class="center">
-                            <button class="detail-button product-detail" type="button">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
-                                    <circle cx="12" cy="12" r="2.5"/>
-                                </svg>
-                                <span>Chi tiết</span></button>
+                            <button class="admin-detail-button detail-button product-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr>
@@ -291,12 +266,7 @@
                         <td class="center product-number">187</td>
                         <td class="center"><span class="product-status product-status--selling">Đang bán</span></td>
                         <td class="center">
-                            <button class="detail-button product-detail" type="button">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
-                                    <circle cx="12" cy="12" r="2.5"/>
-                                </svg>
-                                <span>Chi tiết</span></button>
+                            <button class="admin-detail-button detail-button product-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr>
@@ -316,12 +286,7 @@
                         <td class="center product-number">54</td>
                         <td class="center"><span class="product-status product-status--selling">Đang bán</span></td>
                         <td class="center">
-                            <button class="detail-button product-detail" type="button">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
-                                    <circle cx="12" cy="12" r="2.5"/>
-                                </svg>
-                                <span>Chi tiết</span></button>
+                            <button class="admin-detail-button detail-button product-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr>
@@ -342,12 +307,7 @@
                         <td class="center product-number">243</td>
                         <td class="center"><span class="product-status product-status--hidden">Tạm ẩn</span></td>
                         <td class="center">
-                            <button class="detail-button product-detail" type="button">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
-                                    <circle cx="12" cy="12" r="2.5"/>
-                                </svg>
-                                <span>Chi tiết</span></button>
+                            <button class="admin-detail-button detail-button product-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr>
@@ -369,12 +329,7 @@
                         <td class="center product-number">612</td>
                         <td class="center"><span class="product-status product-status--selling">Đang bán</span></td>
                         <td class="center">
-                            <button class="detail-button product-detail" type="button">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
-                                    <circle cx="12" cy="12" r="2.5"/>
-                                </svg>
-                                <span>Chi tiết</span></button>
+                            <button class="admin-detail-button detail-button product-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     </tbody>
@@ -402,8 +357,8 @@
     </main>
 </div>
 
-<script src="../../assets/js/reusable-controls.js"></script>
-<script src="../../assets/js/product-effects.js"></script>
-<script src="../../assets/js/app.js"></script>
+<script src="../assets/js/reusable-controls.js"></script>
+<script src="../assets/js/product-effects.js"></script>
+<script src="../assets/js/app.js?v=20260926e"></script>
 </body>
 </html>

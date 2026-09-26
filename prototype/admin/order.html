@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="../assets/css/base.css?v=20260917b">
     <link rel="stylesheet" href="../assets/css/components.css?v=20260917b">
     <link rel="stylesheet" href="../assets/css/pages.css?v=20260917b">
-    <link rel="stylesheet" href="../assets/css/production.css?v=20260917">
+    <link rel="stylesheet" href="../assets/css/production.css?v=20260926k">
+    <link rel="stylesheet" href="../assets/css/reusable-controls.css?v=20260926">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/WebAsset/FontAwesome@pro/css/all.min.css">
 </head>
 <body class="admin-dashboard order-page">
@@ -28,7 +29,8 @@
                 <p class="admin-updated"><i class="fa-solid fa-arrows-rotate"></i> Cập nhật: 20/09/2026 · 09:45</p>
             </div>
             <div class="cluster admin-page-actions">
-                <button class="btn btn--secondary" type="button"><i class="fa-regular fa-calendar"></i> Tất cả thời gian <i class="fa-solid fa-angle-down"></i></button>
+                <button class="btn btn--secondary" type="button" data-time-filter><i class="fa-regular fa-calendar"></i>
+                    <span data-time-label>Hôm nay · 26/09/2026</span><i class="fa-solid fa-angle-down chevron"></i></button>
                 <button class="btn btn--primary" type="button"><i class="fa-solid fa-file"></i> Xuất báo cáo</button>
             </div>
         </div>
@@ -56,7 +58,8 @@
             </article>
         </section>
 
-        <section class="panel order-panel" aria-label="Danh sách đơn hàng">
+        <section class="panel order-panel" aria-label="Danh sách đơn hàng" data-selection-container
+                 data-selection-actions="Xác nhận đơn|Bàn giao vận chuyển|Đánh dấu đã giao|Hủy đơn">
             <div class="order-toolbar">
                 <div class="order-toolbar__top">
                     <label class="order-toolbar__search">
@@ -99,7 +102,7 @@
             </div>
 
             <div class="admin-table-wrap">
-                <table class="order-table">
+                <table class="order-table" data-selectable-table data-selection-noun="đơn hàng" data-selection-limit="8">
                     <thead>
                     <tr>
                         <th><input id="selectAll" class="order-checkbox" type="checkbox" aria-label="Chọn tất cả"></th>
@@ -126,7 +129,7 @@
                         <td class="order-address"><small>72 Nguyễn Trãi,<br>Thanh Xuân, Hà Nội</small></td>
                         <td><span class="status order-status order-status--pending">Chờ xác nhận</span></td>
                         <td>
-                            <button class="btn btn--secondary order-detail-btn" type="button">◉ &nbsp; Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary order-detail-btn" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="confirmed" data-shop="Đèn LED &amp; Hiển Thị Pro">
@@ -140,7 +143,7 @@
                         <td class="order-address"><small>215 Lê Văn Việt,<br>Quận 9, TP. Hồ Chí Minh</small></td>
                         <td><span class="status order-status order-status--confirmed">Đã xác nhận</span></td>
                         <td>
-                            <button class="btn btn--secondary order-detail-btn" type="button">◉ &nbsp; Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary order-detail-btn" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="shipping" data-shop="Module &amp; Cảm Biến 24H">
@@ -155,7 +158,7 @@
                         <td class="order-address"><small>18 Trần Phú, Hải Châu,<br>Đà Nẵng</small></td>
                         <td><span class="status order-status order-status--shipping">Đang giao</span></td>
                         <td>
-                            <button class="btn btn--secondary order-detail-btn" type="button">◉ &nbsp; Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary order-detail-btn" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="delivered" data-shop="Linh Kiện TechZone">
@@ -170,7 +173,7 @@
                         <td class="order-address"><small>99 Cách Mạng Tháng 8,<br>Ninh Kiều, Cần Thơ</small></td>
                         <td><span class="status order-status order-status--delivered">Đã giao</span></td>
                         <td>
-                            <button class="btn btn--secondary order-detail-btn" type="button">◉ &nbsp; Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary order-detail-btn" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="return" data-shop="Linh Kiện TechZone">
@@ -185,7 +188,7 @@
                         <td class="order-address"><small>45 Lý Thường Kiệt,<br>Hoàn Kiếm, Hà Nội</small></td>
                         <td><span class="status order-status order-status--return">Trả hàng</span></td>
                         <td>
-                            <button class="btn btn--secondary order-detail-btn" type="button">◉ &nbsp; Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary order-detail-btn" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="pending" data-shop="Board Mạch Thông Minh">
@@ -200,7 +203,7 @@
                         <td class="order-address"><small>12 Võ Văn Ngân,<br>Thủ Đức, TP. Hồ Chí Minh</small></td>
                         <td><span class="status order-status order-status--pending">Chờ xác nhận</span></td>
                         <td>
-                            <button class="btn btn--secondary order-detail-btn" type="button">◉ &nbsp; Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary order-detail-btn" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="cancelled" data-shop="Nguồn &amp; Adapter Pro">
@@ -215,7 +218,7 @@
                         <td class="order-address"><small>31 Nguyễn Văn Cừ,<br>TP. Huế</small></td>
                         <td><span class="status order-status order-status--cancelled">Đã hủy</span></td>
                         <td>
-                            <button class="btn btn--secondary order-detail-btn" type="button">◉ &nbsp; Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary order-detail-btn" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="confirmed" data-shop="PCB Express Việt">
@@ -230,7 +233,7 @@
                         <td class="order-address"><small>58 Hai Bà Trưng,<br>TP. Biên Hòa, Đồng Nai</small></td>
                         <td><span class="status order-status order-status--confirmed">Đã xác nhận</span></td>
                         <td>
-                            <button class="btn btn--secondary order-detail-btn" type="button">◉ &nbsp; Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary order-detail-btn" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="delivered" data-shop="Linh Kiện Sao Việt">
@@ -244,7 +247,7 @@
                         <td class="order-address"><small>17 Nguyễn Huệ,<br>Quận 1, TP. Hồ Chí Minh</small></td>
                         <td><span class="status order-status order-status--delivered">Đã giao</span></td>
                         <td>
-                            <button class="btn btn--secondary order-detail-btn" type="button">◉ &nbsp; Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary order-detail-btn" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="shipping" data-shop="Đèn LED &amp; Hiển Thị Pro">
@@ -258,7 +261,7 @@
                         <td class="order-address"><small>28 Nguyễn Trãi,<br>Thanh Xuân, Hà Nội</small></td>
                         <td><span class="status order-status order-status--shipping">Đang giao</span></td>
                         <td>
-                            <button class="btn btn--secondary order-detail-btn" type="button">◉ &nbsp; Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary order-detail-btn" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="return" data-shop="Module &amp; Cảm Biến 24H">
@@ -272,7 +275,7 @@
                         <td class="order-address"><small>6 Nguyễn Đình Chiểu,<br>Đà Nẵng</small></td>
                         <td><span class="status order-status order-status--return">Trả hàng</span></td>
                         <td>
-                            <button class="btn btn--secondary order-detail-btn" type="button">◉ &nbsp; Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary order-detail-btn" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="delivered" data-shop="Linh Kiện TechZone">
@@ -286,7 +289,7 @@
                         <td class="order-address"><small>84 Phạm Văn Đồng,<br>Thủ Đức, TP. Hồ Chí Minh</small></td>
                         <td><span class="status order-status order-status--delivered">Đã giao</span></td>
                         <td>
-                            <button class="btn btn--secondary order-detail-btn" type="button">◉ &nbsp; Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary order-detail-btn" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     </tbody>
@@ -307,6 +310,7 @@
     </main>
 </div>
 
-<script src="../assets/js/app.js?v=20260917b"></script>
+<script src="../assets/js/reusable-controls.js?v=20260926"></script>
+<script src="../assets/js/app.js?v=20260926e"></script>
 </body>
 </html>
