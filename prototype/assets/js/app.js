@@ -335,40 +335,44 @@ document.addEventListener('click', function (e) {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const points = document.querySelectorAll(".chart-points circle");
+    const points = Array.from(document.querySelectorAll(".chart-points circle"));
+    const bars = Array.from(document.querySelectorAll(".chart-bars rect"));
 
     const tooltip = document.getElementById("chartTooltip");
     const tooltipTime = document.getElementById("tooltipTime");
     const tooltipRevenue = document.getElementById("tooltipRevenue");
     const tooltipFee = document.getElementById("tooltipFee");
 
-    const chartContainer = document.querySelector(".chart-container");
+    const chartContainer = document.querySelector(".admin-chart-wrap");
 
-    if (!points.length || !tooltip || !chartContainer) {
+    if (!points.length || !bars.length || !tooltip || !chartContainer) {
         return;
     }
 
-    points.forEach(point => {
+    const hideTooltip = () => {
+        tooltip.classList.remove("show");
+        bars.forEach((bar) => bar.classList.remove("is-active"));
+    };
 
-        point.addEventListener("mouseenter", function () {
-
-            tooltipTime.textContent = this.dataset.time;
-            tooltipRevenue.textContent = this.dataset.revenue;
-            tooltipFee.textContent = this.dataset.fee;
+    const showTooltip = (target, dataPoint, bar) => {
+            tooltipTime.textContent = dataPoint.dataset.time;
+            tooltipRevenue.textContent = dataPoint.dataset.revenue;
+            tooltipFee.textContent = dataPoint.dataset.fee;
 
             tooltip.classList.add("show");
+            bars.forEach((item) => item.classList.toggle("is-active", item === bar));
 
-            const pointRect = this.getBoundingClientRect();
+            const targetRect = target.getBoundingClientRect();
             const containerRect =
                 chartContainer.getBoundingClientRect();
 
             const pointX =
-                pointRect.left -
+                targetRect.left -
                 containerRect.left +
-                pointRect.width / 2;
+                targetRect.width / 2;
 
             const pointY =
-                pointRect.top -
+                targetRect.top -
                 containerRect.top;
 
             const tooltipWidth = tooltip.offsetWidth;
@@ -396,12 +400,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
             tooltip.style.left = `${left}px`;
             tooltip.style.top = `${top}px`;
-        });
+    };
 
-        point.addEventListener("mouseleave", function () {
-            tooltip.classList.remove("show");
-        });
+    bars.forEach((bar, index) => {
+        const point = points[index];
+        if (!point) return;
 
+        const accessibleLabel = `${point.dataset.time}: Doanh thu ${point.dataset.revenue}, phí và hoa hồng ${point.dataset.fee}`;
+        bar.setAttribute("tabindex", "0");
+        bar.setAttribute("role", "img");
+        bar.setAttribute("aria-label", accessibleLabel);
+
+        bar.addEventListener("mouseenter", () => showTooltip(bar, point, bar));
+        bar.addEventListener("mouseleave", hideTooltip);
+        bar.addEventListener("focus", () => showTooltip(bar, point, bar));
+        bar.addEventListener("blur", hideTooltip);
+
+        point.addEventListener("mouseenter", () => showTooltip(point, point, bar));
+        point.addEventListener("mouseleave", hideTooltip);
     });
 
 });
