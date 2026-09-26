@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../assets/css/pages.css?v=20260917b">
     <link rel="stylesheet" href="../assets/css/production.css?v=20260926k">
     <link rel="stylesheet" href="../assets/css/reusable-controls.css?v=20260926">
+    <link rel="stylesheet" href="../assets/css/admin-table-badges.css?v=20260926">
 </head>
 <body class="admin-dashboard">
 <a class="skip-link" href="#main">Chuyển đến nội dung chính</a>
@@ -57,7 +58,8 @@
             </article>
         </section>
 
-        <section class="panel transaction-panel">
+        <section class="panel transaction-panel" data-selection-container
+                 data-selection-actions="Đánh dấu thành công|Đánh dấu thất bại|Đưa về đang xử lý">
             <div class="transaction-toolbar">
                 <div class="transaction-filters">
                     <label class="transaction-search">
@@ -94,7 +96,8 @@
             </div>
 
             <div class="admin-table-wrap">
-                <table class="data-table transaction-table">
+                <table class="data-table transaction-table" data-selectable-table data-selection-noun="giao dịch"
+                       data-selection-limit="8">
                     <thead>
                     <tr>
                         <th class="transaction-check"><input id="selectAllTransactions" type="checkbox"
@@ -123,9 +126,7 @@
                         <td>Thẻ tín dụng</td>
                         <td><span class="status transaction-status transaction-status--success">Thành công</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small transaction-detail" type="button">◉ &nbsp;Chi
-                                tiết
-                            </button>
+                            <button class="admin-detail-button btn btn--secondary btn--small transaction-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="success" data-method="wallet">
@@ -140,9 +141,7 @@
                         <td>Ví điện tử</td>
                         <td><span class="status transaction-status transaction-status--success">Thành công</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small transaction-detail" type="button">◉ &nbsp;Chi
-                                tiết
-                            </button>
+                            <button class="admin-detail-button btn btn--secondary btn--small transaction-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="processing" data-method="cod">
@@ -158,9 +157,7 @@
                         <td><span class="status transaction-status transaction-status--processing">Đang xử lý</span>
                         </td>
                         <td>
-                            <button class="btn btn--secondary btn--small transaction-detail" type="button">◉ &nbsp;Chi
-                                tiết
-                            </button>
+                            <button class="admin-detail-button btn btn--secondary btn--small transaction-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="success" data-method="card">
@@ -175,9 +172,7 @@
                         <td>Thẻ tín dụng</td>
                         <td><span class="status transaction-status transaction-status--success">Thành công</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small transaction-detail" type="button">◉ &nbsp;Chi
-                                tiết
-                            </button>
+                            <button class="admin-detail-button btn btn--secondary btn--small transaction-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="processing" data-method="bank">
@@ -193,9 +188,7 @@
                         <td><span class="status transaction-status transaction-status--processing">Đang xử lý</span>
                         </td>
                         <td>
-                            <button class="btn btn--secondary btn--small transaction-detail" type="button">◉ &nbsp;Chi
-                                tiết
-                            </button>
+                            <button class="admin-detail-button btn btn--secondary btn--small transaction-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="success" data-method="shop">
@@ -210,9 +203,7 @@
                         <td>Chi trả về ngân<br>hàng shop</td>
                         <td><span class="status transaction-status transaction-status--success">Thành công</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small transaction-detail" type="button">◉ &nbsp;Chi
-                                tiết
-                            </button>
+                            <button class="admin-detail-button btn btn--secondary btn--small transaction-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="failed" data-method="wallet">
@@ -227,9 +218,7 @@
                         <td>Ví điện tử</td>
                         <td><span class="status transaction-status transaction-status--failed">Thất bại</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small transaction-detail" type="button">◉ &nbsp;Chi
-                                tiết
-                            </button>
+                            <button class="admin-detail-button btn btn--secondary btn--small transaction-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="success" data-method="wallet">
@@ -244,9 +233,7 @@
                         <td>Ví điện tử</td>
                         <td><span class="status transaction-status transaction-status--success">Thành công</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small transaction-detail" type="button">◉ &nbsp;Chi
-                                tiết
-                            </button>
+                            <button class="admin-detail-button btn btn--secondary btn--small transaction-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="success" data-method="card">
@@ -261,9 +248,7 @@
                         <td>Thẻ tín dụng</td>
                         <td><span class="status transaction-status transaction-status--success">Thành công</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small transaction-detail" type="button">◉ &nbsp;Chi
-                                tiết
-                            </button>
+                            <button class="admin-detail-button btn btn--secondary btn--small transaction-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="processing" data-method="bank">
@@ -279,9 +264,7 @@
                         <td><span class="status transaction-status transaction-status--processing">Đang xử lý</span>
                         </td>
                         <td>
-                            <button class="btn btn--secondary btn--small transaction-detail" type="button">◉ &nbsp;Chi
-                                tiết
-                            </button>
+                            <button class="admin-detail-button btn btn--secondary btn--small transaction-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="success" data-method="card">
@@ -296,9 +279,7 @@
                         <td>Thẻ tín dụng</td>
                         <td><span class="status transaction-status transaction-status--success">Thành công</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small transaction-detail" type="button">◉ &nbsp;Chi
-                                tiết
-                            </button>
+                            <button class="admin-detail-button btn btn--secondary btn--small transaction-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr data-status="success" data-method="wallet">
@@ -313,9 +294,7 @@
                         <td>Ví điện tử</td>
                         <td><span class="status transaction-status transaction-status--success">Thành công</span></td>
                         <td>
-                            <button class="btn btn--secondary btn--small transaction-detail" type="button">◉ &nbsp;Chi
-                                tiết
-                            </button>
+                            <button class="admin-detail-button btn btn--secondary btn--small transaction-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     </tbody>

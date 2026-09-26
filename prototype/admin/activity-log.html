@@ -12,476 +12,8 @@
     <link rel="stylesheet" href="../assets/css/pages.css">
     <link rel="stylesheet" href="../assets/css/production.css?v=20260926k">
     <link rel="stylesheet" href="../assets/css/reusable-controls.css?v=20260926">
-    <style>
-
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.875rem;
-            color: var(--color-slate);
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-
-        .breadcrumb a {
-            color: var(--color-slate);
-            text-decoration: none;
-        }
-
-        .breadcrumb a:hover {
-            color: var(--color-ink);
-        }
-
-        .breadcrumb span {
-            color: var(--color-ink);
-            font-weight: 600;
-        }
-
-        .page-header-row {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-
-        .page-title {
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: var(--color-ink);
-            letter-spacing: -0.02em;
-            margin-bottom: 6px;
-        }
-
-        .page-desc {
-            font-size: 0.9375rem;
-            color: var(--color-slate);
-            line-height: 1.5;
-        }
-
-        .page-info {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.8125rem;
-            color: var(--color-slate);
-            margin-bottom: 24px;
-            margin-top: 8px;
-        }
-
-        .page-info i {
-            color: var(--color-cobalt);
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-        }
-
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: var(--color-surface);
-            color: var(--color-ink);
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            font-size: 0.875rem;
-            font-weight: 700;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 0.15s;
-        }
-
-        .btn-secondary:hover {
-            background: var(--color-canvas);
-        }
-
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: var(--color-cobalt);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            font-weight: 700;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 0.15s;
-        }
-
-        .btn-primary:hover {
-            background: var(--color-cobalt-deep);
-        }
-
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            border: 1px solid var(--color-border);
-            border-radius: 12px;
-            overflow: hidden;
-            background: var(--color-surface);
-            margin-bottom: 20px;
-        }
-
-        .stat-cell {
-            padding: 20px 22px;
-            border-right: 1px solid var(--color-border);
-        }
-
-        .stat-cell:last-child {
-            border-right: none;
-        }
-
-        .stat-label {
-            font-size: 0.6875rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--color-slate);
-            margin-bottom: 8px;
-        }
-
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--color-ink);
-            line-height: 1.1;
-            margin-bottom: 4px;
-        }
-
-        .stat-value small {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--color-slate);
-        }
-
-        .stat-sub {
-            font-size: 0.75rem;
-            color: var(--color-slate);
-        }
-
-        .stat-sub .up {
-            color: #16a34a;
-            font-weight: 600;
-        }
-
-        .stat-sub .amber {
-            color: var(--color-amber-deep);
-            font-weight: 600;
-        }
-
-        .stat-sub .down {
-            color: #dc2626;
-            font-weight: 600;
-        }
-
-        .table-panel {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .search-toolbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .search-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1;
-            flex-wrap: wrap;
-        }
-
-        .search-input-wrap {
-            position: relative;
-            min-width: 260px;
-        }
-
-        .search-input-wrap i {
-            position: absolute;
-            left: 11px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--color-slate);
-            font-size: 0.8125rem;
-            pointer-events: none;
-        }
-
-        .search-input-wrap input {
-            padding: 8px 12px 8px 32px;
-            font-size: 0.8125rem;
-            border-radius: 8px;
-            border: 1px solid var(--color-border);
-            background: var(--color-canvas);
-            color: var(--color-ink);
-            outline: none;
-            width: 100%;
-        }
-
-        .search-input-wrap input:focus {
-            border-color: var(--color-cobalt);
-            box-shadow: 0 0 0 3px rgba(19, 95, 210, 0.1);
-        }
-
-        .filter-pills {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .filter-pill {
-            border: 1px solid var(--color-border);
-            background: var(--color-surface);
-            color: var(--color-slate);
-            font-size: 0.8125rem;
-            font-weight: 600;
-            padding: 5px 13px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background 0.15s, color 0.15s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .filter-pill .pill-count {
-            font-size: 0.6875rem;
-            background: var(--color-canvas);
-            border: 1px solid var(--color-border);
-            color: var(--color-slate);
-            border-radius: 10px;
-            padding: 1px 6px;
-            font-weight: 600;
-        }
-
-        .filter-pill.is-active {
-            background: var(--color-cobalt);
-            color: #fff;
-            border-color: var(--color-cobalt);
-        }
-
-        .filter-pill.is-active .pill-count {
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            border-color: transparent;
-        }
-
-        .filter-pill:not(.is-active):hover {
-            background: var(--color-canvas);
-            color: var(--color-ink);
-        }
-
-        .toolbar-info {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.8125rem;
-            color: var(--color-slate);
-            white-space: nowrap;
-        }
-
-        .toolbar-info i {
-            color: var(--color-cobalt);
-            font-size: 0.8125rem;
-        }
-
-        .log-badge {
-            display: inline-flex;
-            align-items: center;
-            font-size: 0.6875rem;
-            font-weight: 600;
-            padding: 3px 10px;
-            border-radius: 20px;
-            white-space: nowrap;
-        }
-
-        .log-badge--blue {
-            background: var(--color-cobalt-soft);
-            color: var(--color-cobalt-deep);
-        }
-
-        .log-badge--gray {
-            background: var(--color-canvas);
-            color: var(--color-slate);
-            border: 1px solid var(--color-border);
-        }
-
-        .log-badge--red {
-            background: #fef2f2;
-            color: #dc2626;
-        }
-
-        .imp-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.6875rem;
-            font-weight: 700;
-            padding: 2px 7px;
-            border-radius: 20px;
-            background: var(--color-amber-soft);
-            color: var(--color-amber-deep);
-            margin-left: 6px;
-            vertical-align: middle;
-        }
-
-        .action-time .date {
-            font-size: 0.8125rem;
-            font-weight: 600;
-            color: var(--color-ink);
-        }
-
-        .action-time .time {
-            font-size: 0.75rem;
-            color: var(--color-slate);
-        }
-
-        .action-name {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--color-ink);
-        }
-
-        .action-code {
-            font-size: 0.6875rem;
-            color: var(--color-slate);
-            margin-top: 2px;
-            font-weight: 500;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .obj-cell {
-            font-size: 0.8125rem;
-            color: var(--color-ink);
-        }
-
-        .obj-cell small {
-            display: block;
-            font-size: 0.75rem;
-            color: var(--color-slate);
-            margin-top: 2px;
-        }
-
-        .ip-cell {
-            font-size: 0.8125rem;
-            color: var(--color-slate);
-            font-variant-numeric: tabular-nums;
-            white-space: nowrap;
-        }
-
-        .follow-cell {
-            font-size: 0.8125rem;
-            color: var(--color-muted-strong);
-            text-align: center;
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.875rem;
-        }
-
-        .data-table th {
-            padding: 11px 14px;
-            border-bottom: 1px solid var(--color-border);
-            background: var(--color-canvas);
-            color: var(--color-slate);
-            font-size: 0.6875rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            text-align: left;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        .data-table td {
-            padding: 14px;
-            border-bottom: 1px solid var(--color-border);
-            vertical-align: middle;
-        }
-
-        .data-table tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .data-table tbody tr:hover {
-            background: var(--color-canvas);
-        }
-
-        .btn-detail {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 6px 12px;
-            border: 1px solid var(--color-border);
-            border-radius: 20px;
-            background: var(--color-surface);
-            color: var(--color-cobalt);
-            font-size: 0.8125rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 0.15s;
-        }
-
-        .btn-detail:hover {
-            background: var(--color-cobalt-soft);
-        }
-
-        .table-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 20px;
-            font-size: 0.8125rem;
-            color: var(--color-slate);
-        }
-
-        .pagination {
-            display: flex;
-            gap: 4px;
-        }
-
-        .page-btn {
-            min-width: 32px;
-            min-height: 32px;
-            padding: 0 10px;
-            border: 1px solid var(--color-border);
-            border-radius: 6px;
-            background: var(--color-surface);
-            color: var(--color-ink);
-            font-size: 0.8125rem;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .page-btn[aria-current="page"] {
-            background: var(--color-cobalt);
-            color: #fff;
-            border-color: var(--color-cobalt);
-        }
-
-        .page-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/activity-log.css?v=20260926">
+    <link rel="stylesheet" href="../assets/css/admin-table-badges.css?v=20260926">
 </head>
 <body>
 <a class="skip-link" href="#main">Chuyển đến nội dung chính</a>
@@ -512,7 +44,7 @@
                 <button class="btn-secondary" type="button" data-time-filter>
                     <i class="fa-regular fa-calendar"></i>
                     <span data-time-label>Hôm nay · 26/09/2026</span>
-                    <i class="fa-solid fa-chevron-down chevron" style="font-size:0.65rem;"></i>
+                    <i class="fa-solid fa-chevron-down chevron"></i>
                 </button>
                 <button class="btn-primary" type="button">
                     <i class="fa-solid fa-file"></i>
@@ -527,30 +59,31 @@
                 <div class="stat-label">Thao tác hôm nay</div>
                 <div class="stat-value">126 <small>lượt</small></div>
                 <div class="stat-sub"><span class="up"><i class="fa-solid fa-arrow-up"></i> +18</span></div>
-                <div class="stat-sub" style="margin-top:4px;">55 hành động bạn đã thực hiện trên hệ thống hôm nay</div>
+                <div class="stat-sub stat-description">55 hành động bạn đã thực hiện trên hệ thống hôm nay</div>
             </div>
             <div class="stat-cell">
                 <div class="stat-label">Thao tác 7 ngày</div>
                 <div class="stat-value">842 <small>lượt</small></div>
                 <div class="stat-sub"><span class="up"><i class="fa-solid fa-arrow-up"></i> +8,2%</span></div>
-                <div class="stat-sub" style="margin-top:4px;">Tổng thao tác trong 7 ngày gần nhất</div>
+                <div class="stat-sub stat-description">Tổng thao tác trong 7 ngày gần nhất</div>
             </div>
             <div class="stat-cell">
                 <div class="stat-label">Thao tác quan trọng</div>
                 <div class="stat-value">23 <small>lượt</small></div>
                 <div class="stat-sub"><span class="amber"><i class="fa-solid fa-arrow-up"></i> 4 duyệt hoàn tiền</span></div>
-                <div class="stat-sub" style="margin-top:4px;">Hành động ảnh hưởng trực tiếp tới tiền và quyền hệ thống
+                <div class="stat-sub stat-description">Hành động ảnh hưởng trực tiếp tới tiền và quyền hệ thống
                 </div>
             </div>
             <div class="stat-cell">
                 <div class="stat-label">Phiên đăng nhập</div>
                 <div class="stat-value">6 <small>phiên</small></div>
                 <div class="stat-sub"><span class="down"><i class="fa-solid fa-arrow-down"></i> 1 phiên lạ đã thu hồi</span></div>
-                <div class="stat-sub" style="margin-top:4px;">Số lần đăng nhập trong / ngày gần nhất</div>
+                <div class="stat-sub stat-description">Số lần đăng nhập trong / ngày gần nhất</div>
             </div>
         </div>
 
-        <div class="table-panel">
+        <div class="table-panel" data-selection-container
+             data-selection-actions="Xuất bản ghi|Gắn cờ theo dõi">
             <div class="search-toolbar">
                 <div class="search-left">
                     <div class="search-input-wrap">
@@ -565,7 +98,7 @@
                 </div>
             </div>
 
-            <div style="padding: 12px 20px; border-bottom: 1px solid var(--color-border);">
+            <div class="filter-strip">
                 <div class="filter-pills">
                     <button class="filter-pill is-active" type="button" data-filter="all">Tất cả <span
                             class="pill-count">14</span></button>
@@ -584,17 +117,18 @@
                 </div>
             </div>
 
-            <table class="data-table">
+            <table class="data-table activity-history-table" data-selectable-table data-selection-noun="thao tác"
+                   data-selection-limit="8">
                 <thead>
                 <tr>
-                    <th style="width:40px;"><input type="checkbox" aria-label="Chọn tất cả"></th>
+                    <th class="select-column"><input type="checkbox" aria-label="Chọn tất cả"></th>
                     <th>THỜI GIAN</th>
                     <th>THAO TÁC</th>
                     <th>LOẠI</th>
                     <th>ĐỐI TƯỢNG TÁC ĐỘNG</th>
                     <th>ĐỊA CHỈ IP</th>
                     <th>THEO DÕI</th>
-                    <th style="text-align:right;">THAO TÁC</th>
+                    <th class="action-column">THAO TÁC</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -608,7 +142,7 @@
                     </td>
                     <td>
                         <span class="action-name">Duyệt shop tham gia sàn<span class="imp-badge"><i
-                                class="fa-solid fa-star" style="font-size:9px;"></i> Quan trọng</span></span>
+                                class="fa-solid fa-star"></i> Quan trọng</span></span>
                         <div class="action-code">MY-260920-01</div>
                     </td>
                     <td><span class="log-badge log-badge--blue">Danh mục</span></td>
@@ -617,8 +151,8 @@
                     </td>
                     <td class="ip-cell">203.113.44.10</td>
                     <td class="follow-cell">—</td>
-                    <td style="text-align:right;">
-                        <button class="btn-detail" type="button"><i class="fa-solid fa-eye"></i> Chi tiết</button>
+                    <td class="action-cell">
+                        <button class="admin-detail-button btn-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                     </td>
                 </tr>
                 <tr data-type="don-hang">
@@ -639,8 +173,8 @@
                     </td>
                     <td class="ip-cell">203.113.44.10</td>
                     <td class="follow-cell">—</td>
-                    <td style="text-align:right;">
-                        <button class="btn-detail" type="button"><i class="fa-solid fa-eye"></i> Chi tiết</button>
+                    <td class="action-cell">
+                        <button class="admin-detail-button btn-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                     </td>
                 </tr>
                 <tr data-type="dang-nhap">
@@ -661,8 +195,8 @@
                     </td>
                     <td class="ip-cell">203.113.44.10</td>
                     <td class="follow-cell">—</td>
-                    <td style="text-align:right;">
-                        <button class="btn-detail" type="button"><i class="fa-solid fa-eye"></i> Chi tiết</button>
+                    <td class="action-cell">
+                        <button class="admin-detail-button btn-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                     </td>
                 </tr>
                 <tr data-type="thanh-toan">
@@ -674,8 +208,7 @@
                         </div>
                     </td>
                     <td>
-                        <span class="action-name">Thực hiện hoàn tiền<span class="imp-badge"><i class="fa-solid fa-star"
-                                                                                                style="font-size:9px;"></i> Quan trọng</span></span>
+                        <span class="action-name">Thực hiện hoàn tiền<span class="imp-badge"><i class="fa-solid fa-star"></i> Quan trọng</span></span>
                         <div class="action-code">MY-260919-01</div>
                     </td>
                     <td><span class="log-badge log-badge--red">Thanh toán</span></td>
@@ -684,8 +217,8 @@
                     </td>
                     <td class="ip-cell">203.113.44.10</td>
                     <td class="follow-cell">—</td>
-                    <td style="text-align:right;">
-                        <button class="btn-detail" type="button"><i class="fa-solid fa-eye"></i> Chi tiết</button>
+                    <td class="action-cell">
+                        <button class="admin-detail-button btn-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                     </td>
                 </tr>
                 <tr data-type="cau-hinh">
@@ -697,8 +230,7 @@
                         </div>
                     </td>
                     <td>
-                        <span class="action-name">Cập nhật biểu phí<span class="imp-badge"><i class="fa-solid fa-star"
-                                                                                              style="font-size:9px;"></i> Quan trọng</span></span>
+                        <span class="action-name">Cập nhật biểu phí<span class="imp-badge"><i class="fa-solid fa-star"></i> Quan trọng</span></span>
                         <div class="action-code">MY-260919-05</div>
                     </td>
                     <td><span class="log-badge log-badge--gray">Cấu hình</span></td>
@@ -707,8 +239,8 @@
                     </td>
                     <td class="ip-cell">203.113.44.10</td>
                     <td class="follow-cell">—</td>
-                    <td style="text-align:right;">
-                        <button class="btn-detail" type="button"><i class="fa-solid fa-eye"></i> Chi tiết</button>
+                    <td class="action-cell">
+                        <button class="admin-detail-button btn-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                     </td>
                 </tr>
                 <tr data-type="bao-mat">
@@ -721,7 +253,7 @@
                     </td>
                     <td>
                         <span class="action-name">Thu hồi phiên đăng nhập<span class="imp-badge"><i
-                                class="fa-solid fa-star" style="font-size:9px;"></i> Quan trọng</span></span>
+                                class="fa-solid fa-star"></i> Quan trọng</span></span>
                         <div class="action-code">MY-260919-06</div>
                     </td>
                     <td><span class="log-badge log-badge--red">Bảo mật</span></td>
@@ -730,8 +262,8 @@
                     </td>
                     <td class="ip-cell">203.113.44.10</td>
                     <td class="follow-cell">—</td>
-                    <td style="text-align:right;">
-                        <button class="btn-detail" type="button"><i class="fa-solid fa-eye"></i> Chi tiết</button>
+                    <td class="action-cell">
+                        <button class="admin-detail-button btn-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                     </td>
                 </tr>
                 <tr data-type="danh-muc">
@@ -752,8 +284,8 @@
                     </td>
                     <td class="ip-cell">203.113.44.10</td>
                     <td class="follow-cell">—</td>
-                    <td style="text-align:right;">
-                        <button class="btn-detail" type="button"><i class="fa-solid fa-eye"></i> Chi tiết</button>
+                    <td class="action-cell">
+                        <button class="admin-detail-button btn-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                     </td>
                 </tr>
                 <tr data-type="thanh-toan">
@@ -765,8 +297,7 @@
                         </div>
                     </td>
                     <td>
-                        <span class="action-name">Xử lý giao dịch lỗi<span class="imp-badge"><i class="fa-solid fa-star"
-                                                                                                style="font-size:9px;"></i> Quan trọng</span></span>
+                        <span class="action-name">Xử lý giao dịch lỗi<span class="imp-badge"><i class="fa-solid fa-star"></i> Quan trọng</span></span>
                         <div class="action-code">MY-260918-02</div>
                     </td>
                     <td><span class="log-badge log-badge--red">Thanh toán</span></td>
@@ -775,8 +306,8 @@
                     </td>
                     <td class="ip-cell">203.113.44.10</td>
                     <td class="follow-cell">—</td>
-                    <td style="text-align:right;">
-                        <button class="btn-detail" type="button"><i class="fa-solid fa-eye"></i> Chi tiết</button>
+                    <td class="action-cell">
+                        <button class="admin-detail-button btn-detail" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                     </td>
                 </tr>
                 </tbody>
@@ -798,18 +329,6 @@
 
 <script src="../assets/js/reusable-controls.js?v=20260926"></script>
 <script src="../assets/js/app.js?v=20260926e"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var pills = document.querySelectorAll('.filter-pill');
-        pills.forEach(function (pill) {
-            pill.addEventListener('click', function () {
-                pills.forEach(function (p) {
-                    p.classList.remove('is-active');
-                });
-                pill.classList.add('is-active');
-            });
-        });
-    });
-</script>
+<script src="../assets/js/activity-log.js?v=20260926"></script>
 </body>
 </html>

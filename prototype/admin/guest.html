@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../assets/css/pages.css?v=20260917b">
     <link rel="stylesheet" href="../assets/css/production.css?v=20260926k">
     <link rel="stylesheet" href="../assets/css/reusable-controls.css?v=20260926">
+    <link rel="stylesheet" href="../assets/css/admin-table-badges.css?v=20260926">
 </head>
 <body class="operations-page">
 <a class="skip-link" href="#main">Chuyển đến nội dung chính</a>
@@ -36,7 +37,7 @@
             <div>
                 <h1>Quản lý khách hàng</h1>
                 <p>Xem thông tin người mua, duyệt yêu cầu đổi số điện thoại và theo dõi lịch sử thay đổi tài khoản.</p>
-                <div style="margin-top: 6px; font-size: 13px; color: var(--color-amber-deep); font-weight: 600;">
+                <div class="pending-note">
                     <i class="fa-regular fa-user"></i> 5 yêu cầu đổi số điện thoại đang chờ admin duyệt
                 </div>
             </div>
@@ -87,7 +88,8 @@
             </div>
         </div>
 
-        <div class="panel panel--padded" style="padding-inline: var(--space-5);">
+        <div class="panel panel--padded" style="padding-inline: var(--space-5);" data-selection-container
+             data-selection-actions="Mở khóa tài khoản|Khóa tài khoản|Duyệt đổi SĐT">
             <div class="cluster" style="justify-content: space-between; margin-bottom: var(--space-4);">
                 <div class="cluster" style="flex: 1; max-width: 600px;">
                     <label class="field" style="flex: 1;">
@@ -118,7 +120,7 @@
             </div>
 
             <div class="table-wrap" id="panel-customers" role="tabpanel" aria-labelledby="tab-all">
-                <table class="data-table">
+                <table class="data-table" data-selectable-table data-selection-noun="khách hàng" data-selection-limit="8">
                     <thead>
                     <tr>
                         <th style="width: 40px;"><input type="checkbox" aria-label="Chọn tất cả"></th>
@@ -146,7 +148,7 @@
                         <td class="tabular"><strong>28,6 triệu đ</strong></td>
                         <td><span class="status status--info">Đang hoạt động</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr>
@@ -160,14 +162,14 @@
                         <td>
                             <div class="stack" style="gap: 4px;">
                                 <span class="tabular">0912 664 118</span>
-                                <span class="status status--warn" style="font-size: 11px; width: fit-content;">📞 Chờ đổi SĐT</span>
+                                <span class="status status--warn"><i class="fa-solid fa-phone" aria-hidden="true"></i> Chờ đổi SĐT</span>
                             </div>
                         </td>
                         <td class="tabular">28 đơn</td>
                         <td class="tabular"><strong>34,9 triệu đ</strong></td>
                         <td><span class="status status--info">Đang hoạt động</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr>
@@ -185,7 +187,7 @@
                         <td class="tabular"><strong>62,3 triệu đ</strong></td>
                         <td><span class="status status--info">Đang hoạt động</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr>
@@ -199,14 +201,14 @@
                         <td>
                             <div class="stack" style="gap: 4px;">
                                 <span class="tabular">0977 330 118</span>
-                                <span class="status status--warn" style="font-size: 11px; width: fit-content;">📞 Chờ đổi SĐT</span>
+                                <span class="status status--warn"><i class="fa-solid fa-phone" aria-hidden="true"></i> Chờ đổi SĐT</span>
                             </div>
                         </td>
                         <td class="tabular">12 đơn</td>
                         <td class="tabular"><strong>8,9 triệu đ</strong></td>
                         <td><span class="status status--info">Đang hoạt động</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr>
@@ -224,7 +226,7 @@
                         <td class="tabular"><strong>104,2 triệu đ</strong></td>
                         <td><span class="status status--info">Đang hoạt động</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr>
@@ -242,7 +244,7 @@
                         <td class="tabular"><strong>3,1 triệu đ</strong></td>
                         <td><span class="status status--bad">Đã khóa</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr>
@@ -260,7 +262,7 @@
                         <td class="tabular"><strong>19,8 triệu đ</strong></td>
                         <td><span class="status status--info">Đang hoạt động</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     <tr>
@@ -274,14 +276,14 @@
                         <td>
                             <div class="stack" style="gap: 4px;">
                                 <span class="tabular">0988 551 224</span>
-                                <span class="status status--warn" style="font-size: 11px; width: fit-content;">📞 Chờ đổi SĐT</span>
+                                <span class="status status--warn"><i class="fa-solid fa-phone" aria-hidden="true"></i> Chờ đổi SĐT</span>
                             </div>
                         </td>
                         <td class="tabular">19 đơn</td>
                         <td class="tabular"><strong>14,2 triệu đ</strong></td>
                         <td><span class="status status--info">Đang hoạt động</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">👁 Chi tiết</button>
+                            <button class="admin-detail-button btn btn--secondary btn--quiet" type="button"><i class="fa-regular fa-eye"></i><span>Chi tiết</span></button>
                         </td>
                     </tr>
                     </tbody>

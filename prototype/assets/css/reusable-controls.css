@@ -28,7 +28,7 @@
 .bulk-action-bar[hidden] { display: none; }
 .bulk-action-bar__summary { display: flex; align-items: center; gap: 8px; color: #1e40af; font-size: 12px; font-weight: 600; white-space: nowrap; }
 .bulk-action-bar__summary > span:first-child { display: grid; min-width: 20px; height: 20px; padding: 0 5px; place-items: center; border-radius: 999px; background: #2563eb; color: #fff; font-size: 10px; font-weight: 700; }
-.bulk-action-bar__actions { display: flex; align-items: center; gap: 9px; margin-left: 4px; padding-left: 16px; border-left: 1px solid #bfdbfe; }
+.bulk-action-bar__actions { display: flex; align-items: center; gap: 9px; margin-right: auto; margin-left: 4px; padding-left: 16px; border-left: 1px solid #bfdbfe; }
 .bulk-action-bar__button { display: inline-flex; min-height: 38px; align-items: center; justify-content: center; gap: 7px; padding: 7px 13px; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff; color: #475569; font-size: 12px; font-weight: 600; white-space: nowrap; cursor: pointer; }
 .bulk-action-bar__button svg { width: 17px; height: 17px; flex: 0 0 17px; color: #64748b; }
 .bulk-action-bar__button:hover { background: #f8fafc; }
@@ -38,7 +38,8 @@
 .bulk-action-bar__button.is-danger { border-color: #f59e0b; background: #fff; color: #b45309; }
 .bulk-action-bar__button.is-danger svg { color: #d97706; }
 .bulk-action-bar__button.is-danger:hover { background: #fffbeb; }
-.bulk-action-bar__clear { padding: 6px 8px; border: 0; border-radius: 6px; background: transparent; color: #64748b; font-size: 11px; font-weight: 600; white-space: nowrap; cursor: pointer; }
+.bulk-action-bar__clear { display: inline-flex; align-items: center; gap: 6px; padding: 6px 8px; border: 0; border-radius: 6px; background: transparent; color: #64748b; font-size: 11px; font-weight: 600; white-space: nowrap; cursor: pointer; }
+.bulk-action-bar__clear > span:first-child { font-size: 16px; font-weight: 400; line-height: 1; }
 .bulk-action-bar__clear:hover { background: #dbeafe; color: #1e3a8a; }
 tr.is-row-selected { background: rgb(239 246 255 / .55) !important; box-shadow: inset 3px 0 #3b82f6; }
 @keyframes bulk-bar-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }

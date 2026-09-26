@@ -9,17 +9,41 @@
     }[char]));
 
     const actionIcon = (action) => {
-        if (/^(Duyệt|Kích hoạt|Áp dụng)/i.test(action)) {
+        if (/^(Duyệt(?! đổi SĐT)|Kích hoạt|Áp dụng|Xác nhận|Chấp nhận|Đánh dấu (thành công|đã phản hồi))/i.test(action)) {
             return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
         }
-        if (/^(Tạm ẩn|Tạm tắt)/i.test(action)) {
+        if (/^(Bàn giao|Đánh dấu đã giao)/i.test(action)) {
+            return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>`;
+        }
+        if (/^(Tạm ẩn|Tạm tắt|Ẩn đánh giá)/i.test(action)) {
             return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3l18 18M10.6 10.7a2 2 0 0 0 2.7 2.7M9.9 5.2A10.8 10.8 0 0 1 12 5c6 0 9 7 9 7a16 16 0 0 1-2.1 3M6.6 6.6C4.3 8.2 3 12 3 12s3 7 9 7a9.7 9.7 0 0 0 3.4-.6" stroke-linecap="round"/></svg>`;
         }
         if (/^Xóa$/i.test(action)) {
             return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7M10 11v5M14 11v5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
         }
-        if (/^(Từ chối|Từ chối \/)/i.test(action)) {
+        if (/^(Từ chối|Hủy|Tạm ngưng|Đánh dấu thất bại)/i.test(action)) {
             return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.5 8.5 7 7m0-7-7 7" stroke-linecap="round"/></svg>`;
+        }
+        if (/^(Mở khóa|Khóa)/i.test(action)) {
+            return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke-linecap="round"/></svg>`;
+        }
+        if (/^(Chuyển xác minh|Tiếp nhận xử lý)/i.test(action)) {
+            return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4M11 8v6m-3-3h6" stroke-linecap="round"/></svg>`;
+        }
+        if (/^(Đưa về|Gửi nhắc|Nhắc shop)/i.test(action)) {
+            return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+        }
+        if (/^Duyệt đổi SĐT/i.test(action)) {
+            return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 3h4l2 5-3 2a16 16 0 0 0 5 5l2-3 5 2v4a3 3 0 0 1-3 3C10 21 3 14 3 6a3 3 0 0 1 3-3Z" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+        }
+        if (/^Gán vai trò/i.test(action)) {
+            return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M3 21v-2a6 6 0 0 1 10.5-4M18 14v6m-3-3h6" stroke-linecap="round"/></svg>`;
+        }
+        if (/^Xuất/i.test(action)) {
+            return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM14 3v5h5M12 11v6m-3-3 3 3 3-3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+        }
+        if (/^Gắn cờ/i.test(action)) {
+            return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 21V4m0 1h11l-1 4 1 4H5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
         }
         return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v8" stroke-linecap="round"/></svg>`;
     };
@@ -177,6 +201,8 @@
             const scrollWrap = table.closest(".table-scroll") || table.parentElement;
             const noun = table.dataset.selectionNoun || "bản ghi";
             const actions = (container.dataset.selectionActions || "Xử lý đã chọn").split("|").filter(Boolean);
+            const primaryAction = container.dataset.selectionPrimaryAction || actions[0];
+            const selectionLimit = Number.parseInt(table.dataset.selectionLimit || "", 10);
             const bar = document.createElement("div");
             bar.className = "bulk-action-bar";
             bar.hidden = true;
@@ -184,22 +210,35 @@
                 <div class="bulk-action-bar__summary"><span data-selected-count>0</span><span>${escapeHtml(noun)} đã chọn</span></div>
                 <div class="bulk-action-bar__actions">
                     ${actions.map((action, index) => {
-                        const isDanger = /^(Từ chối|Xóa)$/i.test(action);
-                        return `<button type="button" class="bulk-action-bar__button${index === 0 ? " is-primary" : ""}${isDanger ? " is-danger" : ""}" data-bulk-action>${actionIcon(action)}<span>${escapeHtml(action)}</span></button>`;
+                        const isPrimary = action === primaryAction;
+                        const isDanger = /^(Từ chối|Xóa|Hủy|Tạm ngưng|Đánh dấu thất bại)/i.test(action);
+                        return `<button type="button" class="bulk-action-bar__button${isPrimary ? " is-primary" : ""}${isDanger ? " is-danger" : ""}" data-bulk-action>${actionIcon(action)}<span>${escapeHtml(action)}</span></button>`;
                     }).join("")}
                 </div>
-                <button class="bulk-action-bar__clear" type="button" data-clear-selection aria-label="Bỏ chọn">Bỏ chọn</button>
+                <button class="bulk-action-bar__clear" type="button" data-clear-selection aria-label="Bỏ chọn"><span aria-hidden="true">×</span><span>Bỏ chọn</span></button>
             `;
-            container.insertBefore(bar, scrollWrap);
+            const insertionPoint = scrollWrap === container ? table : scrollWrap;
+            container.insertBefore(bar, insertionPoint);
 
             const count = bar.querySelector("[data-selected-count]");
+            const availableCheckboxes = () => {
+                const visible = rowCheckboxes.filter((checkbox) => {
+                    const row = checkbox.closest("tr");
+                    return row && !row.hidden && getComputedStyle(row).display !== "none";
+                });
+                return Number.isFinite(selectionLimit) && selectionLimit > 0
+                    ? visible.slice(0, selectionLimit)
+                    : visible;
+            };
             const update = () => {
                 const checked = rowCheckboxes.filter((checkbox) => checkbox.checked);
+                const available = availableCheckboxes();
+                const availableChecked = available.filter((checkbox) => checkbox.checked);
                 const selected = checked.length;
                 count.textContent = String(selected);
                 bar.hidden = selected === 0;
-                headCheckbox.checked = selected > 0 && selected === rowCheckboxes.length;
-                headCheckbox.indeterminate = selected > 0 && selected < rowCheckboxes.length;
+                headCheckbox.checked = available.length > 0 && availableChecked.length === available.length;
+                headCheckbox.indeterminate = availableChecked.length > 0 && availableChecked.length < available.length;
                 rowCheckboxes.forEach((checkbox) => checkbox.closest("tr")?.classList.toggle("is-row-selected", checkbox.checked));
                 container.dispatchEvent(new CustomEvent("table-selection-change", {
                     bubbles: true,
@@ -212,7 +251,7 @@
             };
 
             headCheckbox.addEventListener("change", () => {
-                rowCheckboxes.forEach((checkbox) => { checkbox.checked = headCheckbox.checked; });
+                availableCheckboxes().forEach((checkbox) => { checkbox.checked = headCheckbox.checked; });
                 update();
             });
             rowCheckboxes.forEach((checkbox) => checkbox.addEventListener("change", update));
@@ -223,6 +262,11 @@
                     detail: { action: button.textContent.trim(), checkboxes: rowCheckboxes.filter((item) => item.checked) }
                 }));
             }));
+            new MutationObserver(update).observe(table.tBodies[0], {
+                attributes: true,
+                attributeFilter: ["hidden", "style"],
+                subtree: true
+            });
             update();
         });
     };

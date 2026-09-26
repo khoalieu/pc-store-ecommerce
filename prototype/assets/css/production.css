@@ -3979,6 +3979,7 @@ p {
 .page-header .last-changed i,
 .page-info i,
 .page-subtitle-row i,
+.pending-note i,
 .pending-note svg,
 .policy-change-note svg {
     flex: 0 0 auto !important;
@@ -4518,6 +4519,47 @@ p {
     white-space: nowrap !important;
 }
 
+.admin-ui .shell__content table .admin-detail-button {
+    box-sizing: border-box;
+    display: inline-flex !important;
+    min-width: 110px !important;
+    min-height: 40px !important;
+    height: 40px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 0 14px !important;
+    border: 1px solid #dfe3e8 !important;
+    border-radius: 8px !important;
+    background: #fff !important;
+    color: #334155 !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    line-height: 20px !important;
+    box-shadow: none !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+    transition: border-color .15s ease, background-color .15s ease, color .15s ease !important;
+}
+
+.admin-ui .shell__content table .admin-detail-button > i {
+    display: inline-block !important;
+    color: #475569;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.admin-ui .shell__content table .admin-detail-button > span {
+    display: inline !important;
+}
+
+.admin-ui .shell__content table .admin-detail-button:hover {
+    border-color: #cbd5e1 !important;
+    background: #f8fafc !important;
+    color: #1e293b !important;
+}
+
 .admin-ui .shell__content table input[type="checkbox"] {
     width: 16px !important;
     height: 16px !important;
@@ -4541,19 +4583,178 @@ p {
     font-size: 13px !important;
 }
 
-.admin-ui .shell__content :where(.tabs .tab, .filter-tabs button, .order-tab, .transaction-tab, .return-tab, .filter-pill) {
+.admin-ui .shell__content :where(
+    .tabs .tab,
+    .filter-tabs button,
+    .category-status-tabs button,
+    .policy-fee-tabs button,
+    .order-tab,
+    .transaction-tab,
+    .return-tab,
+    .filter-pill,
+    .pills .pill
+) {
     box-sizing: border-box;
-    min-height: 32px !important;
-    padding: 6px 12px !important;
+    display: inline-flex !important;
+    min-height: 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 7px !important;
+    padding: 8px 14px !important;
+    border: 1px solid #dfe5ec !important;
     border-radius: 999px !important;
-    font-size: 12px !important;
+    background: #fff !important;
+    color: #27364c !important;
+    font-size: 14px !important;
     font-weight: 600 !important;
-    line-height: 18px !important;
+    line-height: 20px !important;
     white-space: nowrap !important;
+    box-shadow: none !important;
+    cursor: pointer !important;
+    transition: border-color .15s ease, background-color .15s ease, color .15s ease !important;
 }
 
-.admin-ui .shell__content :where(.tabs .tab, .filter-tabs button, .order-tab, .transaction-tab, .return-tab, .filter-pill) :where(span, .pill-count) {
-    font-size: 11px !important;
+.admin-ui .shell__content :where(
+    .tabs .tab,
+    .filter-tabs button,
+    .category-status-tabs button,
+    .policy-fee-tabs button,
+    .order-tab,
+    .transaction-tab,
+    .return-tab,
+    .filter-pill,
+    .pills .pill
+):hover {
+    border-color: #bfd2ea !important;
+    background: #f7faff !important;
+    color: #1d4ed8 !important;
+}
+
+.admin-ui .shell__content :where(
+    .tabs .tab[aria-selected="true"],
+    .filter-tabs button.is-active,
+    .category-status-tabs button.is-active,
+    .policy-fee-tabs button.is-active,
+    .order-tab.is-active,
+    .transaction-tab.is-active,
+    .return-tab.is-active,
+    .filter-pill.is-active,
+    .pills .pill.active
+) {
+    border-color: #d6e7fb !important;
+    background: #dcecff !important;
+    color: #1d4ed8 !important;
+    font-weight: 700 !important;
+}
+
+.admin-ui .shell__content .tabs .tab[aria-selected="true"]::after {
+    display: none !important;
+}
+
+.admin-ui .shell__content :where(
+    .tabs .tab,
+    .filter-tabs button,
+    .category-status-tabs button,
+    .policy-fee-tabs button,
+    .order-tab,
+    .transaction-tab,
+    .return-tab,
+    .filter-pill,
+    .pills .pill
+) > :where(span, strong, .pill-count) {
+    box-sizing: border-box;
+    display: inline-flex !important;
+    min-width: 24px !important;
+    min-height: 22px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 1px 7px !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    background: #f1f5f9 !important;
+    color: #64748b !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    line-height: 20px !important;
+}
+
+.admin-ui .shell__content :where(
+    .tabs .tab[aria-selected="true"],
+    .filter-tabs button.is-active,
+    .category-status-tabs button.is-active,
+    .policy-fee-tabs button.is-active,
+    .order-tab.is-active,
+    .transaction-tab.is-active,
+    .return-tab.is-active,
+    .filter-pill.is-active,
+    .pills .pill.active
+) > :where(span, strong, .pill-count) {
+    background: #c9ddfb !important;
+    color: #1d4ed8 !important;
+}
+
+.admin-ui .shell__content :where(
+    .tabs,
+    .filter-tabs,
+    .category-status-tabs,
+    .policy-fee-tabs,
+    .order-tabs,
+    .transaction-tabs,
+    .return-tabs,
+    .filter-pills,
+    .pills
+) {
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+}
+
+.admin-ui .shell__content .category-status-tabs {
+    padding: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.admin-ui .shell__content .filter-strip {
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+}
+
+.admin-ui .shell__content :where(
+    .table-toolbar,
+    .search-toolbar,
+    .order-toolbar,
+    .transaction-toolbar,
+    .return-toolbar,
+    .product-toolbar
+):has(+ :where(
+    .tabs,
+    .filter-tabs,
+    .order-tabs,
+    .transaction-tabs,
+    .return-tabs,
+    .filter-strip
+)) {
+    border-bottom: 0 !important;
+}
+
+.admin-ui .shell__content .product-filter-panel {
+    border-bottom: 0 !important;
+}
+
+.shell__content :where(.tabs, .filter-tabs, .category-status-tabs, .order-tabs, .transaction-tabs, .return-tabs, .filter-pills, .policy-fee-tabs, .pills),
+.shop-main :where(.tabs, .filter-tabs, .category-status-tabs, .order-tabs, .transaction-tabs, .return-tabs, .filter-pills, .policy-fee-tabs, .pills) {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.shell__content :where(.tabs, .filter-tabs, .category-status-tabs, .order-tabs, .transaction-tabs, .return-tabs, .filter-pills, .policy-fee-tabs, .pills)::-webkit-scrollbar,
+.shop-main :where(.tabs, .filter-tabs, .category-status-tabs, .order-tabs, .transaction-tabs, .return-tabs, .filter-pills, .policy-fee-tabs, .pills)::-webkit-scrollbar {
+    display: none;
 }
 
 .admin-ui .shell__content :where(.admin-table-foot, .transaction-table-foot, .return-table-foot, .table-footer, .table-pagination) {
@@ -4583,14 +4784,14 @@ p {
         min-width: 0 !important;
     }
 
-    .admin-ui .shell__content :where(.tabs, .filter-tabs, .order-tabs, .transaction-tabs, .return-tabs, .filter-pills) {
+    .admin-ui .shell__content :where(.tabs, .filter-tabs, .category-status-tabs, .order-tabs, .transaction-tabs, .return-tabs, .filter-pills, .policy-fee-tabs, .pills) {
         width: 100% !important;
         max-width: 100% !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
+        flex-wrap: wrap !important;
+        overflow-x: visible !important;
     }
 
-    .admin-ui .shell__content :where(.tabs, .filter-tabs, .order-tabs, .transaction-tabs, .return-tabs, .filter-pills) > * {
+    .admin-ui .shell__content :where(.tabs, .filter-tabs, .category-status-tabs, .order-tabs, .transaction-tabs, .return-tabs, .filter-pills, .policy-fee-tabs, .pills) > * {
         flex: 0 0 auto !important;
     }
 

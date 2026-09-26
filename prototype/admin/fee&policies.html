@@ -8,15 +8,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/WebAsset/FontAwesome@pro/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/tokens.css">
-    <link rel="stylesheet" href="../../assets/css/base.css">
-    <link rel="stylesheet" href="../../assets/css/components.css">
-    <link rel="stylesheet" href="../../assets/css/pages.css">
-    <link rel="stylesheet" href="../../assets/css/production.css?v=20260926k">
-    <link rel="stylesheet" href="../../assets/css/reusable-controls.css">
-    <link rel="stylesheet" href="../../assets/css/ecosystem/shop.css">
-    <link rel="stylesheet" href="../../assets/css/ecosystem/policies.css">
-    <link rel="stylesheet" href="../../assets/css/policy-effects.css">
+    <link rel="stylesheet" href="../assets/css/tokens.css">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/pages.css">
+    <link rel="stylesheet" href="../assets/css/production.css?v=20260926k">
+    <link rel="stylesheet" href="../assets/css/reusable-controls.css">
+    <link rel="stylesheet" href="../assets/css/shop-admin.css">
+    <link rel="stylesheet" href="../assets/css/fee&policies.css">
+    <link rel="stylesheet" href="../assets/css/policy-effects.css">
+    <link rel="stylesheet" href="../assets/css/admin-table-badges.css?v=20260926">
 </head>
 <body class="policies-page">
 <div id="header-host"></div>
@@ -26,7 +27,7 @@
 
     <main class="shell__content shop-main policies-main" id="main">
         <nav class="breadcrumbs policy-breadcrumb" aria-label="Breadcrumb"><a
-                href="../dashboard.html">Admin</a><span>/</span><span>Phí &amp; Chính sách</span></nav>
+                href="dashboard.html">Admin</a><span>/</span><span>Phí &amp; Chính sách</span></nav>
 
         <section class="policy-heading">
             <div>
@@ -95,7 +96,7 @@
                 </div>
             </header>
             <div class="table-scroll">
-                <table class="policy-fee-table" data-selectable-table data-selection-noun="nhóm phí">
+                <table class="policy-fee-table" data-selectable-table data-selection-noun="nhóm phí" data-selection-limit="10">
                     <thead>
                     <tr>
                         <th class="checkbox-cell"><input type="checkbox" aria-label="Chọn tất cả nhóm phí"></th>
@@ -243,8 +244,8 @@
     </main>
 </div>
 
-<script src="../../assets/js/reusable-controls.js"></script>
-<script src="../../assets/js/policy-effects.js"></script>
-<script src="../../assets/js/app.js?v=20260926e"></script>
+<script src="../assets/js/reusable-controls.js"></script>
+<script src="../assets/js/policy-effects.js"></script>
+<script src="../assets/js/app.js?v=20260926e"></script>
 </body>
 </html>

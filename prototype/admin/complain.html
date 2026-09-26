@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../assets/css/pages.css?v=20260917b">
     <link rel="stylesheet" href="../assets/css/production.css?v=20260926k">
     <link rel="stylesheet" href="../assets/css/reusable-controls.css?v=20260926">
+    <link rel="stylesheet" href="../assets/css/admin-table-badges.css?v=20260926">
 </head>
 <body class="operations-page">
 <a class="skip-link" href="#main">Chuyển đến nội dung chính</a>
@@ -37,7 +38,7 @@
                 <h1>Phản hồi &amp; Khiếu nại</h1>
                 <p>Tiếp nhận phản hồi ngoài luồng của người mua, xem thông tin người gửi và xử lý phản hồi trực tiếp
                     trên sàn.</p>
-                <div style="margin-top: 6px; font-size: 13px; color: var(--color-amber-deep); font-weight: 600;">
+                <div class="pending-note">
                     <i class="fa-regular fa-comment"></i> 12 phản hồi mới chưa được phản hồi
                 </div>
             </div>
@@ -88,7 +89,9 @@
             </div>
         </div>
 
-        <div class="panel panel--padded" style="padding-inline: var(--space-5);">
+        <div class="panel panel--padded" style="padding-inline: var(--space-5);" data-selection-container
+             data-selection-actions="Tiếp nhận xử lý|Đánh dấu đã phản hồi|Gửi nhắc nội bộ"
+             data-selection-primary-action="Đánh dấu đã phản hồi">
             <div class="cluster" style="justify-content: space-between; margin-bottom: var(--space-4);">
                 <div class="cluster" style="flex: 1; max-width: 600px;">
                     <label class="field" style="flex: 2;">
@@ -124,7 +127,8 @@
             </div>
 
             <div class="table-wrap" id="panel-complaints" role="tabpanel" aria-labelledby="tab-all">
-                <table class="data-table">
+                <table class="data-table complaint-table" data-selectable-table data-selection-noun="phản hồi"
+                       data-selection-limit="8">
                     <thead>
                     <tr>
                         <th style="width: 40px;"><input type="checkbox" aria-label="Chọn tất cả"></th>
@@ -153,11 +157,11 @@
                             </div>
                         </td>
                         <td><span class="status status--info" style="font-size: 11px;">Đơn hàng</span></td>
-                        <td><span class="status status--bad" style="font-size: 11px;">⚠️ Cao</span></td>
+                        <td><span class="status status--bad"><i class="fa-solid fa-bell" aria-hidden="true"></i> Cao</span></td>
                         <td><span class="muted">Chưa phân công</span></td>
                         <td><span class="status status--warn">Chưa phản hồi</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">⚙ Xử lý</button>
+                            <button class="admin-detail-button complaint-action-button" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Xử lý</span></button>
                         </td>
                     </tr>
 
@@ -176,11 +180,11 @@
                             </div>
                         </td>
                         <td><span class="status status--info" style="font-size: 11px;">Thanh toán</span></td>
-                        <td><span class="status status--bad" style="font-size: 11px;">⚠️ Cao</span></td>
+                        <td><span class="status status--bad"><i class="fa-solid fa-bell" aria-hidden="true"></i> Cao</span></td>
                         <td><span class="muted">Chưa phân công</span></td>
                         <td><span class="status status--warn">Chưa phản hồi</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">⚙ Xử lý</button>
+                            <button class="admin-detail-button complaint-action-button" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Xử lý</span></button>
                         </td>
                     </tr>
 
@@ -199,11 +203,11 @@
                             </div>
                         </td>
                         <td><span class="status status--warn" style="font-size: 11px;">Về shop</span></td>
-                        <td><span class="muted" style="font-size: 11px;">Bình thường</span></td>
-                        <td><strong>Platform Admin</strong></td>
+                        <td><span class="status" style="font-size: 11px;">Bình thường</span></td>
+                        <td><span class="muted">Platform Admin</span></td>
                         <td><span class="status status--info">Đang xử lý</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">⚙ Xử lý</button>
+                            <button class="admin-detail-button complaint-action-button" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Xử lý</span></button>
                         </td>
                     </tr>
 
@@ -222,11 +226,11 @@
                             </div>
                         </td>
                         <td><span class="status" style="font-size: 11px;">Tài khoản</span></td>
-                        <td><span class="muted" style="font-size: 11px;">Bình thường</span></td>
-                        <td><strong>Platform Admin</strong></td>
+                        <td><span class="status" style="font-size: 11px;">Bình thường</span></td>
+                        <td><span class="muted">Platform Admin</span></td>
                         <td><span class="status status--info">Đang xử lý</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">⚙ Xử lý</button>
+                            <button class="admin-detail-button complaint-action-button" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Xử lý</span></button>
                         </td>
                     </tr>
 
@@ -245,11 +249,11 @@
                             </div>
                         </td>
                         <td><span class="status" style="font-size: 11px;">Khác</span></td>
-                        <td><span class="muted" style="font-size: 11px;">Bình thường</span></td>
-                        <td><strong>Platform Admin</strong></td>
+                        <td><span class="status" style="font-size: 11px;">Bình thường</span></td>
+                        <td><span class="muted">Platform Admin</span></td>
                         <td><span class="status status--ok">Đã phản hồi</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">⚙ Xử lý</button>
+                            <button class="admin-detail-button complaint-action-button" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Xử lý</span></button>
                         </td>
                     </tr>
 
@@ -268,11 +272,11 @@
                             </div>
                         </td>
                         <td><span class="status" style="font-size: 11px;">Tài khoản</span></td>
-                        <td><span class="status status--bad" style="font-size: 11px;">⚠️ Cao</span></td>
+                        <td><span class="status status--bad"><i class="fa-solid fa-bell" aria-hidden="true"></i> Cao</span></td>
                         <td><span class="muted">Chưa phân công</span></td>
                         <td><span class="status status--warn">Chưa phản hồi</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">⚙ Xử lý</button>
+                            <button class="admin-detail-button complaint-action-button" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Xử lý</span></button>
                         </td>
                     </tr>
 
@@ -291,11 +295,11 @@
                             </div>
                         </td>
                         <td><span class="status status--info" style="font-size: 11px;">Thanh toán</span></td>
-                        <td><span class="muted" style="font-size: 11px;">Bình thường</span></td>
-                        <td><strong>Platform Admin</strong></td>
+                        <td><span class="status" style="font-size: 11px;">Bình thường</span></td>
+                        <td><span class="muted">Platform Admin</span></td>
                         <td><span class="status status--ok">Đã phản hồi</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">⚙ Xử lý</button>
+                            <button class="admin-detail-button complaint-action-button" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Xử lý</span></button>
                         </td>
                     </tr>
 
@@ -314,11 +318,11 @@
                             </div>
                         </td>
                         <td><span class="status status--info" style="font-size: 11px;">Đơn hàng</span></td>
-                        <td><span class="muted" style="font-size: 11px;">Bình thường</span></td>
-                        <td><strong>Platform Admin</strong></td>
+                        <td><span class="status" style="font-size: 11px;">Bình thường</span></td>
+                        <td><span class="muted">Platform Admin</span></td>
                         <td><span class="status status--ok">Đã phản hồi</span></td>
                         <td style="text-align: right;">
-                            <button class="btn btn--secondary btn--quiet" type="button">⚙ Xử lý</button>
+                            <button class="admin-detail-button complaint-action-button" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Xử lý</span></button>
                         </td>
                     </tr>
                     </tbody>
